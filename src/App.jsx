@@ -1,15 +1,18 @@
+import { useEffect } from "react";
+import { supabase } from "./services/supabase";
+
 function App() {
+  useEffect(() => {
+    console.log("Supabase Connected!");
+
+    console.log(supabase);
+  }, []);
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-pink-100">
-      <div className="rounded-3xl bg-white p-10 shadow-xl">
-        <h1 className="text-5xl font-bold text-pink-500">
-          📚 Welcome to StoryGrove
-        </h1>
-
-        <p className="mt-4 text-gray-600">
-          Where every story finds a home.
-        </p>
-      </div>
+      <h1 className="text-5xl font-bold text-pink-600">
+        StoryGrove 🌸
+      </h1>
     </div>
   );
 }
