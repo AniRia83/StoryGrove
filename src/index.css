@@ -1,13 +1,110 @@
-@import "tailwindcss";
+/* =====================================================
+   STORYGROVE DESIGN SYSTEM
+   ===================================================== */
 
-html,
-body,
-#root {
-  height: 100%;
+@import "./styles/colors.css";
+@import "./styles/theme.css";
+@import "./styles/typography.css";
+@import "./styles/animations.css";
+
+/* =====================================================
+   RESET
+   ===================================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* =====================================================
+   BODY
+   ===================================================== */
+
 body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  background-color: #fff8fb;
+  min-height: 100vh;
+
+  background: var(--color-background);
+  color: var(--color-text);
+
+  font-family: var(--font-body);
+
+  transition:
+    background var(--transition-normal),
+    color var(--transition-normal);
+}
+
+/* =====================================================
+   ROOT
+   ===================================================== */
+
+#root {
+  min-height: 100vh;
+}
+
+/* =====================================================
+   TYPOGRAPHY
+   ===================================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--color-heading);
+  font-family: var(--font-heading);
+  font-weight: 600;
+}
+
+p {
+  line-height: 1.7;
+}
+
+/* =====================================================
+   LINKS
+   ===================================================== */
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* =====================================================
+   BUTTONS
+   ===================================================== */
+
+button {
+  border: none;
+  outline: none;
+  background: none;
+
+  font-family: inherit;
+
+  cursor: pointer;
+}
+
+/* =====================================================
+   IMAGES
+   ===================================================== */
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* =====================================================
+   INPUTS
+   ===================================================== */
+
+input,
+textarea,
+select {
+  font: inherit;
 }

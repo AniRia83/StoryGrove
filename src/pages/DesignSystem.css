@@ -1,0 +1,23 @@
+.design-system {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.design-system__description {
+  margin-top: 1rem;
+  color: var(--color-text-light);
+  max-width: 40rem;
+}
+
+.design-system__section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.design-system__button-group {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}

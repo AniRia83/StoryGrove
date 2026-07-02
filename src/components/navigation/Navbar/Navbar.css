@@ -1,0 +1,27 @@
+.navbar__brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar__links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.navbar__links a,
+.navbar__logo {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
+  transition: color var(--transition-normal);
+}
+
+.navbar__links a:hover,
+.navbar__logo:hover {
+  color: var(--color-primary);
+}
+
+.navbar__links .active {
+  color: var(--color-primary);
+}
