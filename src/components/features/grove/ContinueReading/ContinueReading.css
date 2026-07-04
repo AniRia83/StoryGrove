@@ -1,0 +1,14 @@
+.continue-reading {
+  margin-top: var(--space-3xl);
+}
+
+.continue-reading__title {
+  margin-bottom: var(--space-md);
+}
+
+.continue-reading__card {
+  padding: var(--space-lg);
+  border-radius: var(--radius-lg);
+  background: white;
+  border: 1px solid var(--color-border);
+}

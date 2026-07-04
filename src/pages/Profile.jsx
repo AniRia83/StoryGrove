@@ -3,8 +3,8 @@ import AppLayout from "../components/layout/AppLayout/AppLayout";
 export default function Profile() {
   return (
     <AppLayout
-      title="Profile"
-      subtitle="Find your next magical adventure."
+  title="My Story 📖"
+  subtitle="Your reading journey, achievements and memories."
     >
 
     </AppLayout>

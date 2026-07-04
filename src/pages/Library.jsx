@@ -3,8 +3,8 @@ import AppLayout from "../components/layout/AppLayout/AppLayout";
 export default function Library() {
   return (
     <AppLayout
-      title="Library"
-      subtitle="Find your next magical adventure."
+  title="My Grove 📚"
+  subtitle="Every story you've planted lives here."
     >
 
     </AppLayout>
