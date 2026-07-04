@@ -6,17 +6,26 @@
 .app-layout__content {
   width: min(1200px, 100%);
   margin: 0 auto;
-  padding: 3rem;
+
+  padding: 2.5rem 2rem 5rem;
 }
 
-.page-header{
-  margin-bottom:3rem;
+.page-header {
+  margin-bottom: 3rem;
 }
 
-.page-header h1{
-  margin-bottom:.5rem;
+.page-header h1 {
+  margin-bottom: .5rem;
 }
 
-.page-header p{
-  color:var(--color-text-light);
+.page-header p {
+  color: var(--color-text-light);
+}
+
+@media (max-width: 768px) {
+
+  .app-layout__content {
+    padding: 1.5rem 1.25rem 4rem;
+  }
+
 }

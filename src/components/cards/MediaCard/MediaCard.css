@@ -1,0 +1,79 @@
+.media-card {
+  background: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.media-card:hover {
+  transform: translateY(-6px);
+
+  box-shadow: 0 14px 30px rgba(0,0,0,.08);
+}
+
+.media-card__cover {
+  height: 220px;
+
+  background: linear-gradient(
+      135deg,
+      #cfdccf,
+      #e9ece5
+  );
+
+  position: relative;
+}
+
+.media-card__badge {
+  position: absolute;
+
+  top: 12px;
+  left: 12px;
+
+  background: white;
+
+  padding: 4px 10px;
+
+  border-radius: 999px;
+
+  font-size: .75rem;
+}
+
+.media-card__content {
+  padding: var(--space-lg);
+}
+
+.media-card__title {
+  font-family: var(--font-heading);
+
+  margin-bottom: .25rem;
+}
+
+.media-card__creator {
+  color: var(--color-text-secondary);
+
+  margin-bottom: var(--space-md);
+}
+
+.media-card__progress {
+  height: 8px;
+
+  background: #ececec;
+
+  border-radius: 999px;
+
+  overflow: hidden;
+}
+
+.media-card__progress-fill {
+  height: 100%;
+
+  background: var(--color-evergreen);
+}
+
+.media-card__progress-text {
+  margin-top: .5rem;
+
+  font-size: .85rem;
+}

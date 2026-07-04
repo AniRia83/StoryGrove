@@ -21,8 +21,8 @@
 ========================= */
 
 .sg-button.primary {
-  background: var(--color-primary);
-  color: white;
+  background: var(--color-sage);   /* or your existing green token */
+  color: var(--color-heading);     /* or #1F3D2B */
 }
 
 .sg-button.primary:hover {
