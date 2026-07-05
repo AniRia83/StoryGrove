@@ -1,25 +1,24 @@
 import "./ContinueReading.css";
+import Section from "../../../ui/Section";
 
 export default function ContinueReading() {
   return (
-    <section className="continue-reading">
-      <h2 className="continue-reading__title">
-        Continue Reading
-      </h2>
+  <Section title="Continue Reading">
+    <div className="continue-reading__card">
 
-      <div className="continue-reading__card">
-        <p className="book-title">
-          The Hobbit
-        </p>
+      <p className="book-title">
+        The Hobbit
+      </p>
 
-        <p className="book-author">
-          J.R.R. Tolkien
-        </p>
+      <p className="book-author">
+        J.R.R. Tolkien
+      </p>
 
-        <p className="book-progress">
-          82% complete
-        </p>
-      </div>
-    </section>
+      <p className="book-progress">
+        82% complete
+      </p>
+
+    </div>
+  </Section>
   );
 }
