@@ -1,8 +1,10 @@
 import { useState } from "react";
 
 import "./PlantStoryForm.css";
+
 import JourneySelector from "../../../forms/JourneySelector";
 
+import Input from "../../../ui/Input";
 import Button from "../../../ui/Button";
 
 export default function PlantStoryForm({
@@ -26,85 +28,70 @@ export default function PlantStoryForm({
 
       <div className="plant-story-grid">
 
-      <div className="form-group">
-        <label>Title *</label>
-
-        <input
+        <Input
+          label="Title"
+          required
           type="text"
           placeholder="The Magic Faraway Tree"
-          required
         />
-      </div>
 
-      <div className="form-group">
-        <label>Creator</label>
-
-        <input
+        <Input
+          label="Creator"
           type="text"
           placeholder="Enid Blyton"
         />
-      </div>
 
-      <div className="form-group form-group--full">
-        <label>Journey</label>
+        <div className="form-group form-group--full">
+          <label>Journey</label>
 
-        <JourneySelector
-          value={journey}
-          onChange={setJourney}
-        />
-      </div>
+          <JourneySelector
+            value={journey}
+            onChange={setJourney}
+          />
+        </div>
 
-      <div className="form-group">
-        <label>Grove</label>
-
-        <input
+        <Input
+          label="Grove"
           type="text"
           placeholder="Fantasy Reads"
         />
-      </div>
 
-      <div className="form-group">
-        <label>Genre</label>
-
-        <input
+        <Input
+          label="Genre"
           type="text"
           placeholder="Fantasy"
         />
-      </div>
 
-      <div className="form-group">
-        <label>Bloom</label>
+        <div className="form-group">
+          <label>Bloom</label>
 
-        <input
-          type="range"
-          min="0"
-          max="10"
-          step="0.1"
-          value={bloom}
-          onChange={(e) => setBloom(e.target.value)}
-        />
+          <input
+            type="range"
+            min="0"
+            max="10"
+            step="0.1"
+            value={bloom}
+            onChange={(e) => setBloom(e.target.value)}
+          />
 
-        <p className="bloom-value">
-          {bloom} / 10
-        </p>
-      </div>
+          <p className="bloom-value">
+            {bloom} / 10
+          </p>
+        </div>
 
-      <div className="form-group">
-        <label>Origin</label>
-
-        <input
+        <Input
+          label="Origin"
           type="text"
           placeholder="Where did this story find you?"
         />
-      </div>
 
-      <div className="form-group form-group--full">
-        <label>Cover</label>
+        <div className="form-group form-group--full">
+          <label>Cover</label>
 
-        <input type="file" />
-      </div>
-
+          <input type="file" />
         </div>
+
+      </div>
 
       <div className="form-group">
         <label>🍂 Reflections</label>

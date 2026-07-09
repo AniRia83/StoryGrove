@@ -1,0 +1,43 @@
+.sg-input{
+  display:flex;
+  flex-direction:column;
+  gap:.8rem;
+}
+
+.sg-input__label{
+  font-weight:600;
+  color:var(--text);
+}
+
+.sg-input__required{
+  color:#c26b6b;
+  margin-left:.2rem;
+}
+
+.sg-input input{
+  width:100%;
+
+  padding:.9rem 1rem;
+
+  border:1px solid var(--border);
+  border-radius:18px;
+
+  background:#fffdf9;
+
+  font:inherit;
+
+  transition:all .25s ease;
+}
+
+.sg-input input::placeholder{
+  color:var(--text-muted);
+}
+
+.sg-input input:focus{
+  outline:none;
+
+  border-color:var(--accent);
+
+  box-shadow:
+    0 0 0 4px rgba(111,150,126,.15);
+}

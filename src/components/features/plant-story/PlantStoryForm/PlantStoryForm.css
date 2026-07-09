@@ -1,21 +1,54 @@
+/* =======================================================
+   Plant Story Form
+======================================================= */
+
 .plant-story-form {
   display: flex;
   flex-direction: column;
-  gap: 1.75rem;
+  gap: 2rem;
+}
+
+/* =======================================================
+   Header
+======================================================= */
+
+.plant-story-form__header {
+  margin-bottom: 0.5rem;
 }
 
 .plant-story-form__header h2 {
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
 }
 
 .plant-story-form__header p {
   color: var(--text-muted);
 }
 
+/* =======================================================
+   Grid Layout
+======================================================= */
+
+.plant-story-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  column-gap: 3rem;
+  row-gap: 2.25rem;
+}
+
+.form-group--full {
+  grid-column: 1 / -1;
+}
+
+/* =======================================================
+   Form Groups
+======================================================= */
+
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: .55rem;
+  gap: 0.8rem;
 }
 
 .form-group label {
@@ -23,24 +56,29 @@
   color: var(--text);
 }
 
+/* =======================================================
+   Inputs
+======================================================= */
+
 .plant-story-form input,
 .plant-story-form textarea {
   width: 100%;
-  padding: .9rem 1rem;
 
-  border-radius: 18px;
+  padding: 0.9rem 1rem;
+
   border: 1px solid var(--border);
+  border-radius: 18px;
 
-  background: white;
+  background: #fffdf9;
 
   font: inherit;
 
-  transition: .25s;
+  transition: all 0.25s ease;
 }
 
-.plant-story-form textarea {
-  resize: vertical;
-  min-height: 120px;
+.plant-story-form input::placeholder,
+.plant-story-form textarea::placeholder {
+  color: var(--text-muted);
 }
 
 .plant-story-form input:focus,
@@ -49,110 +87,63 @@
 
   border-color: var(--accent);
 
-  box-shadow: 0 0 0 4px rgba(111,150,126,.15);
+  box-shadow: 0 0 0 4px rgba(111, 150, 126, 0.15);
 }
+
+.plant-story-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* =======================================================
+   Range Slider
+======================================================= */
 
 .form-group input[type="range"] {
   padding: 0;
+  cursor: pointer;
 }
 
 .bloom-value {
-  font-size: .95rem;
-  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--accent);
 }
+
+/* =======================================================
+   File Upload
+======================================================= */
+
+.form-group input[type="file"] {
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+/* =======================================================
+   Submit Button
+======================================================= */
 
 .plant-story-form .sg-button {
-  margin-top: .75rem;
   width: 100%;
+  margin-top: 1rem;
 }
 
+/* =======================================================
+   Responsive
+======================================================= */
 
-.plant-story-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 2rem;
-}
+@media (max-width: 768px) {
+  .plant-story-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
 
-.form-group--full {
-  grid-column: 1 / -1;
-}
+  .form-group--full {
+    grid-column: auto;
+  }
 
-
-/* ---------- Form ---------- */
-
-.plant-story-form{
-  display:flex;
-  flex-direction:column;
-  gap:2rem;
-}
-
-.plant-story-form__header{
-  margin-bottom:1rem;
-}
-
-.plant-story-form__header h2{
-  font-size:2rem;
-  margin-bottom:.5rem;
-}
-
-.plant-story-form__header p{
-  color:#6f5b4d;
-}
-
-/* ---------- Form Groups ---------- */
-
-.form-group{
-  display:flex;
-  flex-direction:column;
-  gap:.65rem;
-}
-
-.form-group label{
-  font-weight:600;
-  color:#5a473d;
-}
-
-/* ---------- Inputs ---------- */
-
-.form-group input[type="text"],
-.form-group textarea{
-  width:100%;
-
-  padding:1rem 1.1rem;
-
-  border:1px solid #ead9c4;
-  border-radius:16px;
-
-  background:#fffdf9;
-
-  font-size:1rem;
-
-  transition:.25s;
-}
-
-.form-group textarea{
-  resize:vertical;
-  min-height:120px;
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder{
-  color:#a49689;
-}
-
-.form-group input:focus,
-.form-group textarea:focus{
-  outline:none;
-
-  border-color:#6b8f71;
-
-  box-shadow:
-  0 0 0 4px rgba(107,143,113,.12);
-}
-
-/* ---------- Bloom ---------- */
-
-.bloom-value{
-  font-weight:600;
-  color:#6b8f71;
+  .plant-story-form__header h2 {
+    font-size: 1.75rem;
+  }
 }
