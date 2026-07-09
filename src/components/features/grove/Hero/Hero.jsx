@@ -1,7 +1,11 @@
 import "./Hero.css";
+
 import Button from "../../../ui/Button";
 
-export default function Hero() {
+export default function Hero({
+  onPlantStoryClick,
+}) {
+  
   return (
     <section className="hero">
       <p className="hero__eyebrow">
@@ -13,12 +17,15 @@ export default function Hero() {
       </h1>
 
       <div className="hero__actions">
-        <Button>🌱 Plant a Story</Button>
+        <Button onClick={onPlantStoryClick}>
+  🌱 Plant a Story
+        </Button>
 
         <Button variant="secondary">
           📚 My Grove
         </Button>
       </div>
+      
     </section>
   );
 }

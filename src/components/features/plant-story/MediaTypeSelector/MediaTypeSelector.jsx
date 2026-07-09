@@ -1,7 +1,9 @@
 import "./MediaTypeSelector.css";
 import mediaTypes from "../../../../data/mediaTypes";
 
-export default function MediaTypeSelector() {
+export default function MediaTypeSelector({
+  onSelect,
+}) {
   return (
     <div className="media-type-selector">
       {mediaTypes.map((media) => (
@@ -9,6 +11,7 @@ export default function MediaTypeSelector() {
           key={media.id}
           className="media-type-card"
           type="button"
+          onClick={() => onSelect(media.name)}
         >
           <span className="media-type-card__icon">
             {media.icon}

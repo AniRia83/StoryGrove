@@ -1,0 +1,39 @@
+import { useState } from "react";
+
+import "./PlantStoryModal.css";
+import Modal from "../../../ui/Modal";
+import MediaTypeSelector from "../MediaTypeSelector";
+
+export default function PlantStoryModal({
+  isOpen,
+  onClose,
+}) {
+  const [selectedType, setSelectedType] = useState(null);
+
+  return (
+    <Modal
+      isOpen={isOpen}
+      onClose={() => {
+        setSelectedType(null);
+        onClose();
+      }}
+      title="🌱 Plant a Story"
+    >
+      {!selectedType ? (
+        <>
+          <p>
+            What would you like to plant today?
+          </p>
+
+          <MediaTypeSelector
+            onSelect={setSelectedType}
+          />
+        </>
+      ) : (
+        <p>
+          Selected: {selectedType}
+        </p>
+      )}
+    </Modal>
+  );
+}
