@@ -24,6 +24,8 @@ export default function PlantStoryForm({
         </p>
       </header>
 
+      <div className="plant-story-grid">
+
       <div className="form-group">
         <label>Title *</label>
 
@@ -43,7 +45,7 @@ export default function PlantStoryForm({
         />
       </div>
 
-      <div className="form-group">
+      <div className="form-group form-group--full">
         <label>Journey</label>
 
         <JourneySelector
@@ -96,17 +98,19 @@ export default function PlantStoryForm({
         />
       </div>
 
-      <div className="form-group">
+      <div className="form-group form-group--full">
         <label>Cover</label>
 
         <input type="file" />
       </div>
 
+        </div>
+
       <div className="form-group">
         <label>🍂 Reflections</label>
 
         <textarea
-          rows="4"
+          rows="5"
           placeholder="Thoughts, favourite moments, quotes..."
         />
       </div>
@@ -115,7 +119,7 @@ export default function PlantStoryForm({
         <label>✨ Firefly</label>
 
         <textarea
-          rows="2"
+          rows="3"
           placeholder="What still glows after this story?"
         />
       </div>
