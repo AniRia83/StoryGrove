@@ -3,6 +3,7 @@ import { useState } from "react";
 import "./PlantStoryModal.css";
 import Modal from "../../../ui/Modal";
 import MediaTypeSelector from "../MediaTypeSelector";
+import PlantStoryForm from "../PlantStoryForm";
 
 export default function PlantStoryModal({
   isOpen,
@@ -30,9 +31,9 @@ export default function PlantStoryModal({
           />
         </>
       ) : (
-        <p>
-          Selected: {selectedType}
-        </p>
+        <PlantStoryForm
+  mediaType={selectedType}
+/>
       )}
     </Modal>
   );

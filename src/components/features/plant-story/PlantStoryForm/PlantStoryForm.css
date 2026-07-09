@@ -1,0 +1,67 @@
+.plant-story-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.plant-story-form__header h2 {
+  margin-bottom: 0.4rem;
+}
+
+.plant-story-form__header p {
+  color: var(--text-muted);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.plant-story-form input,
+.plant-story-form textarea {
+  width: 100%;
+  padding: .9rem 1rem;
+
+  border-radius: 18px;
+  border: 1px solid var(--border);
+
+  background: white;
+
+  font: inherit;
+
+  transition: .25s;
+}
+
+.plant-story-form textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.plant-story-form input:focus,
+.plant-story-form textarea:focus {
+  outline: none;
+
+  border-color: var(--accent);
+
+  box-shadow: 0 0 0 4px rgba(111,150,126,.15);
+}
+
+.form-group input[type="range"] {
+  padding: 0;
+}
+
+.bloom-value {
+  font-size: .95rem;
+  color: var(--text-muted);
+}
+
+.plant-story-form .sg-button {
+  margin-top: .75rem;
+  width: 100%;
+}
