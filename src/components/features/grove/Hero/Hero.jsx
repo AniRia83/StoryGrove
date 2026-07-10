@@ -1,11 +1,15 @@
 import "./Hero.css";
 
+import { useNavigate } from "react-router-dom";
+
 import Button from "../../../ui/Button";
 
 export default function Hero({
   onPlantStoryClick,
 }) {
   
+const navigate = useNavigate();
+
   return (
     <section className="hero">
       <p className="hero__eyebrow">
@@ -21,7 +25,10 @@ export default function Hero({
   🌱 Plant a Story
         </Button>
 
-        <Button variant="secondary">
+        <Button
+          variant="secondary"
+          onClick={() => navigate("/library")}
+        >
           📚 My Grove
         </Button>
       </div>

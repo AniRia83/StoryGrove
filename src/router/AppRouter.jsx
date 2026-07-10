@@ -5,6 +5,7 @@ import Discover from "../pages/Discover";
 import Library from "../pages/Library";
 import Collection from "../pages/Collection";
 import Profile from "../pages/Profile";
+import StoryDetails from "../pages/StoryDetails";
 
 export default function AppRouter() {
   return (
@@ -15,6 +16,10 @@ export default function AppRouter() {
         <Route path="/library" element={<Library />} />
         <Route path="/collections" element={<Collection />} />
         <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/story/:id"
+          element={<StoryDetails />}
+        />
       </Routes>
     </BrowserRouter>
   );

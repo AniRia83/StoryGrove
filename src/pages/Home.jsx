@@ -6,30 +6,20 @@ import ContinueReading from "../components/features/grove/ContinueReading";
 import RecentlyPlanted from "../components/features/grove/RecentlyPlanted";
 import PlantStoryModal from "../components/features/plant-story/PlantStoryModal";
 
+import { useStory } from "../context/StoryContext";
+
 export default function Home() {
   const [isPlantModalOpen, setIsPlantModalOpen] = useState(false);
-  const [stories, setStories] = useState([]);
-  const [selectedMedia, setSelectedMedia] = useState(null);
 
-  const handleClosePlantModal = () => {
-    setIsPlantModalOpen(false);
-    setSelectedMedia(null);
-  };
+  const { stories, plantStory } = useStory();
 
   const handlePlantStory = (story) => {
-  setStories((prevStories) => [
-    story,
-    ...prevStories,
-  ]);
+    plantStory(story);
 
-  console.log("🌱 Story planted!");
+    console.log("🌱 Story planted!");
 
-  console.log(story);
-
-  console.log("All stories:");
-
-  console.log([story, ...stories]);
-};
+    console.log(story);
+  };
 
   return (
     <AppLayout>
@@ -38,6 +28,7 @@ export default function Home() {
       />
 
       <ContinueReading />
+
       <RecentlyPlanted
         stories={stories}
       />
