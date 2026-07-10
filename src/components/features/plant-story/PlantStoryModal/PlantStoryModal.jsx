@@ -8,6 +8,7 @@ import PlantStoryForm from "../PlantStoryForm";
 export default function PlantStoryModal({
   isOpen,
   onClose,
+  onPlant,
 }) {
   const [selectedType, setSelectedType] = useState(null);
 
@@ -32,8 +33,13 @@ export default function PlantStoryModal({
         </>
       ) : (
         <PlantStoryForm
-  mediaType={selectedType}
-/>
+          mediaType={selectedType}
+          onPlant={(story) => {
+            onPlant(story);
+            onClose();
+            setSelectedType(null);
+          }}
+        />
       )}
     </Modal>
   );

@@ -11,6 +11,7 @@ import CoverUpload from "../../../ui/CoverUpload";
 
 export default function PlantStoryForm({
   mediaType,
+  onPlant,
 }) {
  const [formData, setFormData] = useState({
   title: "",
@@ -27,14 +28,30 @@ export default function PlantStoryForm({
 
   //update func
   const handleChange = (field, value) => {
-  setFormData((prev) => ({
-    ...prev,
-    [field]: value,
-  }));
-};
+    setFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const story = {
+      id: crypto.randomUUID(),
+      mediaType,
+      ...formData,
+      plantedAt: new Date().toISOString(),
+    };
+
+    onPlant(story);
+  };
 
   return (
-    <form className="plant-story-form">
+    <form
+      className="plant-story-form"
+      onSubmit={handleSubmit}
+    >
 
       <header className="plant-story-form__header">
         <h2>

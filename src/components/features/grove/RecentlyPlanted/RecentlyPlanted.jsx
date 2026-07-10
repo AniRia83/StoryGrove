@@ -1,36 +1,47 @@
 import "./RecentlyPlanted.css";
 import MediaCard from "../../../cards/MediaCard";
 
-export default function RecentlyPlanted() {
+export default function RecentlyPlanted({
+  stories,
+}) {
   return (
     <section className="recently-planted">
 
       <h2>Recently Planted</h2>
 
-      <div className="recently-planted__grid">
+      {stories.length === 0 ? (
+        <div className="recently-planted__empty">
 
-        <MediaCard
-    title="The Hobbit"
-    creator="J.R.R. Tolkien"
-    mediaType="Book"
-    progress={82}
-        />
+          <div className="empty-grove">
+            🌱
+          </div>
 
-        <MediaCard
-    title="Dune"
-    creator="Frank Herbert"
-    mediaType="Book"
-    progress={41}
-        />
+          <h3>Your grove is waiting.</h3>
 
-        <MediaCard
-    title="Spirited Away"
-    creator="Hayao Miyazaki"
-    mediaType="Movie"
-    progress={100}
-        />
+          <p>
+            Plant your first story and watch your little forest begin to grow.
+          </p>
 
-      </div>
+        </div>
+      ) : (
+
+        <div className="recently-planted__grid">
+
+          {stories.slice(0, 6).map((story) => (
+
+            <MediaCard
+              key={story.id}
+              title={story.title}
+              creator={story.creator}
+              mediaType={story.mediaType}
+              progress={0}
+            />
+
+          ))}
+
+        </div>
+
+      )}
 
     </section>
   );
