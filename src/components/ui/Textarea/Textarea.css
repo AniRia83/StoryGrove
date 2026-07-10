@@ -1,0 +1,47 @@
+.sg-textarea{
+  display:flex;
+  flex-direction:column;
+  gap:.8rem;
+}
+
+.sg-textarea__label{
+  font-weight:600;
+  color:var(--text);
+}
+
+.sg-textarea__required{
+  color:#c26b6b;
+  margin-left:.2rem;
+}
+
+.sg-textarea textarea{
+  width:100%;
+
+  min-height:140px;
+
+  padding:1rem;
+
+  border:1px solid var(--border);
+  border-radius:18px;
+
+  background:#fffdf9;
+
+  font:inherit;
+
+  resize:vertical;
+
+  transition:all .25s ease;
+}
+
+.sg-textarea textarea::placeholder{
+  color:var(--text-muted);
+}
+
+.sg-textarea textarea:focus{
+  outline:none;
+
+  border-color:var(--accent);
+
+  box-shadow:
+    0 0 0 4px rgba(111,150,126,.15);
+}

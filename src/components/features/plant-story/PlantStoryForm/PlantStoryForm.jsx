@@ -5,13 +5,33 @@ import "./PlantStoryForm.css";
 import JourneySelector from "../../../forms/JourneySelector";
 
 import Input from "../../../ui/Input";
+import Textarea from "../../../ui/Textarea";
 import Button from "../../../ui/Button";
+import CoverUpload from "../../../ui/CoverUpload";
 
 export default function PlantStoryForm({
   mediaType,
 }) {
-  const [journey, setJourney] = useState("planning");
-  const [bloom, setBloom] = useState(8.5);
+ const [formData, setFormData] = useState({
+  title: "",
+  creator: "",
+  grove: "",
+  genre: "",
+  origin: "",
+  reflections: "",
+  firefly: "",
+  bloom: 8.5,
+  journey: "planning",
+  cover: null,
+  });
+
+  //update func
+  const handleChange = (field, value) => {
+  setFormData((prev) => ({
+    ...prev,
+    [field]: value,
+  }));
+};
 
   return (
     <form className="plant-story-form">
@@ -31,13 +51,19 @@ export default function PlantStoryForm({
         <Input
           label="Title"
           required
-          type="text"
+          value={formData.title}
+          onChange={(e) =>
+            handleChange("title", e.target.value)
+          }
           placeholder="The Magic Faraway Tree"
         />
 
         <Input
           label="Creator"
-          type="text"
+          value={formData.creator}
+          onChange={(e) =>
+            handleChange("creator", e.target.value)
+          }
           placeholder="Enid Blyton"
         />
 
@@ -45,20 +71,28 @@ export default function PlantStoryForm({
           <label>Journey</label>
 
           <JourneySelector
-            value={journey}
-            onChange={setJourney}
+            value={formData.journey}
+            onChange={(value) =>
+              handleChange("journey", value)
+            }
           />
         </div>
 
         <Input
           label="Grove"
-          type="text"
+          value={formData.grove}
+          onChange={(e) =>
+            handleChange("grove", e.target.value)
+          }
           placeholder="Fantasy Reads"
         />
 
         <Input
           label="Genre"
-          type="text"
+          value={formData.genre}
+          onChange={(e) =>
+            handleChange("genre", e.target.value)
+          }
           placeholder="Fantasy"
         />
 
@@ -70,46 +104,53 @@ export default function PlantStoryForm({
             min="0"
             max="10"
             step="0.1"
-            value={bloom}
-            onChange={(e) => setBloom(e.target.value)}
+            value={formData.bloom}
+            onChange={(e) =>
+              handleChange("bloom", e.target.value)
+            }
           />
 
           <p className="bloom-value">
-            {bloom} / 10
+            {formData.bloom} / 10
           </p>
         </div>
 
         <Input
           label="Origin"
-          type="text"
+          value={formData.origin}
+          onChange={(e) =>
+            handleChange("origin", e.target.value)
+          }
           placeholder="Where did this story find you?"
         />
 
         <div className="form-group form-group--full">
-          <label>Cover</label>
 
-          <input type="file" />
+          <CoverUpload />
+
         </div>
 
       </div>
 
-      <div className="form-group">
-        <label>🍂 Reflections</label>
+      <Textarea
+        label="🍂 Reflections"
+        rows={5}
+        value={formData.reflections}
+        onChange={(e) =>
+          handleChange("reflections", e.target.value)
+        }
+        placeholder="Thoughts, favourite moments, quotes..."
+      />
 
-        <textarea
-          rows="5"
-          placeholder="Thoughts, favourite moments, quotes..."
-        />
-      </div>
-
-      <div className="form-group">
-        <label>✨ Firefly</label>
-
-        <textarea
-          rows="3"
-          placeholder="What still glows after this story?"
-        />
-      </div>
+      <Textarea
+      label="✨ Firefly"
+      rows={3}
+      value={formData.firefly}
+      onChange={(e) =>
+        handleChange("firefly", e.target.value)
+      }
+      placeholder="What still glows after this story?"
+      />
 
       <Button type="submit">
         🌱 Plant Story

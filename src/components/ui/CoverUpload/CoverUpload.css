@@ -1,0 +1,70 @@
+.cover-upload{
+  display:flex;
+  flex-direction:column;
+  gap:.8rem;
+}
+
+.cover-upload__label{
+  font-weight:600;
+  color:var(--text);
+}
+
+.cover-upload__dropzone{
+
+  position:relative;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  gap:.75rem;
+
+  min-height:220px;
+
+  padding:2rem;
+
+  border:2px dashed var(--border);
+  border-radius:22px;
+
+  background:#fffdf9;
+
+  cursor:pointer;
+
+  transition:.25s ease;
+}
+
+.cover-upload__dropzone:hover{
+
+  border-color:var(--accent);
+
+  background:#fcfaf4;
+
+  transform:translateY(-2px);
+}
+
+.cover-upload__dropzone input{
+
+  display:none;
+}
+
+.cover-upload__icon{
+
+  font-size:3.5rem;
+}
+
+.cover-upload__dropzone h3{
+
+  margin:0;
+
+  color:var(--text);
+}
+
+.cover-upload__dropzone p{
+
+  margin:0;
+
+  color:var(--text-muted);
+
+  text-align:center;
+}
