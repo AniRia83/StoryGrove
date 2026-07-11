@@ -1,5 +1,6 @@
 import "./RecentlyPlanted.css";
 import MediaCard from "../../../cards/MediaCard";
+import MediaGrid from "../../../layout/MediaGrid";
 
 export default function RecentlyPlanted({
   stories,
@@ -25,7 +26,7 @@ export default function RecentlyPlanted({
         </div>
       ) : (
 
-        <div className="recently-planted__grid">
+        <MediaGrid>
 
           {stories.slice(0, 6).map((story) => (
 
@@ -39,7 +40,7 @@ export default function RecentlyPlanted({
 
           ))}
 
-        </div>
+        </MediaGrid>
 
       )}
 

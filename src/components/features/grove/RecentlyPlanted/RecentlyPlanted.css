@@ -2,16 +2,6 @@
   margin-top: var(--space-3xl);
 }
 
-.recently-planted__grid {
-  display: grid;
-
-  grid-template-columns: repeat(3, 1fr);
-
-  gap: var(--space-lg);
-
-  margin-top: var(--space-lg);
-}
-
 .recently-planted__empty{
   padding:4rem 2rem;
 

@@ -1,5 +1,6 @@
 import AppLayout from "../components/layout/AppLayout/AppLayout";
 import MediaCard from "../components/cards/MediaCard";
+import MediaGrid from "../components/layout/MediaGrid";
 
 import { useStory } from "../context/StoryContext";
 
@@ -24,7 +25,7 @@ export default function Library() {
           </p>
         </div>
       ) : (
-        <div className="recently-planted__grid">
+        <MediaGrid>
           {stories.map((story) => (
             <MediaCard
               key={story.id}
@@ -34,7 +35,7 @@ export default function Library() {
               progress={0}
             />
           ))}
-        </div>
+        </MediaGrid>
       )}
     </AppLayout>
   );
