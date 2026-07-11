@@ -1,0 +1,39 @@
+.search-bar{
+  display:flex;
+  align-items:center;
+  gap:.8rem;
+
+  margin:2rem 0;
+
+  background:#fffdf9;
+
+  border:1px solid #eadfcf;
+
+  border-radius:18px;
+
+  padding:1rem 1.2rem;
+
+  transition:.25s;
+}
+
+.search-bar:focus-within{
+  border-color:#6b8f71;
+
+  box-shadow:
+    0 0 0 4px rgba(107,143,113,.12);
+}
+
+.search-bar__icon{
+  font-size:1.1rem;
+}
+
+.search-bar input{
+  flex:1;
+
+  border:none;
+  outline:none;
+
+  background:transparent;
+
+  font:inherit;
+}

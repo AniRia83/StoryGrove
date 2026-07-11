@@ -1,0 +1,58 @@
+.grove-summary{
+  display:flex;
+  gap:1.5rem;
+  margin:2rem 0 3rem;
+}
+
+.grove-stat{
+  flex:1;
+
+  background:#fffdf9;
+
+  border:1px solid #eadfcf;
+
+  border-radius:20px;
+
+  padding:1.5rem;
+
+  text-align:center;
+}
+
+.grove-stat span{
+  display:block;
+
+  font-size:2rem;
+  font-weight:700;
+
+  color:#6b8f71;
+}
+
+.grove-stat p{
+  margin-top:.5rem;
+
+  color:#7b6d63;
+}
+
+.grove-empty{
+  text-align:center;
+
+  padding:5rem 2rem;
+}
+
+.grove-empty__icon{
+  font-size:4rem;
+
+  margin-bottom:1rem;
+}
+
+.grove-empty h2{
+  margin-bottom:.75rem;
+}
+
+.grove-empty p{
+  color:#7b6d63;
+
+  max-width:450px;
+
+  margin:auto;
+}
