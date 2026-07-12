@@ -34,6 +34,9 @@ export function StoryProvider({ children }) {
       value={{
         stories,
         plantStory,
+
+        getStoryById: (id) =>
+          stories.find((story) => story.id === id),
       }}
     >
       {children}

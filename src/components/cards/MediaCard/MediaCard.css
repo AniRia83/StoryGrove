@@ -1,25 +1,31 @@
 .media-card {
   background: white;
+
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
+
   overflow: hidden;
 
-  transition: transform .25s ease, box-shadow .25s ease;
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .media-card:hover {
   transform: translateY(-6px);
 
-  box-shadow: 0 14px 30px rgba(0,0,0,.08);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
 }
 
 .media-card__cover {
   height: 220px;
 
   background: linear-gradient(
-      135deg,
-      #cfdccf,
-      #e9ece5
+    135deg,
+    #cfdccf,
+    #e9ece5
   );
 
   position: relative;
@@ -37,7 +43,7 @@
 
   border-radius: 999px;
 
-  font-size: .75rem;
+  font-size: 0.75rem;
 }
 
 .media-card__content {
@@ -47,7 +53,7 @@
 .media-card__title {
   font-family: var(--font-heading);
 
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .media-card__creator {
@@ -73,7 +79,7 @@
 }
 
 .media-card__progress-text {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 
-  font-size: .85rem;
+  font-size: 0.85rem;
 }

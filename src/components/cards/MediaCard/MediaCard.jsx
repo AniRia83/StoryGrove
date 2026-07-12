@@ -2,13 +2,16 @@ import "./MediaCard.css";
 
 export default function MediaCard({
   title,
- creator,
+  creator,
   mediaType,
   progress,
+  onClick,
 }) {
   return (
-    <article className="media-card">
-
+    <article
+      className="media-card"
+      onClick={onClick}
+    >
       <div className="media-card__cover">
 
         <span className="media-card__badge">

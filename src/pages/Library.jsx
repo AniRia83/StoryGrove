@@ -7,6 +7,7 @@ import MediaCard from "../components/cards/MediaCard";
 import MediaGrid from "../components/layout/MediaGrid";
 import SearchBar from "../components/ui/SearchBar";
 
+import { useNavigate } from "react-router-dom";
 import { useStory } from "../context/StoryContext";
 
 export default function Library() {
@@ -29,6 +30,8 @@ export default function Library() {
           ) / totalStories
         ).toFixed(1)
       : 0;
+
+      const navigate = useNavigate();
 
   const filteredStories = stories.filter((story) => {
     const query = search.toLowerCase();
@@ -98,6 +101,7 @@ export default function Library() {
                 creator={story.creator}
                 mediaType={story.mediaType}
                 progress={0}
+                onClick={() => navigate(`/story/${story.id}`)}
               />
             ))
           ) : (
