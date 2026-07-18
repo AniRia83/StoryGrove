@@ -1,6 +1,14 @@
 import "./StoryInfoGrid.css";
 
+import { useCollection } from "../../../../context/CollectionContext";
+
 export default function StoryInfoGrid({ story }) {
+  const { getCollectionById } = useCollection();
+
+  const collection = story.collectionId
+    ? getCollectionById(story.collectionId)
+    : null;
+
   return (
     <section className="story-info-grid">
 
@@ -11,7 +19,11 @@ export default function StoryInfoGrid({ story }) {
 
       <div className="story-info-card">
         <span>Grove</span>
-        <strong>{story.grove || "—"}</strong>
+        <strong>
+          {collection
+            ? `${collection.icon} ${collection.name}`
+            : "No Grove"}
+        </strong>
       </div>
 
       <div className="story-info-card">

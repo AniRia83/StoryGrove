@@ -1,12 +1,21 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 const StoryContext = createContext();
 
 export function StoryProvider({ children }) {
   const [stories, setStories] = useState(() => {
-    const savedStories = localStorage.getItem("storygrove-stories");
+    const savedStories = localStorage.getItem(
+      "storygrove-stories"
+    );
 
-    return savedStories ? JSON.parse(savedStories) : [];
+    return savedStories
+      ? JSON.parse(savedStories)
+      : [];
   });
 
   useEffect(() => {
@@ -21,6 +30,7 @@ export function StoryProvider({ children }) {
       ...story,
       id: crypto.randomUUID(),
       plantedAt: new Date().toISOString(),
+      collectionId: story.collectionId || null,
     };
 
     setStories((prevStories) => [
@@ -29,14 +39,47 @@ export function StoryProvider({ children }) {
     ]);
   };
 
+  const updateStory = (id, updates) => {
+    setStories((prevStories) =>
+      prevStories.map((story) =>
+        story.id === id
+          ? {
+              ...story,
+              ...updates,
+            }
+          : story
+      )
+    );
+  };
+
+  const deleteStory = (id) => {
+    setStories((prevStories) =>
+      prevStories.filter(
+        (story) => story.id !== id
+      )
+    );
+  };
+
+  const getStoryById = (id) =>
+    stories.find((story) => story.id === id);
+
+  const getStoriesByCollection = (
+    collectionId
+  ) =>
+    stories.filter(
+      (story) =>
+        story.collectionId === collectionId
+    );
+
   return (
     <StoryContext.Provider
       value={{
         stories,
         plantStory,
-
-        getStoryById: (id) =>
-          stories.find((story) => story.id === id),
+        updateStory,
+        deleteStory,
+        getStoryById,
+        getStoriesByCollection,
       }}
     >
       {children}

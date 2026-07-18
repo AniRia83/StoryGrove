@@ -1,41 +1,32 @@
 .reflection-card{
-  background: var(--color-surface);
-
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-
-  padding: var(--space-xl);
-
-  box-shadow: var(--shadow-soft);
-
-  margin-bottom: var(--space-xl);
+  background:var(--color-surface);
+  border:1px solid var(--color-border);
+  border-radius:var(--radius-lg);
+  padding:2rem;
+  box-shadow:var(--shadow-soft);
+  margin-bottom:2rem;
 }
 
 .reflection-card__header{
   display:flex;
   align-items:center;
-
-  gap: var(--space-sm);
-
-  margin-bottom: var(--space-md);
+  gap:.75rem;
+  margin-bottom:1.25rem;
 }
 
 .reflection-card__icon{
-  font-size: var(--text-xl);
+  font-size:1.5rem;
 }
 
 .reflection-card__header h2{
-  font-family: var(--font-heading);
-
-  font-size: var(--text-xl);
-
-  color: var(--color-heading);
+  font-family:var(--font-heading);
+  color:var(--color-heading);
+  font-size:1.7rem;
 }
 
 .reflection-card__text{
-  color: var(--color-text);
-
-  font-size: var(--text-md);
-
-  line-height: 1.9;
+  font-size:1.05rem;
+  line-height:2;
+  color:var(--color-text);
+  white-space:pre-wrap;
 }

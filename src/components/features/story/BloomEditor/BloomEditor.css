@@ -1,0 +1,24 @@
+.bloom-editor{
+  margin-top:var(--space-xl);
+}
+
+.bloom-editor__header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:var(--space-sm);
+}
+
+.bloom-editor__header span{
+  color:var(--color-text);
+}
+
+.bloom-editor__header strong{
+  color:var(--color-evergreen);
+  font-size:var(--text-lg);
+}
+
+.bloom-editor input{
+  width:100%;
+  cursor:pointer;
+}

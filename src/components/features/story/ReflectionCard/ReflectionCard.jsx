@@ -1,6 +1,6 @@
 import "./ReflectionCard.css";
 
-export default function ReflectionCard({ reflection }) {
+export default function ReflectionCard({ story }) {
   return (
     <section className="reflection-card">
 
@@ -15,7 +15,7 @@ export default function ReflectionCard({ reflection }) {
       </div>
 
       <p className="reflection-card__text">
-        {reflection || "No reflections planted yet."}
+        {story.reflections || "No reflections planted yet."}
       </p>
 
     </section>

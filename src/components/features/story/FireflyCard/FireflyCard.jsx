@@ -1,19 +1,21 @@
 import "./FireflyCard.css";
 
-export default function FireflyCard({ firefly }) {
+export default function FireflyCard({ story }) {
   return (
     <section className="firefly-card">
 
       <div className="firefly-card__header">
 
-        <span>✨</span>
+        <span className="firefly-card__icon">
+          ✨
+        </span>
 
         <h2>Firefly</h2>
 
       </div>
 
       <p className="firefly-card__text">
-        {firefly || "No firefly captured yet."}
+        {story.firefly || "No fireflies captured yet."}
       </p>
 
     </section>

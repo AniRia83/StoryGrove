@@ -1,8 +1,12 @@
 import "./StoryHero.css";
 
 import JourneySelector from "../../../forms/JourneySelector";
+import BloomEditor from "../BloomEditor/BloomEditor";
 
-export default function StoryHero({ story }) {
+export default function StoryHero({
+  story,
+  onJourneyChange,
+})  {
   return (
     <section className="story-hero">
 
@@ -36,19 +40,13 @@ export default function StoryHero({ story }) {
         <div className="story-hero__journey">
 
           <JourneySelector
-            value={story.journey}
-            onChange={() => {}}
-          />
+  value={story.journey}
+  onChange={onJourneyChange}
+/>
 
         </div>
 
-        <div className="story-hero__bloom">
-
-          <span>Bloom</span>
-
-          <strong>{story.bloom} / 10</strong>
-
-        </div>
+        <BloomEditor story={story} />
 
       </div>
 
