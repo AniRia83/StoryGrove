@@ -1,0 +1,46 @@
+.library-toolbar{
+  display:flex;
+  gap:1rem;
+  align-items:center;
+  margin-bottom:2rem;
+  flex-wrap:wrap;
+}
+
+.library-toolbar .search-bar{
+  flex:1;
+  min-width:320px;
+}
+
+.library-toolbar select{
+  min-width:220px;
+
+  padding:.9rem 1rem;
+
+  border-radius:999px;
+
+  border:1px solid var(--color-border);
+
+  background:var(--color-surface);
+
+  font-family:var(--font-body);
+
+  font-size:var(--text-md);
+
+  color:var(--color-text);
+
+  cursor:pointer;
+
+  transition:.25s;
+}
+
+.library-toolbar select:hover{
+  border-color:var(--color-primary);
+}
+
+.library-toolbar select:focus{
+  outline:none;
+
+  border-color:var(--color-primary);
+
+  box-shadow:0 0 0 4px rgba(110,160,118,.15);
+}
