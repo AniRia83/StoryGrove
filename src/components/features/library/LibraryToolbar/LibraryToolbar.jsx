@@ -11,6 +11,8 @@ export default function LibraryToolbar({
   setJourney,
   bloom,
   setBloom,
+  sort,
+  setSort,
   collections,
 }) {
   return (
@@ -93,6 +95,37 @@ export default function LibraryToolbar({
 
   <option value="10">
     ⭐⭐⭐⭐ 10
+  </option>
+</select>
+
+<select
+  value={sort}
+  onChange={(e) =>
+    setSort(e.target.value)
+  }
+>
+  <option value="newest">
+    🆕 Newest
+  </option>
+
+  <option value="oldest">
+    🌱 Oldest
+  </option>
+
+  <option value="title-asc">
+    🔤 Title A–Z
+  </option>
+
+  <option value="title-desc">
+    🔠 Title Z–A
+  </option>
+
+  <option value="bloom-desc">
+    ⭐ Highest Bloom
+  </option>
+
+  <option value="bloom-asc">
+    🌑 Lowest Bloom
   </option>
 </select>
 

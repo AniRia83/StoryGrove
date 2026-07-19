@@ -30,6 +30,8 @@ export default function Library() {
 
   const [bloom, setBloom] = useState("");
 
+  const [sort, setSort] = useState("newest"); 
+
   const totalStories = stories.length;
 
   const growingStories = stories.filter(
@@ -47,50 +49,66 @@ export default function Library() {
         ).toFixed(1)
       : 0;
 
-  const filteredStories = stories.filter(
-    (story) => {
-      const query = search.toLowerCase();
+  const filteredStories = stories
+  .filter((story) => {
+    const query = search.toLowerCase();
 
-      const collection = story.collectionId
-        ? getCollectionById(
-            story.collectionId
-          )
-        : null;
+    const collection = story.collectionId
+      ? getCollectionById(story.collectionId)
+      : null;
 
-      const matchesSearch =
-        story.title
-          ?.toLowerCase()
-          .includes(query) ||
-        story.creator
-          ?.toLowerCase()
-          .includes(query) ||
-        story.genre
-          ?.toLowerCase()
-          .includes(query) ||
-        collection?.name
-          ?.toLowerCase()
-          .includes(query);
+    const matchesSearch =
+      story.title?.toLowerCase().includes(query) ||
+      story.creator?.toLowerCase().includes(query) ||
+      story.genre?.toLowerCase().includes(query) ||
+      collection?.name?.toLowerCase().includes(query);
 
-      const matchesGrove =
-        !grove ||
-        story.collectionId === grove;
-      
-      const matchesJourney =
-        !journey ||
-        story.journey === journey;
+    const matchesGrove =
+      !grove ||
+      story.collectionId === grove;
 
-      const matchesBloom =
+    const matchesJourney =
+      !journey ||
+      story.journey === journey;
+
+    const matchesBloom =
       !bloom ||
       Number(story.bloom) >= Number(bloom);
 
-      return (
-        matchesSearch &&
-        matchesGrove &&
-        matchesJourney &&
-        matchesBloom
-      );
+    return (
+      matchesSearch &&
+      matchesGrove &&
+      matchesJourney &&
+      matchesBloom
+    );
+  })
+  .sort((a, b) => {
+    switch (sort) {
+      case "oldest":
+        return (
+          new Date(a.plantedAt) -
+          new Date(b.plantedAt)
+        );
+
+      case "title-asc":
+        return a.title.localeCompare(b.title);
+
+      case "title-desc":
+        return b.title.localeCompare(a.title);
+
+      case "bloom-desc":
+        return Number(b.bloom) - Number(a.bloom);
+
+      case "bloom-asc":
+        return Number(a.bloom) - Number(b.bloom);
+
+      default:
+        return (
+          new Date(b.plantedAt) -
+          new Date(a.plantedAt)
+        );
     }
-  );
+  });
 
   return (
     <AppLayout
@@ -130,6 +148,9 @@ export default function Library() {
 
   bloom={bloom}
   setBloom={setBloom}
+
+  sort={sort}
+  setSort={setSort}
 
   collections={collections}
 />
