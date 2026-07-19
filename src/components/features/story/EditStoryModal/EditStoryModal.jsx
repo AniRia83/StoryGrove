@@ -6,6 +6,7 @@ import Modal from "../../../ui/Modal/Modal";
 import Input from "../../../ui/Input";
 import Textarea from "../../../ui/Textarea";
 import Button from "../../../ui/Button";
+import CoverUpload from "../../../ui/CoverUpload";
 
 import JourneySelector from "../../../forms/JourneySelector";
 
@@ -31,6 +32,7 @@ export default function EditStoryModal({
     journey: "planning",
     reflections: "",
     firefly: "",
+    cover: null,
   });
 
   useEffect(() => {
@@ -46,6 +48,7 @@ export default function EditStoryModal({
       journey: story.journey || "planning",
       reflections: story.reflections || "",
       firefly: story.firefly || "",
+      cover: story.cover || null,
     });
   }, [story]);
 
@@ -69,6 +72,13 @@ export default function EditStoryModal({
       onClose={onClose}
       title="✏️ Edit Story"
     >
+      <CoverUpload
+        value={formData.cover}
+        onChange={(cover) =>
+          handleChange("cover", cover)
+        }
+      />
+
       <Input
         label="Title"
         value={formData.title}

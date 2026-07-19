@@ -174,7 +174,12 @@ export default function PlantStoryForm({
           />
 
           <div className="form-group form-group--full">
-            <CoverUpload />
+            <CoverUpload
+  value={formData.cover}
+  onChange={(cover) =>
+    handleChange("cover", cover)
+  }
+/>
           </div>
 
         </div>
