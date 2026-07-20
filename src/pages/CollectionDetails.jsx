@@ -1,9 +1,7 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import AppLayout from "../components/layout/AppLayout/AppLayout";
-
 import MediaGrid from "../components/layout/MediaGrid";
-
 import MediaCard from "../components/cards/MediaCard";
 
 import { useCollection } from "../context/CollectionContext";
@@ -11,6 +9,8 @@ import { useStory } from "../context/StoryContext";
 
 export default function CollectionDetails() {
   const { id } = useParams();
+
+  const navigate = useNavigate();
 
   const { getCollectionById } = useCollection();
 
@@ -45,17 +45,14 @@ export default function CollectionDetails() {
 
       {collectionStories.length === 0 ? (
         <section className="grove-empty">
-
           <h2>This Grove is empty.</h2>
 
           <p>
             Plant stories and assign them to this Grove.
           </p>
-
         </section>
       ) : (
         <MediaGrid>
-
           {collectionStories.map((story) => (
             <MediaCard
               key={story.id}
@@ -63,9 +60,12 @@ export default function CollectionDetails() {
               creator={story.creator}
               mediaType={story.mediaType}
               progress={0}
+              cover={story.cover}
+              onClick={() =>
+                navigate(`/story/${story.id}`)
+              }
             />
           ))}
-
         </MediaGrid>
       )}
     </AppLayout>

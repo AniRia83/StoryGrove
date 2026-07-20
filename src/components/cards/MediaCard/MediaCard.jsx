@@ -5,6 +5,7 @@ export default function MediaCard({
   creator,
   mediaType,
   progress,
+  cover,
   onClick,
 }) {
   return (
@@ -13,6 +14,17 @@ export default function MediaCard({
       onClick={onClick}
     >
       <div className="media-card__cover">
+
+        {cover ? (
+          <img
+            src={cover}
+            alt={title}
+          />
+        ) : (
+          <div className="media-card__placeholder">
+            📚
+          </div>
+        )}
 
         <span className="media-card__badge">
           {mediaType}
@@ -27,14 +39,16 @@ export default function MediaCard({
         </h3>
 
         <p className="media-card__creator">
-          {creator}
+          {creator || "Unknown Creator"}
         </p>
 
         <div className="media-card__progress">
 
           <div
             className="media-card__progress-fill"
-            style={{ width: `${progress}%` }}
+            style={{
+              width: `${progress}%`,
+            }}
           />
 
         </div>

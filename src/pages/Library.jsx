@@ -23,14 +23,10 @@ export default function Library() {
   } = useCollection();
 
   const [search, setSearch] = useState("");
-
   const [grove, setGrove] = useState("");
-
   const [journey, setJourney] = useState("");
-
   const [bloom, setBloom] = useState("");
-
-  const [sort, setSort] = useState("newest"); 
+  const [sort, setSort] = useState("newest");
 
   const totalStories = stories.length;
 
@@ -50,65 +46,65 @@ export default function Library() {
       : 0;
 
   const filteredStories = stories
-  .filter((story) => {
-    const query = search.toLowerCase();
+    .filter((story) => {
+      const query = search.toLowerCase();
 
-    const collection = story.collectionId
-      ? getCollectionById(story.collectionId)
-      : null;
+      const collection = story.collectionId
+        ? getCollectionById(story.collectionId)
+        : null;
 
-    const matchesSearch =
-      story.title?.toLowerCase().includes(query) ||
-      story.creator?.toLowerCase().includes(query) ||
-      story.genre?.toLowerCase().includes(query) ||
-      collection?.name?.toLowerCase().includes(query);
+      const matchesSearch =
+        story.title?.toLowerCase().includes(query) ||
+        story.creator?.toLowerCase().includes(query) ||
+        story.genre?.toLowerCase().includes(query) ||
+        collection?.name?.toLowerCase().includes(query);
 
-    const matchesGrove =
-      !grove ||
-      story.collectionId === grove;
+      const matchesGrove =
+        !grove ||
+        story.collectionId === grove;
 
-    const matchesJourney =
-      !journey ||
-      story.journey === journey;
+      const matchesJourney =
+        !journey ||
+        story.journey === journey;
 
-    const matchesBloom =
-      !bloom ||
-      Number(story.bloom) >= Number(bloom);
+      const matchesBloom =
+        !bloom ||
+        Number(story.bloom) >= Number(bloom);
 
-    return (
-      matchesSearch &&
-      matchesGrove &&
-      matchesJourney &&
-      matchesBloom
-    );
-  })
-  .sort((a, b) => {
-    switch (sort) {
-      case "oldest":
-        return (
-          new Date(a.plantedAt) -
-          new Date(b.plantedAt)
-        );
+      return (
+        matchesSearch &&
+        matchesGrove &&
+        matchesJourney &&
+        matchesBloom
+      );
+    })
+    .sort((a, b) => {
+      switch (sort) {
+        case "oldest":
+          return (
+            new Date(a.plantedAt) -
+            new Date(b.plantedAt)
+          );
 
-      case "title-asc":
-        return a.title.localeCompare(b.title);
+        case "title-asc":
+          return a.title.localeCompare(b.title);
 
-      case "title-desc":
-        return b.title.localeCompare(a.title);
+        case "title-desc":
+          return b.title.localeCompare(a.title);
 
-      case "bloom-desc":
-        return Number(b.bloom) - Number(a.bloom);
+        case "bloom-desc":
+          return Number(b.bloom) - Number(a.bloom);
 
-      case "bloom-asc":
-        return Number(a.bloom) - Number(b.bloom);
+        case "bloom-asc":
+          return Number(a.bloom) - Number(b.bloom);
 
-      default:
-        return (
-          new Date(b.plantedAt) -
-          new Date(a.plantedAt)
-        );
-    }
-  });
+        default:
+          return (
+            new Date(b.plantedAt) -
+            new Date(a.plantedAt)
+          );
+      }
+    });
 
   return (
     <AppLayout
@@ -137,23 +133,18 @@ export default function Library() {
       )}
 
       <LibraryToolbar
-  search={search}
-  setSearch={setSearch}
-
-  grove={grove}
-  setGrove={setGrove}
-
-  journey={journey}
-  setJourney={setJourney}
-
-  bloom={bloom}
-  setBloom={setBloom}
-
-  sort={sort}
-  setSort={setSort}
-
-  collections={collections}
-/>
+        search={search}
+        setSearch={setSearch}
+        grove={grove}
+        setGrove={setGrove}
+        journey={journey}
+        setJourney={setJourney}
+        bloom={bloom}
+        setBloom={setBloom}
+        sort={sort}
+        setSort={setSort}
+        collections={collections}
+      />
 
       {totalStories === 0 ? (
         <section className="grove-empty">
@@ -180,6 +171,7 @@ export default function Library() {
                 creator={story.creator}
                 mediaType={story.mediaType}
                 progress={0}
+                cover={story.cover}
                 onClick={() =>
                   navigate(`/story/${story.id}`)
                 }
