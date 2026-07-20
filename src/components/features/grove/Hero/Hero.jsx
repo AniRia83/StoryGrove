@@ -2,37 +2,44 @@ import "./Hero.css";
 
 import { useNavigate } from "react-router-dom";
 
-import Button from "../../../ui/Button";
-
 export default function Hero({
   onPlantStoryClick,
 }) {
-  
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <section className="hero">
+
       <p className="hero__eyebrow">
-        The Grove
+        THE GROVE
       </p>
 
       <h1 className="hero__title">
-        Welcome back, Ani 👋
+        Continue your reading journey.
       </h1>
 
-      <div className="hero__actions">
-        <Button onClick={onPlantStoryClick}>
-  🌱 Plant a Story
-        </Button>
+      <p className="hero__subtitle">
+        Every story you plant becomes another tree in your forest.
+      </p>
 
-        <Button
-          variant="secondary"
+      <div className="hero__actions">
+
+        <button
+          className="hero__button hero__button--primary"
+          onClick={onPlantStoryClick}
+        >
+          🌱 Plant a Story
+        </button>
+
+        <button
+          className="hero__button hero__button--secondary"
           onClick={() => navigate("/library")}
         >
           📚 My Grove
-        </Button>
+        </button>
+
       </div>
-      
+
     </section>
   );
 }

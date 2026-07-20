@@ -1,0 +1,75 @@
+.reading-inspiration{
+
+    margin-top:var(--space-3xl);
+
+    padding:3rem;
+
+    background:linear-gradient(
+        135deg,
+        #fffdf9,
+        #fdf8ef
+    );
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-lg);
+
+    text-align:center;
+
+    box-shadow:var(--shadow-soft);
+}
+
+.reading-inspiration__eyebrow{
+
+    display:inline-block;
+
+    margin-bottom:1rem;
+
+    color:var(--color-evergreen);
+
+    font-size:var(--text-sm);
+
+    font-weight:700;
+
+    letter-spacing:.08em;
+
+    text-transform:uppercase;
+}
+
+.reading-inspiration blockquote{
+
+    margin:0 auto 1.5rem;
+
+    max-width:760px;
+
+    font-family:var(--font-heading);
+
+    font-size:2rem;
+
+    line-height:1.5;
+
+    color:var(--color-heading);
+}
+
+.reading-inspiration__author{
+
+    color:var(--color-moss);
+
+    font-weight:700;
+
+    font-size:var(--text-md);
+}
+
+@media (max-width:768px){
+
+.reading-inspiration{
+
+    padding:2rem;
+}
+
+.reading-inspiration blockquote{
+
+    font-size:1.6rem;
+}
+
+}

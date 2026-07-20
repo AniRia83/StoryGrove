@@ -1,8 +1,11 @@
 const storyTemplate = {
   id: "",
+
   title: "",
+
   creator: "",
-  mediaType: "book",
+
+  mediaType: "Book",
 
   status: "planned",
 

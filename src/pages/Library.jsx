@@ -6,6 +6,7 @@ import "./Library.css";
 import AppLayout from "../components/layout/AppLayout/AppLayout";
 import MediaGrid from "../components/layout/MediaGrid";
 import MediaCard from "../components/cards/MediaCard";
+import PageBanner from "../components/ui/PageBanner";
 
 import LibraryToolbar from "../components/features/library/LibraryToolbar/LibraryToolbar";
 
@@ -107,10 +108,13 @@ export default function Library() {
     });
 
   return (
-    <AppLayout
-      title="🌳 My Grove"
-      subtitle="Every story you've planted lives here."
-    >
+    <AppLayout>
+
+  <PageBanner
+    icon="📚"
+    title="My Grove"
+    subtitle="Every story you've planted lives here."
+  />
       {totalStories > 0 && (
         <section className="grove-summary">
 

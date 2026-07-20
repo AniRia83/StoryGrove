@@ -1,20 +1,29 @@
 :root {
   /* ==========================
-     COLORS
-     ========================== */
+   STORYGROVE BRAND COLORS
+   ========================== */
 
-  --color-evergreen: #355c4a;
-  --color-moss: #7fa37d;
-  --color-cream: #f8f3ea;
-  --color-gold: #c8a766;
-  --color-walnut: #5b4636;
-  --color-mist: #fcfaf5;
+--color-primary: #EE629D;
+--color-secondary: #E289EA;
+--color-accent: #FFC466;
+--color-highlight: #EDF725;
 
-  --color-text: var(--color-walnut);
-  --color-heading: #2d2a26;
-  --color-background: var(--color-cream);
-  --color-surface: #fffdf9;
-  --color-border: #e6dac5;
+--color-evergreen: #355C4A;
+--color-moss: #7FA37D;
+
+--color-cream: #FFF8F0;
+--color-mist: #FFFDF9;
+
+--color-text: #5B4636;
+--color-heading: #2D2A2F;
+--color-background: #FFF8F0;
+--color-surface: #FFFDF9;
+--color-border: #F2E5D9;
+
+--color-success: #AED9A0;
+--color-warning: #FFC466;
+--color-danger: #EE629D;
+
 
   /* ==========================
      TYPOGRAPHY

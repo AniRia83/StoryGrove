@@ -1,0 +1,115 @@
+.page-banner {
+
+  position: relative;
+
+  margin-bottom: 2.5rem;
+
+  padding: 2rem 2.5rem;
+
+  background: var(--color-surface);
+
+  border: 1px solid var(--color-border);
+
+  border-radius: var(--radius-lg);
+
+  box-shadow: var(--shadow-soft);
+
+  overflow: hidden;
+}
+
+.page-banner::before {
+
+  content: "🌿";
+
+  position: absolute;
+
+  top: 16px;
+  left: 20px;
+
+  font-size: 1.4rem;
+
+  opacity: 0.25;
+}
+
+.page-banner::after {
+
+  content: "🍃";
+
+  position: absolute;
+
+  right: 20px;
+  bottom: 16px;
+
+  font-size: 1.3rem;
+
+  opacity: 0.25;
+}
+
+.page-banner__content {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  gap: .45rem;
+}
+
+.page-banner__icon {
+
+  font-size: 1.9rem;
+
+  line-height: 1;
+}
+
+.page-banner h1 {
+
+  margin: 0;
+
+  font-family: var(--font-heading);
+
+  font-size: 2.4rem;
+
+  font-weight: 600;
+
+  color: var(--color-heading);
+
+  line-height: 1.1;
+}
+
+.page-banner p {
+
+  margin: 0;
+
+  max-width: 520px;
+
+  color: var(--color-text);
+
+  font-size: 1rem;
+
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+
+  .page-banner {
+
+    padding: 1.75rem 1.5rem;
+  }
+
+  .page-banner h1 {
+
+    font-size: 2rem;
+  }
+
+  .page-banner p {
+
+    font-size: .95rem;
+  }
+
+}
