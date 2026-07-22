@@ -1,0 +1,57 @@
+.collection-stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+
+    gap:var(--space-lg);
+
+    margin-bottom:var(--space-3xl);
+}
+
+.collection-stat{
+
+    padding:1.5rem;
+
+    background:var(--color-surface);
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-lg);
+
+    text-align:center;
+
+    transition:var(--transition-normal);
+}
+
+.collection-stat:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:var(--shadow-soft);
+}
+
+.collection-stat__icon{
+
+    font-size:2rem;
+
+    margin-bottom:.75rem;
+}
+
+.collection-stat strong{
+
+    display:block;
+
+    margin-bottom:.35rem;
+
+    font-size:2rem;
+
+    font-family:var(--font-heading);
+
+    color:var(--color-primary);
+}
+
+.collection-stat span{
+
+    color:var(--color-text);
+}

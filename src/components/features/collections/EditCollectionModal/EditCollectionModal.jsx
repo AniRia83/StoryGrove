@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import "./CreateCollectionModal.css";
+import "./EditCollectionModal.css";
 
 import Modal from "../../../ui/Modal/Modal";
 import Input from "../../../ui/Input/Input";
@@ -11,69 +11,54 @@ import CollectionThemePicker from "../CollectionThemePicker";
 
 import { useCollection } from "../../../../context/CollectionContext";
 
-export default function CreateCollectionModal({
+export default function EditCollectionModal({
   isOpen,
   onClose,
-  onCollectionCreated,
+  collection,
 }) {
-  const { createCollection } = useCollection();
+  const { updateCollection } = useCollection();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [theme, setTheme] = useState("evergreen");
 
-  function handlePlant() {
+  useEffect(() => {
+    if (!collection) return;
+
+    setName(collection.name);
+    setDescription(collection.description || "");
+    setTheme(collection.color || "evergreen");
+  }, [collection]);
+
+  function handleSave() {
     if (!name.trim()) return;
 
-    const newCollection = createCollection({
+    updateCollection(collection.id, {
       name,
       description,
-
-      icon: "🌳",
-
       color: theme,
-
       banner: theme,
     });
 
-    setName("");
-    setDescription("");
-    setTheme("evergreen");
-
-    if (onCollectionCreated) {
-      onCollectionCreated(newCollection);
-    }
-
     onClose();
   }
 
-  function handleClose() {
-    setName("");
-    setDescription("");
-    setTheme("evergreen");
-
-    onClose();
-  }
+  if (!collection) return null;
 
   return (
     <Modal
       isOpen={isOpen}
-      onClose={handleClose}
-      title="🌳 Plant a New Grove"
+      onClose={onClose}
+      title="🌳 Edit Grove"
     >
       <Input
         label="Grove Name"
-        required
-        placeholder="Fantasy Forest..."
         value={name}
-        onChange={(e) =>
-          setName(e.target.value)
-        }
+        onChange={(e) => setName(e.target.value)}
       />
 
       <Textarea
         label="Description"
-        placeholder="Describe this grove..."
         value={description}
         onChange={(e) =>
           setDescription(e.target.value)
@@ -86,16 +71,18 @@ export default function CreateCollectionModal({
       />
 
       <div className="collection-modal__actions">
+
         <Button
           variant="secondary"
-          onClick={handleClose}
+          onClick={onClose}
         >
           Cancel
         </Button>
 
-        <Button onClick={handlePlant}>
-          🌱 Plant Grove
+        <Button onClick={handleSave}>
+          💾 Save Changes
         </Button>
+
       </div>
     </Modal>
   );

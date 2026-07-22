@@ -1,4 +1,5 @@
 import "./FavoriteCreators.css";
+import Section from "../../../ui/Section";
 
 export default function FavoriteCreators({ stories }) {
   const creatorMap = {};
@@ -15,9 +16,12 @@ export default function FavoriteCreators({ stories }) {
     .slice(0, 5);
 
   return (
-    <section className="favorite-creators">
 
-      <h2>✍️ Favorite Creators</h2>
+    <Section
+      title="Favorite Creators"
+      icon="✍️"
+    >
+
 
       {favoriteCreators.length === 0 ? (
 
@@ -48,6 +52,6 @@ export default function FavoriteCreators({ stories }) {
 
       )}
 
-    </section>
+    </Section>
   );
 }

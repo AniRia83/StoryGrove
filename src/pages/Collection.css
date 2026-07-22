@@ -5,18 +5,6 @@
   margin-bottom:var(--space-xl);
 }
 
-.collection-empty{
-  text-align:center;
-
-  padding:var(--space-3xl);
-}
-
-.collection-empty__icon{
-  font-size:4rem;
-
-  margin-bottom:var(--space-md);
-}
-
 .collection-grid{
   display:grid;
 

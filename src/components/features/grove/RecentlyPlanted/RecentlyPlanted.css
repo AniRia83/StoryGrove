@@ -3,25 +3,7 @@
     margin-top:var(--space-3xl);
 }
 
-.recently-planted__header{
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    margin-bottom:2rem;
-}
-
-.recently-planted__header h2{
-
-    margin:0;
-
-    font-size:2.2rem;
-
-    font-family:var(--font-heading);
-
-    color:var(--color-heading);
-}
+/* ---------- See All Button ---------- */
 
 .recently-planted__seeall{
 
@@ -31,75 +13,18 @@
 
     cursor:pointer;
 
-    color:var(--color-primary);
+    color:var(--color-evergreen);
 
     font-weight:700;
 
     font-size:1rem;
 
-    transition:.25s ease;
+    transition:var(--transition-normal);
 }
 
 .recently-planted__seeall:hover{
 
     transform:translateX(4px);
 
-    color:var(--color-secondary);
-}
-
-/* ---------- Empty State ---------- */
-
-.recently-planted__empty{
-
-    padding:4rem 2rem;
-
-    text-align:center;
-
-    border:2px dashed var(--color-border);
-
-    border-radius:28px;
-
-    background:var(--color-surface);
-}
-
-.empty-grove{
-
-    font-size:3.5rem;
-
-    margin-bottom:1rem;
-}
-
-.recently-planted__empty h3{
-
-    margin-bottom:.7rem;
-
-    color:var(--color-heading);
-
-    font-family:var(--font-heading);
-
-    font-size:2rem;
-}
-
-.recently-planted__empty p{
-
-    max-width:450px;
-
-    margin:0 auto;
-
-    color:var(--color-text);
-
-    line-height:1.7;
-}
-
-@media (max-width:768px){
-
-.recently-planted__header{
-
-    flex-direction:column;
-
-    align-items:flex-start;
-
-    gap:1rem;
-}
-
+    color:var(--color-gold);
 }

@@ -1,0 +1,36 @@
+.delete-collection{
+
+    text-align:center;
+}
+
+.delete-collection__icon{
+
+    font-size:4rem;
+
+    margin-bottom:1rem;
+}
+
+.delete-collection p{
+
+    margin-bottom:1rem;
+
+    line-height:1.7;
+}
+
+.delete-collection__warning{
+
+    color:var(--color-danger);
+
+    font-weight:700;
+}
+
+.delete-collection__actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:1rem;
+
+    margin-top:2rem;
+}

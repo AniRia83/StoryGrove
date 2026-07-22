@@ -40,6 +40,9 @@ export function CollectionProvider({ children }) {
       color:
         collection.color || "evergreen",
 
+      banner:
+        collection.banner || "classic",
+
       createdAt:
         new Date().toISOString(),
 
@@ -52,6 +55,8 @@ export function CollectionProvider({ children }) {
       newCollection,
       ...prev,
     ]);
+
+    return newCollection;
   }
 
   function updateCollection(id, updates) {
@@ -66,6 +71,19 @@ export function CollectionProvider({ children }) {
       )
     );
   }
+
+  function toggleFavourite(id) {
+  setCollections((prev) =>
+    prev.map((collection) =>
+      collection.id === id
+        ? {
+            ...collection,
+            isFavorite: !collection.isFavorite,
+          }
+        : collection
+    )
+  );
+}
 
   function deleteCollection(id) {
     setCollections((prev) =>
@@ -169,6 +187,8 @@ export function CollectionProvider({ children }) {
         createCollection,
 
         updateCollection,
+
+        toggleFavourite,
 
         deleteCollection,
 

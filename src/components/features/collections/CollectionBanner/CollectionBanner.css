@@ -1,0 +1,167 @@
+.collection-banner{
+
+    position:relative;
+
+    padding:4rem 2rem;
+
+    margin-bottom:var(--space-3xl);
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-lg);
+
+    box-shadow:var(--shadow-soft);
+
+    text-align:center;
+
+    transition:var(--transition-normal);
+}
+
+.collection-banner__icon{
+
+    font-size:4rem;
+
+    margin-bottom:1rem;
+
+    transition:var(--transition-normal);
+}
+
+.collection-banner h1{
+
+    margin-bottom:.75rem;
+
+    font-family:var(--font-heading);
+
+    font-size:3rem;
+
+    color:var(--color-heading);
+}
+
+.collection-banner__description{
+
+    max-width:600px;
+
+    margin:0 auto 2.5rem;
+
+    color:var(--color-text);
+
+    line-height:1.7;
+
+    font-size:1.05rem;
+}
+
+.collection-banner__stats{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:4rem;
+
+    flex-wrap:wrap;
+}
+
+.collection-banner__stats div{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:.35rem;
+}
+
+.collection-banner__stats strong{
+
+    font-size:2rem;
+
+    font-family:var(--font-heading);
+
+    transition:var(--transition-normal);
+}
+
+.collection-banner__stats span{
+
+    color:var(--color-text);
+}
+
+/* ==========================
+   Actions Menu
+   ========================== */
+
+.collection-banner .sg-popover{
+
+    position:absolute;
+
+    top:1.5rem;
+
+    right:1.5rem;
+}
+
+.collection-banner__menu{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:44px;
+
+    height:44px;
+
+    border-radius:50%;
+
+    font-size:2rem;
+
+    line-height:1;
+
+    color:var(--color-heading);
+
+    cursor:pointer;
+
+    transition:var(--transition-fast);
+}
+
+.collection-banner__menu:hover{
+
+    background:rgba(255,255,255,.7);
+}
+
+/* ==========================
+   Responsive
+   ========================== */
+
+@media (max-width:768px){
+
+    .collection-banner{
+
+        padding:3rem 1.5rem;
+    }
+
+    .collection-banner h1{
+
+        font-size:2.4rem;
+    }
+
+    .collection-banner__stats{
+
+        gap:2rem;
+    }
+
+    .collection-banner .sg-popover{
+
+        top:1rem;
+
+        right:1rem;
+    }
+
+    .collection-banner__menu{
+
+        width:40px;
+
+        height:40px;
+
+        font-size:1.8rem;
+    }
+
+}

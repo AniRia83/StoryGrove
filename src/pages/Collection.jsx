@@ -4,6 +4,7 @@ import AppLayout from "../components/layout/AppLayout/AppLayout";
 import CollectionCard from "../components/cards/CollectionCard/CollectionCard";
 
 import Button from "../components/ui/Button/Button";
+import EmptyState from "../components/ui/EmptyState";
 
 import CreateCollectionModal from "../components/features/collections/CreateCollectionModal/CreateCollectionModal";
 
@@ -31,19 +32,15 @@ export default function Collection() {
 
       {collections.length === 0 ? (
 
-        <section className="collection-empty">
-
-          <div className="collection-empty__icon">
-            🌿
-          </div>
-
-          <h2>No Groves Yet</h2>
-
-          <p>
-            Plant your first Grove to organize your favourite stories.
-          </p>
-
-        </section>
+        <EmptyState
+  icon="🌿"
+  title="No Groves Yet"
+  description="Plant your first Grove to organize your favourite stories."
+>
+  <Button onClick={() => setShowModal(true)}>
+    🌱 Plant New Grove
+  </Button>
+</EmptyState>
 
       ) : (
 

@@ -1,8 +1,15 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 import AppLayout from "../components/layout/AppLayout/AppLayout";
-import MediaGrid from "../components/layout/MediaGrid";
-import MediaCard from "../components/cards/MediaCard";
+
+import CollectionBanner from "../components/features/collections/CollectionBanner";
+import CollectionStats from "../components/features/collections/CollectionStats";
+import CollectionStoryGrid from "../components/features/collections/CollectionStoryGrid";
+import EditCollectionModal from "../components/features/collections/EditCollectionModal";
+import DeleteCollectionModal from "../components/features/collections/DeleteCollectionModal";
+
+import EmptyState from "../components/ui/EmptyState";
 
 import { useCollection } from "../context/CollectionContext";
 import { useStory } from "../context/StoryContext";
@@ -12,62 +19,124 @@ export default function CollectionDetails() {
 
   const navigate = useNavigate();
 
-  const { getCollectionById } = useCollection();
+  const [showEditModal, setShowEditModal] =
+    useState(false);
 
-  const { stories } = useStory();
+  const [showDeleteModal, setShowDeleteModal] =
+    useState(false);
+
+  const {
+    getCollectionById,
+    toggleFavourite,
+    deleteCollection,
+  } = useCollection();
+
+  const {
+  stories,
+  removeCollectionFromStories,
+} = useStory();
 
   const collection = getCollectionById(id);
 
   if (!collection) {
     return (
-      <AppLayout
-        title="Grove not found"
-        subtitle="This Grove doesn't exist."
-      />
+      <AppLayout>
+        <h2>🌳 Grove not found</h2>
+
+        <p>This Grove doesn't exist.</p>
+      </AppLayout>
     );
   }
 
   const collectionStories = stories.filter(
-    (story) => story.collectionId === collection.id
+    (story) =>
+      story.collectionId === collection.id
   );
 
+  const averageBloom =
+    collectionStories.length > 0
+      ? (
+          collectionStories.reduce(
+            (sum, story) =>
+              sum + Number(story.bloom || 0),
+            0
+          ) / collectionStories.length
+        ).toFixed(1)
+      : "0.0";
+
+  const growingCount = collectionStories.filter(
+    (story) =>
+      story.journey === "growing" ||
+      story.journey === "started"
+  ).length;
+
+  const finishedCount = collectionStories.filter(
+    (story) =>
+      story.journey === "finished"
+  ).length;
+
+  function handleDeleteCollection() {
+    removeCollectionFromStories(
+      collection.id
+    );
+
+    deleteCollection(collection.id);
+
+    navigate("/collections");
+  }
+
   return (
-    <AppLayout
-      title={`${collection.icon} ${collection.name}`}
-      subtitle={collection.description}
-    >
-      <p>
-        📚 {collectionStories.length}{" "}
-        {collectionStories.length === 1
-          ? "Story"
-          : "Stories"}
-      </p>
+    <AppLayout>
+      <CollectionBanner
+        collection={collection}
+        storyCount={collectionStories.length}
+        averageBloom={averageBloom}
+        onEdit={() =>
+          setShowEditModal(true)
+        }
+        onFavourite={() =>
+          toggleFavourite(collection.id)
+        }
+        onDelete={() =>
+          setShowDeleteModal(true)
+        }
+      />
+
+      <CollectionStats
+        totalStories={collectionStories.length}
+        averageBloom={averageBloom}
+        growingCount={growingCount}
+        finishedCount={finishedCount}
+      />
 
       {collectionStories.length === 0 ? (
-        <section className="grove-empty">
-          <h2>This Grove is empty.</h2>
-
-          <p>
-            Plant stories and assign them to this Grove.
-          </p>
-        </section>
+        <EmptyState
+          icon="🌱"
+          title="This Grove is waiting."
+          description="Plant stories into this Grove to watch it grow."
+        />
       ) : (
-        <MediaGrid>
-          {collectionStories.map((story) => (
-            <MediaCard
-              key={story.id}
-              title={story.title}
-              creator={story.creator}
-              mediaType={story.mediaType}
-              progress={0}
-              cover={story.cover}
-              onClick={() =>
-                navigate(`/story/${story.id}`)
-              }
-            />
-          ))}
-        </MediaGrid>
+        <CollectionStoryGrid
+          stories={collectionStories}
+        />
       )}
+
+      <EditCollectionModal
+        isOpen={showEditModal}
+        onClose={() =>
+          setShowEditModal(false)
+        }
+        collection={collection}
+      />
+
+      <DeleteCollectionModal
+        isOpen={showDeleteModal}
+        onClose={() =>
+          setShowDeleteModal(false)
+        }
+        onConfirm={handleDeleteCollection}
+        collection={collection}
+      />
     </AppLayout>
   );
 }

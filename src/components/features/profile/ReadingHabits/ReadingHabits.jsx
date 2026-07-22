@@ -1,4 +1,5 @@
 import "./ReadingHabits.css";
+import Section from "../../../ui/Section";
 
 export default function ReadingHabits({
   stories,
@@ -22,9 +23,10 @@ export default function ReadingHabits({
       : "0.0";
 
   return (
-    <section className="reading-habits">
-
-      <h2>📖 Reading Habits</h2>
+    <Section
+      title="Reading Habits"
+      icon="📖"
+    >
 
       <div className="reading-habits__grid">
 
@@ -54,6 +56,6 @@ export default function ReadingHabits({
 
       </div>
 
-    </section>
+    </Section>
   );
 }

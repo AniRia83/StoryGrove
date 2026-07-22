@@ -60,6 +60,21 @@ export function StoryProvider({ children }) {
     );
   };
 
+  const removeCollectionFromStories = (
+  collectionId
+) => {
+  setStories((prevStories) =>
+    prevStories.map((story) =>
+      story.collectionId === collectionId
+        ? {
+            ...story,
+            collectionId: null,
+          }
+        : story
+    )
+  );
+};
+
   const getStoryById = (id) =>
     stories.find((story) => story.id === id);
 
@@ -78,6 +93,7 @@ export function StoryProvider({ children }) {
         plantStory,
         updateStory,
         deleteStory,
+        removeCollectionFromStories,
         getStoryById,
         getStoriesByCollection,
       }}

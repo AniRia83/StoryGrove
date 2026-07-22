@@ -1,0 +1,48 @@
+.sg-popover{
+
+    position:relative;
+
+    display:inline-block;
+}
+
+.sg-popover__trigger{
+
+    border:none;
+
+    background:none;
+
+    cursor:pointer;
+
+    padding:0;
+}
+
+.sg-popover__content{
+
+    position:absolute;
+
+    top:calc(100% + .75rem);
+
+    right:0;
+
+    z-index:100;
+
+    animation:popoverFade .18s ease;
+}
+
+@keyframes popoverFade{
+
+from{
+
+opacity:0;
+
+transform:translateY(-6px);
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+}
+
+}

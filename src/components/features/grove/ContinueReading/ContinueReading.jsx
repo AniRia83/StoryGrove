@@ -20,7 +20,10 @@ export default function ContinueReading() {
   if (!story) return null;
 
   return (
-    <Section title="Continue Reading">
+    <Section
+  title="Continue Reading"
+  icon="📖"
+>
       <ContinueReadingCard
         story={story}
         onClick={() => navigate(`/story/${story.id}`)}

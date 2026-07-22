@@ -1,4 +1,5 @@
 import "./FavoriteGenres.css";
+import Section from "../../../ui/Section";
 
 export default function FavoriteGenres({
   stories,
@@ -17,9 +18,10 @@ export default function FavoriteGenres({
     .slice(0, 6);
 
   return (
-    <section className="favorite-genres">
-
-      <h2>🌸 Favorite Genres</h2>
+    <Section
+          title="Favorite Genres"
+          icon="🌸"
+        >
 
       {favorites.length === 0 ? (
 
@@ -49,6 +51,6 @@ export default function FavoriteGenres({
 
       )}
 
-    </section>
+    </Section>
   );
 }

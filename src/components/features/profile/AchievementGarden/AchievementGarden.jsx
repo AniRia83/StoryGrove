@@ -1,4 +1,5 @@
 import "./AchievementGarden.css";
+import Section from "../../../ui/Section";
 
 export default function AchievementGarden({
   stories,
@@ -51,10 +52,10 @@ export default function AchievementGarden({
   ];
 
   return (
-    <section className="achievement-garden">
-
-      <h2>🌿 Garden Milestones</h2>
-
+    <Section
+      title="Garden Milestones"
+      icon="🌿"
+    >
       <div className="achievement-garden__grid">
 
         {milestones.map((milestone) => (
@@ -81,7 +82,6 @@ export default function AchievementGarden({
         ))}
 
       </div>
-
-    </section>
+    </Section>
   );
 }

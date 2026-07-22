@@ -2,8 +2,10 @@ import { useNavigate } from "react-router-dom";
 
 import "./RecentlyPlanted.css";
 
+import Section from "../../../ui/Section";
 import MediaCard from "../../../cards/MediaCard";
 import MediaGrid from "../../../layout/MediaGrid";
+import EmptyState from "../../../ui/EmptyState";
 
 export default function RecentlyPlanted({
   stories,
@@ -11,36 +13,26 @@ export default function RecentlyPlanted({
   const navigate = useNavigate();
 
   return (
-    <section className="recently-planted">
-
-      <div className="recently-planted__header">
-
-        <h2>Recently Planted</h2>
-
+    <Section
+      title="Recently Planted"
+      icon="🌱"
+      action={
         <button
           className="recently-planted__seeall"
           onClick={() => navigate("/library")}
         >
           See All →
         </button>
-
-      </div>
+      }
+    >
 
       {stories.length === 0 ? (
 
-        <div className="recently-planted__empty">
-
-          <div className="empty-grove">
-            🌱
-          </div>
-
-          <h3>Your grove is waiting.</h3>
-
-          <p>
-            Plant your first story and watch your little forest begin to grow.
-          </p>
-
-        </div>
+        <EmptyState
+  icon="🌱"
+  title="Your grove is waiting."
+  description="Plant your first story and watch your little forest begin to grow."
+/>
 
       ) : (
 
@@ -53,7 +45,7 @@ export default function RecentlyPlanted({
               title={story.title}
               creator={story.creator}
               mediaType={story.mediaType}
-              progress={0}
+              progress={story.progress || 0}
               cover={story.cover}
               onClick={() =>
                 navigate(`/story/${story.id}`)
@@ -66,6 +58,6 @@ export default function RecentlyPlanted({
 
       )}
 
-    </section>
+    </Section>
   );
 }
