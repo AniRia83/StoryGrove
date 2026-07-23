@@ -18,116 +18,130 @@ export default function LibraryToolbar({
   return (
     <section className="library-toolbar">
 
-      <SearchBar
-        value={search}
-        onChange={setSearch}
-        placeholder="Search your grove..."
-      />
+      <div className="library-toolbar__search">
+        <SearchBar
+          value={search}
+          onChange={setSearch}
+          placeholder="Search your grove..."
+        />
+      </div>
 
-      <select
-        value={grove}
-        onChange={(e) =>
-          setGrove(e.target.value)
-        }
-      >
-        <option value="">
-          🌳 All Groves
-        </option>
+      <div className="library-toolbar__controls">
 
-        {collections.map((collection) => (
-          <option
-            key={collection.id}
-            value={collection.id}
+        <div className="library-toolbar__filters">
+
+          <select
+            value={grove}
+            onChange={(e) =>
+              setGrove(e.target.value)
+            }
           >
-            {collection.icon} {collection.name}
-          </option>
-        ))}
-      </select>
+            <option value="">
+              🌳 All Groves
+            </option>
 
-      <select
-        value={journey}
-        onChange={(e) =>
-          setJourney(e.target.value)
-        }
-      >
-        <option value="">
-          📖 All Journeys
-        </option>
+            {collections.map((collection) => (
+              <option
+                key={collection.id}
+                value={collection.id}
+              >
+                {collection.icon} {collection.name}
+              </option>
+            ))}
+          </select>
 
-        <option value="planning">
-          🌱 Planning
-        </option>
+          <select
+            value={journey}
+            onChange={(e) =>
+              setJourney(e.target.value)
+            }
+          >
+            <option value="">
+              📖 All Journeys
+            </option>
 
-        <option value="growing">
-          🌿 Growing
-        </option>
+            <option value="planning">
+              🌱 Planning
+            </option>
 
-        <option value="completed">
-          🌸 Bloomed
-        </option>
+            <option value="growing">
+              🌿 Growing
+            </option>
 
-        <option value="paused">
-          🍂 Resting
-        </option>
+            <option value="completed">
+              🌸 Bloomed
+            </option>
 
-        <option value="abandoned">
-          🪵 Abandoned
-        </option>
-      </select>
+            <option value="paused">
+              🍂 Resting
+            </option>
 
-      <select
-  value={bloom}
-  onChange={(e) =>
-    setBloom(e.target.value)
-  }
->
-  <option value="">
-    ⭐ Any Bloom
-  </option>
+            <option value="abandoned">
+              🪵 Abandoned
+            </option>
+          </select>
 
-  <option value="8">
-    ⭐⭐ 8+
-  </option>
+          <select
+            value={bloom}
+            onChange={(e) =>
+              setBloom(e.target.value)
+            }
+          >
+            <option value="">
+              ⭐ Any Bloom
+            </option>
 
-  <option value="9">
-    ⭐⭐⭐ 9+
-  </option>
+            <option value="8">
+              ⭐⭐ 8+
+            </option>
 
-  <option value="10">
-    ⭐⭐⭐⭐ 10
-  </option>
-</select>
+            <option value="9">
+              ⭐⭐⭐ 9+
+            </option>
 
-<select
-  value={sort}
-  onChange={(e) =>
-    setSort(e.target.value)
-  }
->
-  <option value="newest">
-    🆕 Newest
-  </option>
+            <option value="10">
+              ⭐⭐⭐⭐ 10
+            </option>
+          </select>
 
-  <option value="oldest">
-    🌱 Oldest
-  </option>
+        </div>
 
-  <option value="title-asc">
-    🔤 Title A–Z
-  </option>
+        <div className="library-toolbar__actions">
 
-  <option value="title-desc">
-    🔠 Title Z–A
-  </option>
+          <select
+            value={sort}
+            onChange={(e) =>
+              setSort(e.target.value)
+            }
+          >
+            <option value="newest">
+              🆕 Newest
+            </option>
 
-  <option value="bloom-desc">
-    ⭐ Highest Bloom
-  </option>
+            <option value="oldest">
+              🌱 Oldest
+            </option>
 
-  <option value="bloom-asc">
-    🌑 Lowest Bloom
-  </option>
-</select>
+            <option value="title-asc">
+              🔤 Title A–Z
+            </option>
+
+            <option value="title-desc">
+              🔠 Title Z–A
+            </option>
+
+            <option value="bloom-desc">
+              ⭐ Highest Bloom
+            </option>
+
+            <option value="bloom-asc">
+              🌑 Lowest Bloom
+            </option>
+          </select>
+
+        </div>
+
+      </div>
 
     </section>
   );

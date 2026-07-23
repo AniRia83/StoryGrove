@@ -1,0 +1,16 @@
+.progress-fields{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1rem;
+    width:100%;
+}
+
+@media (max-width:768px){
+
+.progress-fields{
+
+    grid-template-columns:1fr;
+
+}
+
+}

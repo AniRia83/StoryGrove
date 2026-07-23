@@ -30,6 +30,7 @@ export function StoryProvider({ children }) {
       ...story,
       id: crypto.randomUUID(),
       plantedAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
       collectionId: story.collectionId || null,
     };
 
@@ -46,6 +47,7 @@ export function StoryProvider({ children }) {
           ? {
               ...story,
               ...updates,
+              updatedAt: new Date().toISOString(),
             }
           : story
       )

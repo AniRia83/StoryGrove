@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { useCollection } from "../../../../context/CollectionContext";
 
 import "./PlantStoryForm.css";
@@ -11,6 +12,7 @@ import Button from "../../../ui/Button";
 import CoverUpload from "../../../ui/CoverUpload";
 
 import CreateCollectionModal from "../../collections/CreateCollectionModal/CreateCollectionModal";
+import { ProgressFields } from "../../story";
 
 export default function PlantStoryForm({
   mediaType,
@@ -19,14 +21,25 @@ export default function PlantStoryForm({
   const [formData, setFormData] = useState({
     title: "",
     creator: "",
+
     collectionId: "",
+
     genre: "",
+
     origin: "",
+
     reflections: "",
+
     firefly: "",
+
     bloom: 8.5,
+
     journey: "planning",
+
     cover: null,
+
+    currentProgress: 0,
+    totalProgress: "",
   });
 
   const [showCreateGrove, setShowCreateGrove] =
@@ -34,23 +47,32 @@ export default function PlantStoryForm({
 
   const { collections } = useCollection();
 
-  const handleChange = (field, value) => {
+  function handleChange(field, value) {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
     }));
-  };
+  }
 
-  const handleSubmit = (e) => {
+  function handleSubmit(e) {
     e.preventDefault();
 
     const story = {
       mediaType,
+
       ...formData,
+
+      currentProgress: Number(
+        formData.currentProgress
+      ),
+
+      totalProgress: Number(
+        formData.totalProgress
+      ),
     };
 
     onPlant(story);
-  };
+  }
 
   return (
     <>
@@ -75,7 +97,10 @@ export default function PlantStoryForm({
             required
             value={formData.title}
             onChange={(e) =>
-              handleChange("title", e.target.value)
+              handleChange(
+                "title",
+                e.target.value
+              )
             }
             placeholder="The Magic Faraway Tree"
           />
@@ -84,7 +109,10 @@ export default function PlantStoryForm({
             label="Creator"
             value={formData.creator}
             onChange={(e) =>
-              handleChange("creator", e.target.value)
+              handleChange(
+                "creator",
+                e.target.value
+              )
             }
             placeholder="Enid Blyton"
           />
@@ -95,10 +123,19 @@ export default function PlantStoryForm({
             <JourneySelector
               value={formData.journey}
               onChange={(value) =>
-                handleChange("journey", value)
+                handleChange(
+                  "journey",
+                  value
+                )
               }
             />
           </div>
+
+          <ProgressFields
+            mediaType={mediaType}
+            formData={formData}
+            handleChange={handleChange}
+          />
 
           <div className="form-group">
             <label>Grove</label>
@@ -106,7 +143,9 @@ export default function PlantStoryForm({
             <select
               value={formData.collectionId}
               onChange={(e) => {
-                if (e.target.value === "__new__") {
+                if (
+                  e.target.value === "__new__"
+                ) {
                   setShowCreateGrove(true);
                   return;
                 }
@@ -121,14 +160,17 @@ export default function PlantStoryForm({
                 No Grove
               </option>
 
-              {collections.map((collection) => (
-                <option
-                  key={collection.id}
-                  value={collection.id}
-                >
-                  {collection.icon} {collection.name}
-                </option>
-              ))}
+              {collections.map(
+                (collection) => (
+                  <option
+                    key={collection.id}
+                    value={collection.id}
+                  >
+                    {collection.icon}{" "}
+                    {collection.name}
+                  </option>
+                )
+              )}
 
               <option value="__new__">
                 🌱 Plant New Grove...
@@ -140,7 +182,10 @@ export default function PlantStoryForm({
             label="Genre"
             value={formData.genre}
             onChange={(e) =>
-              handleChange("genre", e.target.value)
+              handleChange(
+                "genre",
+                e.target.value
+              )
             }
             placeholder="Fantasy"
           />
@@ -155,7 +200,10 @@ export default function PlantStoryForm({
               step="0.1"
               value={formData.bloom}
               onChange={(e) =>
-                handleChange("bloom", e.target.value)
+                handleChange(
+                  "bloom",
+                  e.target.value
+                )
               }
             />
 
@@ -168,18 +216,24 @@ export default function PlantStoryForm({
             label="Origin"
             value={formData.origin}
             onChange={(e) =>
-              handleChange("origin", e.target.value)
+              handleChange(
+                "origin",
+                e.target.value
+              )
             }
             placeholder="Where did this story find you?"
           />
 
           <div className="form-group form-group--full">
             <CoverUpload
-  value={formData.cover}
-  onChange={(cover) =>
-    handleChange("cover", cover)
-  }
-/>
+              value={formData.cover}
+              onChange={(cover) =>
+                handleChange(
+                  "cover",
+                  cover
+                )
+              }
+            />
           </div>
 
         </div>
@@ -189,7 +243,10 @@ export default function PlantStoryForm({
           rows={5}
           value={formData.reflections}
           onChange={(e) =>
-            handleChange("reflections", e.target.value)
+            handleChange(
+              "reflections",
+              e.target.value
+            )
           }
           placeholder="Thoughts, favourite moments, quotes..."
         />
@@ -199,7 +256,10 @@ export default function PlantStoryForm({
           rows={3}
           value={formData.firefly}
           onChange={(e) =>
-            handleChange("firefly", e.target.value)
+            handleChange(
+              "firefly",
+              e.target.value
+            )
           }
           placeholder="What still glows after this story?"
         />
@@ -215,7 +275,9 @@ export default function PlantStoryForm({
         onClose={() =>
           setShowCreateGrove(false)
         }
-        onCollectionCreated={(newCollection) => {
+        onCollectionCreated={(
+          newCollection
+        ) => {
           handleChange(
             "collectionId",
             newCollection.id

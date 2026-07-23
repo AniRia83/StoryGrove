@@ -1,13 +1,39 @@
 import "./MediaCard.css";
 
+const mediaIcons = {
+  Book: "📖",
+  Novel: "📘",
+  Manga: "📚",
+  Comic: "💥",
+  Movie: "🎬",
+  TV: "📺",
+  Anime: "🌸",
+  Game: "🎮",
+  Audiobook: "🎧",
+  Podcast: "🎙️",
+  Music: "🎵",
+};
+
 export default function MediaCard({
-  title,
-  creator,
-  mediaType,
-  progress,
-  cover,
+  story,
+  collection,
   onClick,
 }) {
+  const icon =
+    mediaIcons[story.mediaType] || "📚";
+
+  const progress =
+    story.totalProgress > 0
+      ? Math.min(
+          100,
+          Math.round(
+            (story.currentProgress /
+              story.totalProgress) *
+              100
+          )
+        )
+      : 0;
+
   return (
     <article
       className="media-card"
@@ -15,10 +41,10 @@ export default function MediaCard({
     >
       <div className="media-card__cover">
 
-        {cover ? (
+        {story.cover ? (
           <img
-            src={cover}
-            alt={title}
+            src={story.cover}
+            alt={story.title}
           />
         ) : (
           <div className="media-card__placeholder">
@@ -26,21 +52,17 @@ export default function MediaCard({
           </div>
         )}
 
-        <span className="media-card__badge">
-          {mediaType}
-        </span>
+        <div className="media-card__type">
+          {icon}
+        </div>
 
       </div>
 
       <div className="media-card__content">
 
         <h3 className="media-card__title">
-          {title}
+          {story.title}
         </h3>
-
-        <p className="media-card__creator">
-          {creator || "Unknown Creator"}
-        </p>
 
         <div className="media-card__progress">
 
@@ -53,9 +75,11 @@ export default function MediaCard({
 
         </div>
 
-        <p className="media-card__progress-text">
-          {progress}% complete
-        </p>
+        {collection && (
+          <div className="media-card__collection">
+            🌳 {collection}
+          </div>
+        )}
 
       </div>
 

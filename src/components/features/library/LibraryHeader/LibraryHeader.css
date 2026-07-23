@@ -1,0 +1,24 @@
+.library-header{
+
+    margin-bottom:var(--space-2xl);
+}
+
+.library-header h1{
+
+    margin:0 0 .6rem;
+
+    font-family:var(--font-heading);
+
+    font-size:3rem;
+
+    color:var(--color-heading);
+}
+
+.library-header p{
+
+    max-width:620px;
+
+    color:var(--color-text);
+
+    line-height:1.7;
+}

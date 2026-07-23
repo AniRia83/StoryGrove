@@ -19,6 +19,7 @@ import Button from "../components/ui/Button";
 import EditStoryModal from "../components/features/story/EditStoryModal/EditStoryModal";
 
 import { useStory } from "../context/StoryContext";
+import { useCollection } from "../context/CollectionContext";
 
 export default function StoryDetails() {
   const { id } = useParams();
@@ -28,7 +29,11 @@ export default function StoryDetails() {
   const {
     getStoryById,
     deleteStory,
+    updateStory,
   } = useStory();
+
+  const { getCollectionById } =
+    useCollection();
 
   const story = getStoryById(id);
 
@@ -42,6 +47,21 @@ export default function StoryDetails() {
         subtitle="This story doesn't seem to exist."
       />
     );
+  }
+
+  const collection =
+    story.collectionId
+      ? getCollectionById(
+          story.collectionId
+        )
+      : null;
+
+  function handleJourneyChange(
+    newJourney
+  ) {
+    updateStory(story.id, {
+      journey: newJourney,
+    });
   }
 
   function handleDelete() {
@@ -58,13 +78,22 @@ export default function StoryDetails() {
 
   return (
     <AppLayout>
-      <StoryHero story={story} />
+
+      <StoryHero
+        story={story}
+        collection={collection}
+        onJourneyChange={
+          handleJourneyChange
+        }
+      />
 
       <div
         style={{
           display: "flex",
           justifyContent: "space-between",
-          marginBottom: "1.5rem",
+          gap: "1rem",
+          flexWrap: "wrap",
+          marginBottom: "2rem",
         }}
       >
         <Button
@@ -99,6 +128,7 @@ export default function StoryDetails() {
         }
         story={story}
       />
+
     </AppLayout>
   );
 }

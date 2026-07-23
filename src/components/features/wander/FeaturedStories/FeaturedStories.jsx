@@ -5,10 +5,15 @@ import MediaCard from "../../../cards/MediaCard";
 
 import { useNavigate } from "react-router-dom";
 
+import { useCollection } from "../../../../context/CollectionContext";
+
 export default function FeaturedStories({
   stories,
 }) {
   const navigate = useNavigate();
+
+  const { getCollectionById } =
+    useCollection();
 
   if (!stories.length) return null;
 
@@ -29,12 +34,17 @@ export default function FeaturedStories({
 
           <MediaCard
             key={story.id}
-            title={story.title}
-            creator={story.creator}
-            mediaType={story.mediaType}
-            cover={story.cover}
-            progress={story.progress || 0}
-            onClick={() => navigate(`/story/${story.id}`)}
+            story={story}
+            collection={
+              story.collectionId
+                ? getCollectionById(
+                    story.collectionId
+                  )?.name
+                : null
+            }
+            onClick={() =>
+              navigate(`/story/${story.id}`)
+            }
           />
 
         ))}

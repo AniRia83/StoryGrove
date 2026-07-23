@@ -1,46 +1,116 @@
 .library-toolbar{
-  display:flex;
-  gap:1rem;
-  align-items:center;
-  margin-bottom:2rem;
-  flex-wrap:wrap;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:var(--space-lg);
+
+    margin-bottom:var(--space-2xl);
 }
 
-.library-toolbar .search-bar{
-  flex:1;
-  min-width:320px;
+.library-toolbar__search{
+
+    width:100%;
+}
+
+.library-toolbar__search .search-bar{
+
+    width:100%;
+}
+
+.library-toolbar__controls{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:var(--space-lg);
+
+    flex-wrap:wrap;
+}
+
+.library-toolbar__filters{
+
+    display:flex;
+
+    gap:var(--space-md);
+
+    flex-wrap:wrap;
+
+    flex:1;
+}
+
+.library-toolbar__actions{
+
+    display:flex;
+
+    gap:var(--space-md);
+
+    align-items:center;
 }
 
 .library-toolbar select{
-  min-width:220px;
 
-  padding:.9rem 1rem;
+    min-width:180px;
 
-  border-radius:999px;
+    padding:.9rem 1rem;
 
-  border:1px solid var(--color-border);
+    border-radius:var(--radius-pill);
 
-  background:var(--color-surface);
+    border:1px solid var(--color-border);
 
-  font-family:var(--font-body);
+    background:var(--color-surface);
 
-  font-size:var(--text-md);
+    color:var(--color-text);
 
-  color:var(--color-text);
+    font-family:var(--font-body);
 
-  cursor:pointer;
+    font-size:var(--text-md);
 
-  transition:.25s;
+    transition:var(--transition-normal);
+
+    cursor:pointer;
 }
 
 .library-toolbar select:hover{
-  border-color:var(--color-primary);
+
+    border-color:var(--color-primary);
 }
 
 .library-toolbar select:focus{
-  outline:none;
 
-  border-color:var(--color-primary);
+    outline:none;
 
-  box-shadow:0 0 0 4px rgba(110,160,118,.15);
+    border-color:var(--color-primary);
+
+    box-shadow:0 0 0 4px rgba(238,98,157,.12);
+}
+
+@media (max-width:768px){
+
+.library-toolbar__controls{
+
+    flex-direction:column;
+
+    align-items:stretch;
+}
+
+.library-toolbar__filters{
+
+    flex-direction:column;
+}
+
+.library-toolbar__actions{
+
+    justify-content:space-between;
+}
+
+.library-toolbar select{
+
+    width:100%;
+}
+
 }
