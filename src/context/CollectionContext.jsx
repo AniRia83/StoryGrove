@@ -46,9 +46,11 @@ export function CollectionProvider({ children }) {
       createdAt:
         new Date().toISOString(),
 
-      storyIds: [],
-
       isFavorite: false,
+
+cover: collection.cover || null,
+
+updatedAt: new Date().toISOString(),
     };
 
     setCollections((prev) => [
@@ -60,17 +62,19 @@ export function CollectionProvider({ children }) {
   }
 
   function updateCollection(id, updates) {
-    setCollections((prev) =>
-      prev.map((collection) =>
-        collection.id === id
-          ? {
-              ...collection,
-              ...updates,
-            }
-          : collection
-      )
-    );
-  }
+  setCollections((prev) =>
+    prev.map((collection) =>
+      collection.id === id
+        ? {
+            ...collection,
+            ...updates,
+            updatedAt:
+              new Date().toISOString(),
+          }
+        : collection
+    )
+  );
+}
 
   function toggleFavourite(id) {
   setCollections((prev) =>
@@ -101,83 +105,6 @@ export function CollectionProvider({ children }) {
     );
   }
 
-  function addStoryToCollection(
-    collectionId,
-    storyId
-  ) {
-    setCollections((prev) =>
-      prev.map((collection) => {
-        if (collection.id !== collectionId)
-          return collection;
-
-        if (
-          collection.storyIds.includes(storyId)
-        )
-          return collection;
-
-        return {
-          ...collection,
-          storyIds: [
-            ...collection.storyIds,
-            storyId,
-          ],
-        };
-      })
-    );
-  }
-
-  function removeStoryFromCollection(
-    collectionId,
-    storyId
-  ) {
-    setCollections((prev) =>
-      prev.map((collection) => {
-        if (collection.id !== collectionId)
-          return collection;
-
-        return {
-          ...collection,
-          storyIds:
-            collection.storyIds.filter(
-              (id) => id !== storyId
-            ),
-        };
-      })
-    );
-  }
-
-  function moveStoryToCollection(
-    storyId,
-    newCollectionId
-  ) {
-    setCollections((prev) =>
-      prev.map((collection) => {
-        if (collection.id === newCollectionId) {
-          if (
-            collection.storyIds.includes(storyId)
-          ) {
-            return collection;
-          }
-
-          return {
-            ...collection,
-            storyIds: [
-              ...collection.storyIds,
-              storyId,
-            ],
-          };
-        }
-
-        return {
-          ...collection,
-          storyIds:
-            collection.storyIds.filter(
-              (id) => id !== storyId
-            ),
-        };
-      })
-    );
-  }
 
   return (
     <CollectionContext.Provider
@@ -194,11 +121,6 @@ export function CollectionProvider({ children }) {
 
         getCollectionById,
 
-        addStoryToCollection,
-
-        removeStoryFromCollection,
-
-        moveStoryToCollection,
       }}
     >
       {children}
