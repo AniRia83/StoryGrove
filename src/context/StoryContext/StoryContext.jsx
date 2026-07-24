@@ -5,6 +5,8 @@ import {
   useState,
 } from "react";
 
+import { getJourney } from "../../utils/storyUtils";
+
 const StoryContext = createContext();
 
 export function StoryProvider({ children }) {
@@ -25,68 +27,111 @@ export function StoryProvider({ children }) {
     );
   }, [stories]);
 
-  const plantStory = (story) => {
+  function plantStory(story) {
+    const currentProgress = Number(
+      story.currentProgress || 0
+    );
+
+    const totalProgress = Number(
+      story.totalProgress || 0
+    );
+
     const newStory = {
       ...story,
+
       id: crypto.randomUUID(),
+
       plantedAt: new Date().toISOString(),
+
       updatedAt: new Date().toISOString(),
-      collectionId: story.collectionId || null,
+
+      collectionId:
+        story.collectionId || null,
+
+      currentProgress,
+
+      totalProgress,
     };
 
-    setStories((prevStories) => [
+    newStory.journey =
+      getJourney(newStory);
+
+    setStories((prev) => [
       newStory,
-      ...prevStories,
+      ...prev,
     ]);
-  };
+  }
 
-  const updateStory = (id, updates) => {
+  function updateStory(id, updates) {
     setStories((prevStories) =>
-      prevStories.map((story) =>
-        story.id === id
-          ? {
-              ...story,
-              ...updates,
-              updatedAt: new Date().toISOString(),
-            }
-          : story
-      )
-    );
-  };
+      prevStories.map((story) => {
+        if (story.id !== id) return story;
 
-  const deleteStory = (id) => {
+        const updatedStory = {
+          ...story,
+          ...updates,
+
+          currentProgress: Number(
+            updates.currentProgress ??
+              story.currentProgress ??
+              0
+          ),
+
+          totalProgress: Number(
+            updates.totalProgress ??
+              story.totalProgress ??
+              0
+          ),
+
+          updatedAt:
+            new Date().toISOString(),
+        };
+
+        updatedStory.journey =
+          getJourney(updatedStory);
+
+        return updatedStory;
+      })
+    );
+  }
+
+  function deleteStory(id) {
     setStories((prevStories) =>
       prevStories.filter(
         (story) => story.id !== id
       )
     );
-  };
+  }
 
-  const removeCollectionFromStories = (
-  collectionId
-) => {
-  setStories((prevStories) =>
-    prevStories.map((story) =>
-      story.collectionId === collectionId
-        ? {
-            ...story,
-            collectionId: null,
-          }
-        : story
-    )
-  );
-};
-
-  const getStoryById = (id) =>
-    stories.find((story) => story.id === id);
-
-  const getStoriesByCollection = (
+  function removeCollectionFromStories(
     collectionId
-  ) =>
-    stories.filter(
+  ) {
+    setStories((prevStories) =>
+      prevStories.map((story) =>
+        story.collectionId === collectionId
+          ? {
+              ...story,
+              collectionId: null,
+            }
+          : story
+      )
+    );
+  }
+
+  function getStoryById(id) {
+    return stories.find(
+      (story) => story.id === id
+    );
+  }
+
+  function getStoriesByCollection(
+    collectionId
+  ) {
+    return stories.filter(
       (story) =>
         story.collectionId === collectionId
     );
+  }
 
   return (
     <StoryContext.Provider

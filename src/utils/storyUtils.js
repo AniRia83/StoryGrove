@@ -18,3 +18,21 @@ export function getProgressPercentage(story) {
       );
   }
 }
+
+export function getJourney(story) {
+  const progress = getProgressPercentage(story);
+
+  if (progress === 0) {
+    return "planning";
+  }
+
+  if (progress >= 100) {
+    return "bloomed";
+  }
+
+  return "growing";
+}
+
+export function isCompleted(story) {
+  return getProgressPercentage(story) >= 100;
+}

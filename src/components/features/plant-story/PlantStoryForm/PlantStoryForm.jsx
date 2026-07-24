@@ -36,7 +36,7 @@ export default function PlantStoryForm({
 
     bloom: 8.5,
 
-    journey: "planning",
+    journey: "",
 
     cover: null,
 

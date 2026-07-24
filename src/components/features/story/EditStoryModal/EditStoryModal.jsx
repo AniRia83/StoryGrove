@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import "./EditStoryModal.css";
 
 import { ProgressFields } from "..";
-import { getJourney } from "../../../../utils/journeyUtils";
+import { getJourney } from "../../../../utils/storyUtils";
 
 import Modal from "../../../ui/Modal/Modal";
 import Input from "../../../ui/Input";
@@ -29,14 +29,14 @@ export default function EditStoryModal({
     collectionId: "",
     genre: "",
     origin: "",
-    bloom: 0,
-    journey: "planning",
+    bloom: 8.5,
+    journey: "",
     reflections: "",
     firefly: "",
     cover: null,
 
-currentProgress: 0,
-totalProgress: "",
+    currentProgress: 0,
+    totalProgress: "",
   });
 
   useEffect(() => {
@@ -48,17 +48,17 @@ totalProgress: "",
       collectionId: story.collectionId || "",
       genre: story.genre || "",
       origin: story.origin || "",
-      bloom: story.bloom || 0,
-      journey: story.journey || "planning",
+      bloom: story.bloom || 8.5,
+      journey: story.journey || "",
       reflections: story.reflections || "",
       firefly: story.firefly || "",
       cover: story.cover || null,
 
-currentProgress:
-  story.currentProgress || 0,
+      currentProgress:
+        story.currentProgress || 0,
 
-totalProgress:
-  story.totalProgress || "",
+      totalProgress:
+        story.totalProgress || "",
     });
   }, [story]);
 
@@ -70,31 +70,30 @@ totalProgress:
   }
 
   function handleSave() {
-  const updatedStory = {
-    ...formData,
+    const updatedStory = {
+      ...formData,
 
-    currentProgress: Number(
-      formData.currentProgress
-    ),
+      currentProgress: Number(
+        formData.currentProgress
+      ),
 
-    totalProgress: Number(
-      formData.totalProgress
-    ),
-  };
+      totalProgress: Number(
+        formData.totalProgress
+      ),
+    };
 
-  updatedStory.journey =
-    getJourney({
+    updatedStory.journey = getJourney({
       ...story,
       ...updatedStory,
     });
 
-  updateStory(
-    story.id,
-    updatedStory
-  );
+    updateStory(
+      story.id,
+      updatedStory
+    );
 
-  onClose();
-}
+    onClose();
+  }
 
   if (!story) return null;
 
@@ -115,7 +114,10 @@ totalProgress:
         label="Title"
         value={formData.title}
         onChange={(e) =>
-          handleChange("title", e.target.value)
+          handleChange(
+            "title",
+            e.target.value
+          )
         }
       />
 
@@ -123,7 +125,10 @@ totalProgress:
         label="Creator"
         value={formData.creator}
         onChange={(e) =>
-          handleChange("creator", e.target.value)
+          handleChange(
+            "creator",
+            e.target.value
+          )
         }
       />
 
@@ -158,7 +163,10 @@ totalProgress:
         label="Genre"
         value={formData.genre}
         onChange={(e) =>
-          handleChange("genre", e.target.value)
+          handleChange(
+            "genre",
+            e.target.value
+          )
         }
       />
 
@@ -166,15 +174,18 @@ totalProgress:
         label="Origin"
         value={formData.origin}
         onChange={(e) =>
-          handleChange("origin", e.target.value)
+          handleChange(
+            "origin",
+            e.target.value
+          )
         }
       />
 
       <ProgressFields
-  mediaType={story.mediaType}
-  formData={formData}
-  handleChange={handleChange}
-/>
+        mediaType={story.mediaType}
+        formData={formData}
+        handleChange={handleChange}
+      />
 
       <div className="form-group">
         <label>Bloom</label>
