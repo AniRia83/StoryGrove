@@ -33,7 +33,7 @@ export default function Profile() {
 
       <FavoriteCreators stories={stories} />
 
-      <GardenQuote />
+      <GardenQuote stories={stories} />
 
     </AppLayout>
   );
