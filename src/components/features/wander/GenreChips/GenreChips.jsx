@@ -15,40 +15,64 @@ export default function GenreChips({
 
   return (
     <section className="genre-chips">
+      <div className="genre-chips__header">
+        <h2 className="genre-chips__title">
+          🌸 Browse Genres
+        </h2>
 
-      <button
-        className={
-          !selectedGenre
-            ? "genre-chip active"
-            : "genre-chip"
-        }
-        onClick={() => onSelectGenre("")}
-      >
-        All
-      </button>
-
-      {genres.map((genre) => {
-        const count = stories.filter(
-          (story) => story.genre === genre
-        ).length;
-
-        return (
+        {selectedGenre && (
           <button
-            key={genre}
-            className={
-              selectedGenre === genre
-                ? "genre-chip active"
-                : "genre-chip"
-            }
+            className="genre-chips__clear"
             onClick={() =>
-              onSelectGenre(genre)
+              onSelectGenre("")
             }
           >
-            {genre} ({count})
+            Clear
           </button>
-        );
-      })}
+        )}
+      </div>
 
+      <div className="genre-chips__list">
+        <button
+          className={
+            !selectedGenre
+              ? "genre-chip active"
+              : "genre-chip"
+          }
+          onClick={() =>
+            onSelectGenre("")
+          }
+        >
+          All
+        </button>
+
+        {genres.map((genre) => {
+          const count = stories.filter(
+            (story) =>
+              story.genre === genre
+          ).length;
+
+          return (
+            <button
+              key={genre}
+              className={
+                selectedGenre === genre
+                  ? "genre-chip active"
+                  : "genre-chip"
+              }
+              onClick={() =>
+                onSelectGenre(genre)
+              }
+            >
+              <span>{genre}</span>
+
+              <span className="genre-chip__count">
+                {count}
+              </span>
+            </button>
+          );
+        })}
+      </div>
     </section>
   );
 }

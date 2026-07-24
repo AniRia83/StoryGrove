@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 
 import AppLayout from "../components/layout/AppLayout/AppLayout";
 
 import PageBanner from "../components/ui/PageBanner";
 import SearchBar from "../components/ui/SearchBar";
+import EmptyState from "../components/ui/EmptyState";
 
 import GenreChips from "../components/features/wander/GenreChips";
 import MediaCategories from "../components/features/wander/MediaCategories";
@@ -21,35 +22,61 @@ export default function Discover() {
   const [selectedGenre, setSelectedGenre] =
     useState("");
 
-  const [selectedMediaType, setSelectedMediaType] =
-    useState("");
+  const [
+    selectedMediaType,
+    setSelectedMediaType,
+  ] = useState("");
 
-  const filteredStories = stories.filter((story) => {
-    const query = search.toLowerCase();
+  const filteredStories = useMemo(() => {
+    return stories.filter((story) => {
+      const query = search.toLowerCase();
 
-    const matchesSearch =
-      story.title?.toLowerCase().includes(query) ||
-      story.creator?.toLowerCase().includes(query) ||
-      story.genre?.toLowerCase().includes(query);
+      const matchesSearch =
+        story.title
+          ?.toLowerCase()
+          .includes(query) ||
+        story.creator
+          ?.toLowerCase()
+          .includes(query) ||
+        story.genre
+          ?.toLowerCase()
+          .includes(query);
 
-    const matchesGenre =
-      !selectedGenre ||
-      story.genre === selectedGenre;
+      const matchesGenre =
+        !selectedGenre ||
+        story.genre === selectedGenre;
 
-    const matchesMediaType =
-      !selectedMediaType ||
-      story.mediaType === selectedMediaType;
+      const matchesMediaType =
+        !selectedMediaType ||
+        story.mediaType ===
+          selectedMediaType;
 
-    return (
-      matchesSearch &&
-      matchesGenre &&
-      matchesMediaType
-    );
-  });
+      return (
+        matchesSearch &&
+        matchesGenre &&
+        matchesMediaType
+      );
+    });
+  }, [
+    stories,
+    search,
+    selectedGenre,
+    selectedMediaType,
+  ]);
+
+  const hasFilters =
+    search ||
+    selectedGenre ||
+    selectedMediaType;
+
+  function clearFilters() {
+    setSearch("");
+    setSelectedGenre("");
+    setSelectedMediaType("");
+  }
 
   return (
     <AppLayout>
-
       <PageBanner
         icon="🧭"
         title="Discover"
@@ -59,7 +86,7 @@ export default function Discover() {
       <SearchBar
         value={search}
         onChange={setSearch}
-        placeholder="Search stories, creators, genres..."
+        placeholder="Search stories, creators or genres..."
       />
 
       <GenreChips
@@ -69,20 +96,75 @@ export default function Discover() {
       />
 
       <MediaCategories
-        selectedMediaType={selectedMediaType}
-        onSelectMediaType={setSelectedMediaType}
+        selectedMediaType={
+          selectedMediaType
+        }
+        onSelectMediaType={
+          setSelectedMediaType
+        }
       />
 
-      <FeaturedStories
-        stories={filteredStories}
-      />
+      <div
+        style={{
+          display: "flex",
+          justifyContent:
+            "space-between",
+          alignItems: "center",
+          marginTop: "2rem",
+          marginBottom: "1rem",
+          flexWrap: "wrap",
+          gap: "1rem",
+        }}
+      >
+        <p>
+          <strong>
+            {filteredStories.length}
+          </strong>{" "}
+          {filteredStories.length === 1
+            ? "story"
+            : "stories"}{" "}
+          found
+        </p>
 
-      <ReadingInspiration />
+        {hasFilters && (
+          <button
+            onClick={clearFilters}
+            style={{
+              border: "none",
+              background:
+                "var(--color-evergreen)",
+              color: "white",
+              padding:
+                ".65rem 1.2rem",
+              borderRadius: "999px",
+              cursor: "pointer",
+              fontWeight: 700,
+            }}
+          >
+            Clear Filters
+          </button>
+        )}
+      </div>
 
-      <SurpriseMe
-        stories={stories}
-      />
+      {filteredStories.length === 0 ? (
+        <EmptyState
+          icon="🌿"
+          title="Nothing grew here."
+          description="Try another search or clear your filters."
+        />
+      ) : (
+        <>
+          <FeaturedStories
+            stories={filteredStories}
+          />
 
+          <ReadingInspiration />
+
+          <SurpriseMe
+            stories={filteredStories}
+          />
+        </>
+      )}
     </AppLayout>
   );
 }

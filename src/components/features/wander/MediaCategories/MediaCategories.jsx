@@ -7,9 +7,9 @@ const categories = [
     description: "Novels & literature",
   },
   {
-    icon: "🎬",
-    title: "Movie",
-    description: "Films",
+    icon: "📖",
+    title: "Manga",
+    description: "Graphic stories",
   },
   {
     icon: "📺",
@@ -17,9 +17,14 @@ const categories = [
     description: "Animated series",
   },
   {
-    icon: "📖",
-    title: "Manga",
-    description: "Graphic stories",
+    icon: "🎬",
+    title: "Movie",
+    description: "Films",
+  },
+  {
+    icon: "📺",
+    title: "TV Series",
+    description: "Shows & series",
   },
   {
     icon: "🎮",
@@ -31,17 +36,11 @@ const categories = [
     title: "Music",
     description: "Albums & soundtracks",
   },
-{
-  icon: "📺",
-  title: "TV Series",
-  description: "Shows & Series",
-},
-{
-  icon: "🎙️",
-  title: "Podcast",
-  description: "Episodes & Audio",
-},
-
+  {
+    icon: "🎙️",
+    title: "Podcast",
+    description: "Episodes & audio",
+  },
 ];
 
 export default function MediaCategories({
@@ -51,9 +50,24 @@ export default function MediaCategories({
   return (
     <section className="media-categories">
 
-      <h2 className="media-categories__title">
-        Browse by Media
-      </h2>
+      <div className="media-categories__header">
+
+        <h2 className="media-categories__title">
+          📚 Browse Media
+        </h2>
+
+        {selectedMediaType && (
+          <button
+            className="media-categories__clear"
+            onClick={() =>
+              onSelectMediaType("")
+            }
+          >
+            Clear
+          </button>
+        )}
+
+      </div>
 
       <div className="media-categories__grid">
 
@@ -63,7 +77,9 @@ export default function MediaCategories({
               ? "media-category-card active"
               : "media-category-card"
           }
-          onClick={() => onSelectMediaType("")}
+          onClick={() =>
+            onSelectMediaType("")
+          }
         >
           <span className="media-category-card__icon">
             🌿
@@ -79,12 +95,15 @@ export default function MediaCategories({
           <button
             key={category.title}
             className={
-              selectedMediaType === category.title
+              selectedMediaType ===
+              category.title
                 ? "media-category-card active"
                 : "media-category-card"
             }
             onClick={() =>
-              onSelectMediaType(category.title)
+              onSelectMediaType(
+                category.title
+              )
             }
           >
 

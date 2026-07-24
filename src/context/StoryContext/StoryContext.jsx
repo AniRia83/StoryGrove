@@ -6,6 +6,7 @@ import {
 } from "react";
 
 import { getJourney } from "../../utils/storyUtils";
+import { compareStoryChanges } from "../../utils/compareStoryChanges";
 
 const StoryContext = createContext();
 
@@ -36,14 +37,16 @@ export function StoryProvider({ children }) {
       story.totalProgress || 0
     );
 
+    const now = new Date().toISOString();
+
     const newStory = {
       ...story,
 
       id: crypto.randomUUID(),
 
-      plantedAt: new Date().toISOString(),
+      plantedAt: now,
 
-      updatedAt: new Date().toISOString(),
+      updatedAt: now,
 
       collectionId:
         story.collectionId || null,
@@ -51,6 +54,18 @@ export function StoryProvider({ children }) {
       currentProgress,
 
       totalProgress,
+
+      timeline: [
+        {
+          id: crypto.randomUUID(),
+
+          type: "plant",
+
+          message: "Story planted 🌱",
+
+          createdAt: now,
+        },
+      ],
     };
 
     newStory.journey =
@@ -65,7 +80,9 @@ export function StoryProvider({ children }) {
   function updateStory(id, updates) {
     setStories((prevStories) =>
       prevStories.map((story) => {
-        if (story.id !== id) return story;
+
+        if (story.id !== id)
+          return story;
 
         const updatedStory = {
           ...story,
@@ -89,6 +106,17 @@ export function StoryProvider({ children }) {
 
         updatedStory.journey =
           getJourney(updatedStory);
+
+        const newEvents =
+          compareStoryChanges(
+            story,
+            updatedStory
+          );
+
+        updatedStory.timeline = [
+          ...(story.timeline || []),
+          ...newEvents,
+        ];
 
         return updatedStory;
       })

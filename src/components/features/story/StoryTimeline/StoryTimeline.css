@@ -1,69 +1,206 @@
 .story-timeline{
-  margin-top:var(--space-2xl);
 
-  background:var(--color-surface);
-
-  border:1px solid var(--color-border);
-
-  border-radius:var(--radius-lg);
-
-  padding:var(--space-xl);
-
-  box-shadow:var(--shadow-soft);
+    margin-top:3rem;
 }
 
 .story-timeline h2{
-  margin-bottom:var(--space-xl);
 
-  font-family:var(--font-heading);
-
-  color:var(--color-heading);
+    margin-bottom:2rem;
 }
 
 .story-timeline__list{
-  display:flex;
 
-  flex-direction:column;
+    position:relative;
 
-  gap:var(--space-lg);
+    display:flex;
+
+    flex-direction:column;
+
+    gap:1.5rem;
+
+    padding-left:2rem;
+}
+
+.story-timeline__list::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:25px;
+
+    top:0;
+
+    bottom:0;
+
+    width:3px;
+
+    background:linear-gradient(
+        to bottom,
+        var(--color-evergreen),
+        var(--color-primary)
+    );
+
+    border-radius:999px;
+
+    opacity:.35;
 }
 
 .story-timeline__item{
-  display:flex;
 
-  gap:var(--space-md);
+    position:relative;
 
-  align-items:flex-start;
+    display:flex;
+
+    margin-left:2rem;
+
+    padding:1.5rem 1.5rem 1.5rem 4rem;
+
+    background:var(--color-surface);
+
+    border:1px solid var(--color-border);
+
+    border-radius:var(--radius-lg);
+
+    box-shadow:var(--shadow-soft);
+
+    transition:var(--transition-normal);
+
+    animation:timelineGrow .45s ease;
+}
+
+.story-timeline__item:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--shadow-card);
 }
 
 .story-timeline__icon{
-  width:44px;
-  height:44px;
 
-  display:grid;
-  place-items:center;
+    position:absolute;
 
-  border-radius:50%;
+    left:-2px;
 
-  background:var(--color-cream);
+    top:50%;
 
-  font-size:1.2rem;
+    transform:translateY(-50%);
 
-  flex-shrink:0;
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    width:54px;
+
+    height:54px;
+
+    border-radius:50%;
+
+    background:white;
+
+    border:3px solid var(--color-evergreen);
+
+    box-shadow:var(--shadow-soft);
+
+    font-size:1.5rem;
+
+    z-index:2;
 }
 
-.story-timeline__item h3{
-  margin:0;
+.story-timeline__content{
 
-  font-size:var(--text-md);
-
-  color:var(--color-heading);
+    flex:1;
 }
 
-.story-timeline__item p{
-  margin-top:4px;
+.story-timeline__content h3{
 
-  color:var(--color-moss);
+    margin:0 0 .4rem;
 
-  font-size:var(--text-sm);
+    font-size:1rem;
+
+    color:var(--color-heading);
+}
+
+.story-timeline__content p{
+
+    margin:0;
+
+    color:var(--color-text-secondary);
+
+    font-size:.9rem;
+}
+
+.story-timeline__empty{
+
+    padding:2rem;
+
+    text-align:center;
+
+    background:var(--color-surface);
+
+    border:1px dashed var(--color-border);
+
+    border-radius:var(--radius-lg);
+
+    color:var(--color-text-secondary);
+
+    font-style:italic;
+}
+
+/* ==========================
+   Event Colors
+========================== */
+
+.story-timeline__icon--plant{
+
+    border-color:#6AA84F;
+}
+
+.story-timeline__icon--progress{
+
+    border-color:#5C9DFF;
+}
+
+.story-timeline__icon--journey{
+
+    border-color:#7BC67B;
+}
+
+.story-timeline__icon--bloom{
+
+    border-color:#F7B3D7;
+}
+
+.story-timeline__icon--reflection{
+
+    border-color:#C7A6FF;
+}
+
+.story-timeline__icon--firefly{
+
+    border-color:#FFD966;
+}
+
+/* ==========================
+   Animation
+========================== */
+
+@keyframes timelineGrow{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
+
 }

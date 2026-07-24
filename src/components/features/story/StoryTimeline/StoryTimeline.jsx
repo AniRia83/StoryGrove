@@ -1,77 +1,70 @@
 import "./StoryTimeline.css";
 
+const icons = {
+  plant: "🌱",
+  progress: "📖",
+  journey: "🌿",
+  bloom: "✨",
+  reflection: "📝",
+  firefly: "🧚",
+};
+
 export default function StoryTimeline({
   story,
 }) {
-
-  const timeline = [];
-
-  if (story.plantedAt) {
-    timeline.push({
-      icon: "🌱",
-      title: "Story planted",
-      date: story.plantedAt,
-    });
-  }
-
-  if (
-    story.currentProgress > 0 &&
-    story.totalProgress > 0
-  ) {
-    timeline.push({
-      icon: "📖",
-      title: `Reading progress: ${story.currentProgress}/${story.totalProgress}`,
-      date: story.plantedAt,
-    });
-  }
-
-  timeline.push({
-    icon: "🌿",
-    title: `Journey: ${story.journey}`,
-    date: story.plantedAt,
-  });
-
-  timeline.push({
-    icon: "✨",
-    title: `Bloom ${story.bloom}/10`,
-    date: story.plantedAt,
-  });
+  const timeline = [
+    ...(story.timeline || []),
+  ].reverse();
 
   return (
     <section className="story-timeline">
 
       <h2>🌲 Story Timeline</h2>
 
-      <div className="story-timeline__list">
+      {timeline.length === 0 ? (
 
-        {timeline.map((event, index) => (
+        <div className="story-timeline__empty">
+          This story hasn't grown yet.
+        </div>
 
-          <div
-            key={index}
-            className="story-timeline__item"
-          >
+      ) : (
 
-            <div className="story-timeline__icon">
-              {event.icon}
+        <div className="story-timeline__list">
+
+          {timeline.map((event) => (
+
+            <div
+              key={event.id}
+              className="story-timeline__item"
+            >
+
+              <div
+                className={`story-timeline__icon story-timeline__icon--${event.type}`}
+              >
+                {icons[event.type] || "🌿"}
+              </div>
+
+              <div className="story-timeline__content">
+
+                <h3>
+                  {event.message}
+                </h3>
+
+                <p>
+                  {new Date(
+                    event.createdAt
+                  ).toLocaleString()}
+                </p>
+
+              </div>
+
             </div>
 
-            <div>
+          ))}
 
-              <h3>{event.title}</h3>
+        </div>
 
-              <p>
-                {new Date(
-                  event.date
-                ).toLocaleDateString()}
-              </p>
-
-            </div>
-
-          </div>
-
-        ))}
-
-      </div>
+      )}
 
     </section>
   );
