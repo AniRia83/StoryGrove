@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useStory } from "../../../context/StoryContext";
 
+import { getCollectionStats } from "../../../utils/collectionUtils";
+
 const themeColors = {
   evergreen: "var(--color-evergreen)",
   blossom: "var(--color-primary)",
@@ -12,27 +14,17 @@ const themeColors = {
   sunshine: "var(--color-highlight)",
 };
 
-export default function CollectionCard({ collection }) {
+export default function CollectionCard({
+  collection,
+}) {
   const navigate = useNavigate();
 
   const { stories } = useStory();
 
-  const collectionStories = stories.filter(
-    (story) => story.collectionId === collection.id
+  const stats = getCollectionStats(
+    collection,
+    stories
   );
-
-  const storyCount = collectionStories.length;
-
-  const averageBloom =
-    storyCount > 0
-      ? (
-          collectionStories.reduce(
-            (sum, story) =>
-              sum + Number(story.bloom || 0),
-            0
-          ) / storyCount
-        ).toFixed(1)
-      : "0.0";
 
   return (
     <article
@@ -68,15 +60,67 @@ export default function CollectionCard({ collection }) {
       </p>
 
       <div className="collection-card__stats">
+
         <div>
-          <strong>{storyCount}</strong>
+          <strong>
+            {stats.totalStories}
+          </strong>
           <span>Stories</span>
         </div>
 
         <div>
-          <strong>{averageBloom}</strong>
+          <strong>
+            {stats.averageBloom}
+          </strong>
           <span>Bloom</span>
         </div>
+
+      </div>
+
+      <div className="collection-card__progress">
+
+        <div className="collection-card__progress-top">
+
+          <span>Reading Progress</span>
+
+          <span>
+            {stats.progressPercent}%
+          </span>
+
+        </div>
+
+        <div className="collection-card__progress-bar">
+
+          <div
+            className="collection-card__progress-fill"
+            style={{
+              width: `${stats.progressPercent}%`,
+            }}
+          />
+
+        </div>
+
+      </div>
+
+      <div className="collection-card__journeys">
+
+        <span>
+          🌱{" "}
+          {
+            stories.filter(
+              (story) =>
+                story.collectionId ===
+                  collection.id &&
+                story.journey === "growing"
+            ).length
+          }
+        </span>
+
+        <span>
+          🌳{" "}
+          {stats.completedStories}
+        </span>
+
       </div>
 
       <div className="collection-card__footer">

@@ -147,3 +147,66 @@
 }
 
 }
+
+.collection-card__progress{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:.55rem;
+}
+
+.collection-card__progress-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    font-size:.9rem;
+
+    font-weight:700;
+
+    color:var(--color-text);
+}
+
+.collection-card__progress-bar{
+
+    height:8px;
+
+    background:var(--color-border);
+
+    border-radius:999px;
+
+    overflow:hidden;
+}
+
+.collection-card__progress-fill{
+
+    height:100%;
+
+    background:linear-gradient(
+        90deg,
+        var(--color-evergreen),
+        var(--color-moss)
+    );
+
+    border-radius:999px;
+
+    transition:width .4s ease;
+}
+
+.collection-card__journeys{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:.25rem;
+
+    font-size:.95rem;
+
+    font-weight:700;
+
+    color:var(--color-evergreen);
+}
