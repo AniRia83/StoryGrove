@@ -69,6 +69,9 @@ export default function PlantStoryForm({
       totalProgress: Number(
         formData.totalProgress
       ),
+      
+      plantedAt: new Date().toISOString(),
+
     };
 
     onPlant(story);

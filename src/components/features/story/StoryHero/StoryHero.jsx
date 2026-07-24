@@ -64,8 +64,8 @@ export default function StoryHero({
 
           {collection && (
             <span className="story-hero__collection">
-              🌳 {collection.name}
-            </span>
+  {collection.icon} {collection.name}
+</span>
           )}
 
         </div>
