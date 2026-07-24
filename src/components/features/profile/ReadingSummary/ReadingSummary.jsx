@@ -1,16 +1,22 @@
 import "./ReadingSummary.css";
 
+import { useCollection } from "../../../../context/CollectionContext";
+
 export default function ReadingSummary({
   stories,
 }) {
+  const { collections } = useCollection();
+
   const totalStories = stories.length;
+
+  const totalGroves = collections.length;
 
   const growingStories = stories.filter(
     (story) => story.journey === "growing"
   ).length;
 
-  const finishedStories = stories.filter(
-    (story) => story.journey === "finished"
+  const bloomedStories = stories.filter(
+    (story) => story.journey === "bloomed"
   ).length;
 
   const averageBloom =
@@ -22,13 +28,18 @@ export default function ReadingSummary({
             0
           ) / totalStories
         ).toFixed(1)
-      : 0;
+      : "0.0";
 
   const stats = [
     {
       icon: "📚",
-      label: "Stories Planted",
+      label: "Stories",
       value: totalStories,
+    },
+    {
+      icon: "🌳",
+      label: "Groves",
+      value: totalGroves,
     },
     {
       icon: "🌱",
@@ -37,12 +48,12 @@ export default function ReadingSummary({
     },
     {
       icon: "🌸",
-      label: "Finished",
-      value: finishedStories,
+      label: "Bloomed",
+      value: bloomedStories,
     },
     {
       icon: "✨",
-      label: "Average Bloom",
+      label: "Avg. Bloom",
       value: averageBloom,
     },
   ];
@@ -51,6 +62,7 @@ export default function ReadingSummary({
     <section className="reading-summary">
 
       {stats.map((stat) => (
+
         <article
           key={stat.label}
           className="reading-summary__card"
@@ -65,6 +77,7 @@ export default function ReadingSummary({
           <p>{stat.label}</p>
 
         </article>
+
       ))}
 
     </section>
