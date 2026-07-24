@@ -22,7 +22,7 @@ export default function HomeGreeting() {
   ).length;
 
   const completedStories = stories.filter(
-    (story) => story.journey === "completed"
+    (story) => story.journey === "bloomed"
   ).length;
 
   return (
@@ -34,22 +34,46 @@ export default function HomeGreeting() {
         {totalStories === 0
           ? "Your grove is waiting for its very first story."
           : `Your grove now holds ${totalStories} ${
-              totalStories === 1 ? "story" : "stories"
+              totalStories === 1
+                ? "story"
+                : "stories"
             }.`}
       </p>
 
       {totalStories > 0 && (
+
         <div className="home-greeting__stats">
 
-          <div>
-            🌱 <strong>{growingStories}</strong> Growing
+          <div className="home-greeting__pill">
+            <span className="home-greeting__emoji">
+              🌱
+            </span>
+
+            <div>
+              <strong>
+                {growingStories}
+              </strong>
+
+              <span>Growing</span>
+            </div>
           </div>
 
-          <div>
-            🌸 <strong>{completedStories}</strong> Bloomed
+          <div className="home-greeting__pill">
+            <span className="home-greeting__emoji">
+              🌸
+            </span>
+
+            <div>
+              <strong>
+                {completedStories}
+              </strong>
+
+              <span>Bloomed</span>
+            </div>
           </div>
 
         </div>
+
       )}
 
     </section>
