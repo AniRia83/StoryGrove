@@ -1,5 +1,7 @@
 import "./MediaCard.css";
 
+import { getProgressPercentage } from "../../../utils/storyUtils";
+
 const mediaIcons = {
   Book: "📖",
   Novel: "📘",
@@ -22,17 +24,7 @@ export default function MediaCard({
   const icon =
     mediaIcons[story.mediaType] || "📚";
 
-  const progress =
-    story.totalProgress > 0
-      ? Math.min(
-          100,
-          Math.round(
-            (story.currentProgress /
-              story.totalProgress) *
-              100
-          )
-        )
-      : 0;
+  const progress = getProgressPercentage(story);
 
   return (
     <article

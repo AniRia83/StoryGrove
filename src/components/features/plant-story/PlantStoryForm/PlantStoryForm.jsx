@@ -2,6 +2,8 @@ import { useState } from "react";
 
 import { useCollection } from "../../../../context/CollectionContext";
 
+import { getJourney } from "../../../../utils/journeyUtils";
+
 import "./PlantStoryForm.css";
 
 import JourneySelector from "../../../forms/JourneySelector";
@@ -58,23 +60,24 @@ export default function PlantStoryForm({
     e.preventDefault();
 
     const story = {
-      mediaType,
+  mediaType,
 
-      ...formData,
+  ...formData,
 
-      currentProgress: Number(
-        formData.currentProgress
-      ),
+  currentProgress: Number(
+    formData.currentProgress
+  ),
 
-      totalProgress: Number(
-        formData.totalProgress
-      ),
-      
-      plantedAt: new Date().toISOString(),
+  totalProgress: Number(
+    formData.totalProgress
+  ),
 
-    };
+  plantedAt: new Date().toISOString(),
+};
 
-    onPlant(story);
+story.journey = getJourney(story);
+
+onPlant(story);
   }
 
   return (

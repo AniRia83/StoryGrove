@@ -1,6 +1,5 @@
 import "./StoryHero.css";
 
-import JourneySelector from "../../../forms/JourneySelector";
 import BloomEditor from "../BloomEditor/BloomEditor";
 
 const mediaIcons = {
@@ -118,14 +117,19 @@ export default function StoryHero({
 
         <div className="story-hero__section">
 
-          <h3>Journey</h3>
+  <h3>Journey</h3>
 
-          <JourneySelector
-            value={story.journey}
-            onChange={onJourneyChange}
-          />
+  <div className="story-hero__journey">
 
-        </div>
+    {story.journey === "planning" && "🌱 Planning"}
+
+    {story.journey === "growing" && "🌿 Growing"}
+
+    {story.journey === "bloomed" && "🌸 Bloomed"}
+
+  </div>
+
+</div>
 
         <div className="story-hero__section">
 

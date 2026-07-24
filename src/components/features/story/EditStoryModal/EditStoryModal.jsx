@@ -2,13 +2,14 @@ import { useEffect, useState } from "react";
 
 import "./EditStoryModal.css";
 
+import { ProgressFields } from "..";
+import { getJourney } from "../../../../utils/journeyUtils";
+
 import Modal from "../../../ui/Modal/Modal";
 import Input from "../../../ui/Input";
 import Textarea from "../../../ui/Textarea";
 import Button from "../../../ui/Button";
 import CoverUpload from "../../../ui/CoverUpload";
-
-import JourneySelector from "../../../forms/JourneySelector";
 
 import { useCollection } from "../../../../context/CollectionContext";
 import { useStory } from "../../../../context/StoryContext";
@@ -33,6 +34,9 @@ export default function EditStoryModal({
     reflections: "",
     firefly: "",
     cover: null,
+
+currentProgress: 0,
+totalProgress: "",
   });
 
   useEffect(() => {
@@ -49,6 +53,12 @@ export default function EditStoryModal({
       reflections: story.reflections || "",
       firefly: story.firefly || "",
       cover: story.cover || null,
+
+currentProgress:
+  story.currentProgress || 0,
+
+totalProgress:
+  story.totalProgress || "",
     });
   }, [story]);
 
@@ -60,9 +70,31 @@ export default function EditStoryModal({
   }
 
   function handleSave() {
-    updateStory(story.id, formData);
-    onClose();
-  }
+  const updatedStory = {
+    ...formData,
+
+    currentProgress: Number(
+      formData.currentProgress
+    ),
+
+    totalProgress: Number(
+      formData.totalProgress
+    ),
+  };
+
+  updatedStory.journey =
+    getJourney({
+      ...story,
+      ...updatedStory,
+    });
+
+  updateStory(
+    story.id,
+    updatedStory
+  );
+
+  onClose();
+}
 
   if (!story) return null;
 
@@ -138,16 +170,11 @@ export default function EditStoryModal({
         }
       />
 
-      <div className="form-group">
-        <label>Journey</label>
-
-        <JourneySelector
-          value={formData.journey}
-          onChange={(value) =>
-            handleChange("journey", value)
-          }
-        />
-      </div>
+      <ProgressFields
+  mediaType={story.mediaType}
+  formData={formData}
+  handleChange={handleChange}
+/>
 
       <div className="form-group">
         <label>Bloom</label>

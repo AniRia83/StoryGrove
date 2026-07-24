@@ -251,3 +251,28 @@
     }
 
 }
+
+.story-hero__journey{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:.5rem;
+
+    padding:.8rem 1.2rem;
+
+    width:fit-content;
+
+    border-radius:999px;
+
+    background:var(--color-cream);
+
+    color:var(--color-evergreen);
+
+    font-weight:700;
+
+    font-size:1rem;
+
+    border:1px solid var(--color-border);
+}
