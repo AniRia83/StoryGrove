@@ -73,3 +73,76 @@
 
     color:var(--color-text);
 }
+
+.achievement-card__status{
+
+    margin-top:1rem;
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+    letter-spacing:.04em;
+
+    text-transform:uppercase;
+}
+
+.achievement-card--unlocked
+.achievement-card__status{
+
+    color:var(--color-evergreen);
+}
+
+.achievement-card--locked
+.achievement-card__status{
+
+    color:var(--color-text-secondary);
+}
+
+.achievement-card--unlocked{
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.achievement-card--unlocked::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:-80%;
+
+    left:-60%;
+
+    width:50%;
+
+    height:250%;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(255,255,255,.4),
+            transparent
+        );
+
+    transform:rotate(25deg);
+
+    animation:
+        achievementShine 5s linear infinite;
+}
+
+@keyframes achievementShine{
+
+    from{
+
+        left:-60%;
+    }
+
+    to{
+
+        left:140%;
+    }
+
+}
