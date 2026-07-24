@@ -28,19 +28,26 @@ export default function FavoriteGenres({
         </p>
       ) : (
         <div className="favorite-genres__chips">
+
           {favorites.map(([genre, count]) => (
 
             <div
               key={genre}
               className="favorite-genre-chip"
             >
-              <span>{genre}</span>
 
-              <span>{count}</span>
+              <span className="favorite-genre-chip__name">
+                {genre}
+              </span>
+
+              <span className="favorite-genre-chip__count">
+                {count}
+              </span>
 
             </div>
 
           ))}
+
         </div>
       )}
     </Section>
