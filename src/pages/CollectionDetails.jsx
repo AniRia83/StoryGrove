@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import AppLayout from "../components/layout/AppLayout/AppLayout";
@@ -6,6 +6,8 @@ import AppLayout from "../components/layout/AppLayout/AppLayout";
 import CollectionBanner from "../components/features/collections/CollectionBanner";
 import CollectionStats from "../components/features/collections/CollectionStats";
 import CollectionStoryGrid from "../components/features/collections/CollectionStoryGrid";
+import CollectionToolbar from "../components/features/collections/CollectionToolbar";
+
 import EditCollectionModal from "../components/features/collections/EditCollectionModal";
 import DeleteCollectionModal from "../components/features/collections/DeleteCollectionModal";
 
@@ -25,6 +27,11 @@ export default function CollectionDetails() {
   const [showDeleteModal, setShowDeleteModal] =
     useState(false);
 
+  const [search, setSearch] = useState("");
+
+  const [sort, setSort] =
+    useState("updated");
+
   const {
     getCollectionById,
     toggleFavourite,
@@ -32,9 +39,9 @@ export default function CollectionDetails() {
   } = useCollection();
 
   const {
-  stories,
-  removeCollectionFromStories,
-} = useStory();
+    stories,
+    removeCollectionFromStories,
+  } = useStory();
 
   const collection = getCollectionById(id);
 
@@ -42,16 +49,79 @@ export default function CollectionDetails() {
     return (
       <AppLayout>
         <h2>🌳 Grove not found</h2>
-
         <p>This Grove doesn't exist.</p>
       </AppLayout>
     );
   }
 
-  const collectionStories = stories.filter(
-    (story) =>
-      story.collectionId === collection.id
-  );
+  const collectionStories = useMemo(() => {
+    let filtered = stories.filter(
+      (story) =>
+        story.collectionId === collection.id
+    );
+
+    if (search.trim()) {
+      const query = search.toLowerCase();
+
+      filtered = filtered.filter(
+        (story) =>
+          story.title
+            ?.toLowerCase()
+            .includes(query) ||
+          story.creator
+            ?.toLowerCase()
+            .includes(query)
+      );
+    }
+
+    switch (sort) {
+      case "title":
+        filtered.sort((a, b) =>
+          a.title.localeCompare(b.title)
+        );
+        break;
+
+      case "bloom":
+        filtered.sort(
+          (a, b) =>
+            Number(b.bloom || 0) -
+            Number(a.bloom || 0)
+        );
+        break;
+
+      case "progress":
+        filtered.sort((a, b) => {
+          const progressA =
+            a.totalProgress > 0
+              ? a.currentProgress /
+                a.totalProgress
+              : 0;
+
+          const progressB =
+            b.totalProgress > 0
+              ? b.currentProgress /
+                b.totalProgress
+              : 0;
+
+          return progressB - progressA;
+        });
+        break;
+
+      default:
+        filtered.sort(
+          (a, b) =>
+            new Date(b.updatedAt) -
+            new Date(a.updatedAt)
+        );
+    }
+
+    return filtered;
+  }, [
+    stories,
+    collection.id,
+    search,
+    sort,
+  ]);
 
   const averageBloom =
     collectionStories.length > 0
@@ -63,17 +133,6 @@ export default function CollectionDetails() {
           ) / collectionStories.length
         ).toFixed(1)
       : "0.0";
-
-  const growingCount = collectionStories.filter(
-    (story) =>
-      story.journey === "growing" ||
-      story.journey === "started"
-  ).length;
-
-  const finishedCount = collectionStories.filter(
-    (story) =>
-      story.journey === "finished"
-  ).length;
 
   function handleDeleteCollection() {
     removeCollectionFromStories(
@@ -87,6 +146,7 @@ export default function CollectionDetails() {
 
   return (
     <AppLayout>
+
       <CollectionBanner
         collection={collection}
         storyCount={collectionStories.length}
@@ -103,10 +163,15 @@ export default function CollectionDetails() {
       />
 
       <CollectionStats
-        totalStories={collectionStories.length}
-        averageBloom={averageBloom}
-        growingCount={growingCount}
-        finishedCount={finishedCount}
+  stories={collectionStories}
+/>
+
+      <CollectionToolbar
+        search={search}
+        onSearch={setSearch}
+        sort={sort}
+        onSort={setSort}
+        storyCount={collectionStories.length}
       />
 
       {collectionStories.length === 0 ? (
@@ -137,6 +202,7 @@ export default function CollectionDetails() {
         onConfirm={handleDeleteCollection}
         collection={collection}
       />
+
     </AppLayout>
   );
 }

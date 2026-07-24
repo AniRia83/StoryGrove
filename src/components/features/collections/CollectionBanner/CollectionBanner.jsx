@@ -12,25 +12,25 @@ const bannerThemes = {
 
   blossom: {
     background:
-      "linear-gradient(135deg, #FFF5FB, #FFF8F0)",
+      "linear-gradient(135deg,#FFF5FB,#FFF8F0)",
     accent: "var(--color-primary)",
   },
 
   moonlight: {
     background:
-      "linear-gradient(135deg, #F7F2FF, #FFFDF9)",
+      "linear-gradient(135deg,#F7F2FF,#FFFDF9)",
     accent: "var(--color-secondary)",
   },
 
   autumn: {
     background:
-      "linear-gradient(135deg, #FFF7EE, #FFFDF9)",
+      "linear-gradient(135deg,#FFF7EE,#FFFDF9)",
     accent: "var(--color-accent)",
   },
 
   sunshine: {
     background:
-      "linear-gradient(135deg, #FFFDE8, #FFFDF9)",
+      "linear-gradient(135deg,#FFFDE8,#FFFDF9)",
     accent: "var(--color-highlight)",
   },
 };
@@ -47,6 +47,10 @@ export default function CollectionBanner({
     bannerThemes[collection.color] ??
     bannerThemes.evergreen;
 
+  const createdDate = new Date(
+    collection.createdAt
+  ).toLocaleDateString();
+
   return (
     <section
       className="collection-banner"
@@ -54,11 +58,18 @@ export default function CollectionBanner({
         background: theme.background,
       }}
     >
+
+      <div
+        className="collection-banner__accent"
+        style={{
+          background: theme.accent,
+        }}
+      />
+
       <Popover
         trigger={
           <span
             className="collection-banner__menu"
-            aria-label="Collection actions"
           >
             &#8942;
           </span>
@@ -68,7 +79,9 @@ export default function CollectionBanner({
           onEdit={onEdit}
           onFavourite={onFavourite}
           onDelete={onDelete}
-          isFavourite={collection.isFavorite}
+          isFavourite={
+            collection.isFavorite
+          }
         />
       </Popover>
 
@@ -81,14 +94,28 @@ export default function CollectionBanner({
         {collection.icon}
       </div>
 
-      <h1>{collection.name}</h1>
+      <h1>
+        {collection.name}
+
+        {collection.isFavorite && (
+          <span className="collection-banner__favorite">
+            ⭐
+          </span>
+        )}
+      </h1>
 
       <p className="collection-banner__description">
         {collection.description}
       </p>
 
+      <p className="collection-banner__date">
+        Created {createdDate}
+      </p>
+
       <div className="collection-banner__stats">
+
         <div>
+
           <strong
             style={{
               color: theme.accent,
@@ -98,9 +125,11 @@ export default function CollectionBanner({
           </strong>
 
           <span>Stories</span>
+
         </div>
 
         <div>
+
           <strong
             style={{
               color: theme.accent,
@@ -110,8 +139,11 @@ export default function CollectionBanner({
           </strong>
 
           <span>Average Bloom</span>
+
         </div>
+
       </div>
+
     </section>
   );
 }
