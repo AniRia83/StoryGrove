@@ -4,9 +4,12 @@ const icons = {
   plant: "🌱",
   progress: "📖",
   journey: "🌿",
-  bloom: "✨",
-  reflection: "📝",
-  firefly: "🧚",
+  bloom: "⭐",
+  reflection: "🍂",
+  firefly: "✨",
+  cover: "🖼️",
+  grove: "🌳",
+  genre: "🏷️",
 };
 
 export default function StoryTimeline({
@@ -19,12 +22,21 @@ export default function StoryTimeline({
   return (
     <section className="story-timeline">
 
-      <h2>🌲 Story Timeline</h2>
+      <div className="story-timeline__header">
+
+        <h2>🌲 Story Journey</h2>
+
+        <p>
+          Every story leaves footprints through
+          your grove.
+        </p>
+
+      </div>
 
       {timeline.length === 0 ? (
 
         <div className="story-timeline__empty">
-          This story hasn't grown yet.
+          🌱 Nothing has happened yet.
         </div>
 
       ) : (
@@ -33,7 +45,7 @@ export default function StoryTimeline({
 
           {timeline.map((event) => (
 
-            <div
+            <article
               key={event.id}
               className="story-timeline__item"
             >
@@ -46,19 +58,17 @@ export default function StoryTimeline({
 
               <div className="story-timeline__content">
 
-                <h3>
-                  {event.message}
-                </h3>
+                <h3>{event.message}</h3>
 
-                <p>
+                <time>
                   {new Date(
                     event.createdAt
                   ).toLocaleString()}
-                </p>
+                </time>
 
               </div>
 
-            </div>
+            </article>
 
           ))}
 

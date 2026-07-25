@@ -1,0 +1,31 @@
+.story-hero-actions{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:1rem;
+
+    margin-top:2rem;
+}
+
+.story-hero-actions button{
+
+    flex:1;
+
+    min-width:180px;
+}
+
+@media (max-width:768px){
+
+.story-hero-actions{
+
+    flex-direction:column;
+}
+
+.story-hero-actions button{
+
+    width:100%;
+}
+
+}

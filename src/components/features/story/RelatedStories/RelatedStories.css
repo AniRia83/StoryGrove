@@ -1,0 +1,29 @@
+.related-stories{
+
+    margin-top:4rem;
+}
+
+.related-stories__header{
+
+    margin-bottom:1.5rem;
+}
+
+.related-stories__header h2{
+
+    margin-bottom:.3rem;
+}
+
+.related-stories__header p{
+
+    color:var(--color-text-secondary);
+}
+
+.related-stories__grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(220px,1fr));
+
+    gap:1.5rem;
+}

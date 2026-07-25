@@ -1,12 +1,30 @@
 .story-timeline{
 
-    margin-top:3rem;
+    margin-top:4rem;
 }
 
-.story-timeline h2{
+.story-timeline__header{
 
-    margin-bottom:2rem;
+    margin-bottom:2.5rem;
 }
+
+.story-timeline__header h2{
+
+    margin-bottom:.45rem;
+
+    font-size:2rem;
+}
+
+.story-timeline__header p{
+
+    color:var(--color-text-secondary);
+
+    max-width:520px;
+}
+
+/* ==========================
+   Timeline
+========================== */
 
 .story-timeline__list{
 
@@ -16,9 +34,9 @@
 
     flex-direction:column;
 
-    gap:1.5rem;
+    gap:1.25rem;
 
-    padding-left:2rem;
+    padding-left:4rem;
 }
 
 .story-timeline__list::before{
@@ -27,13 +45,14 @@
 
     position:absolute;
 
-    left:25px;
+    left:28px;
 
     top:0;
-
     bottom:0;
 
-    width:3px;
+    width:4px;
+
+    border-radius:999px;
 
     background:linear-gradient(
         to bottom,
@@ -41,10 +60,12 @@
         var(--color-primary)
     );
 
-    border-radius:999px;
-
-    opacity:.35;
+    opacity:.25;
 }
+
+/* ==========================
+   Timeline Card
+========================== */
 
 .story-timeline__item{
 
@@ -52,49 +73,51 @@
 
     display:flex;
 
-    margin-left:2rem;
-
-    padding:1.5rem 1.5rem 1.5rem 4rem;
+    align-items:center;
 
     background:var(--color-surface);
 
     border:1px solid var(--color-border);
 
-    border-radius:var(--radius-lg);
+    border-radius:24px;
+
+    padding:1.2rem 1.6rem;
 
     box-shadow:var(--shadow-soft);
 
     transition:var(--transition-normal);
 
-    animation:timelineGrow .45s ease;
+    animation:fadeIn .35s ease;
 }
 
 .story-timeline__item:hover{
 
-    transform:translateY(-3px);
+    transform:translateY(-4px);
 
     box-shadow:var(--shadow-card);
 }
+
+/* ==========================
+   Timeline Icon
+========================== */
 
 .story-timeline__icon{
 
     position:absolute;
 
-    left:-2px;
+    left:-44px;
 
     top:50%;
 
     transform:translateY(-50%);
 
+    width:58px;
+    height:58px;
+
     display:flex;
 
     justify-content:center;
-
     align-items:center;
-
-    width:54px;
-
-    height:54px;
 
     border-radius:50%;
 
@@ -104,10 +127,14 @@
 
     box-shadow:var(--shadow-soft);
 
-    font-size:1.5rem;
+    font-size:1.45rem;
 
-    z-index:2;
+    z-index:5;
 }
+
+/* ==========================
+   Content
+========================== */
 
 .story-timeline__content{
 
@@ -116,33 +143,41 @@
 
 .story-timeline__content h3{
 
-    margin:0 0 .4rem;
+    margin:0 0 .35rem;
 
-    font-size:1rem;
+    font-size:1.05rem;
 
     color:var(--color-heading);
+
+    font-weight:600;
 }
 
-.story-timeline__content p{
+.story-timeline__content time{
 
-    margin:0;
+    display:block;
 
     color:var(--color-text-secondary);
 
-    font-size:.9rem;
+    opacity:.75;
+
+    font-size:.82rem;
 }
+
+/* ==========================
+   Empty State
+========================== */
 
 .story-timeline__empty{
 
-    padding:2rem;
+    padding:3rem;
 
     text-align:center;
 
     background:var(--color-surface);
 
-    border:1px dashed var(--color-border);
+    border:2px dashed var(--color-border);
 
-    border-radius:var(--radius-lg);
+    border-radius:24px;
 
     color:var(--color-text-secondary);
 
@@ -150,7 +185,7 @@
 }
 
 /* ==========================
-   Event Colors
+   Event Colours
 ========================== */
 
 .story-timeline__icon--plant{
@@ -160,22 +195,22 @@
 
 .story-timeline__icon--progress{
 
-    border-color:#5C9DFF;
+    border-color:#6FA8DC;
 }
 
 .story-timeline__icon--journey{
 
-    border-color:#7BC67B;
+    border-color:#93C47D;
 }
 
 .story-timeline__icon--bloom{
 
-    border-color:#F7B3D7;
+    border-color:#EE629D;
 }
 
 .story-timeline__icon--reflection{
 
-    border-color:#C7A6FF;
+    border-color:#B4A7D6;
 }
 
 .story-timeline__icon--firefly{
@@ -184,23 +219,39 @@
 }
 
 /* ==========================
-   Animation
+   Mobile
 ========================== */
 
-@keyframes timelineGrow{
+@media (max-width:768px){
 
-    from{
+.story-timeline__list{
 
-        opacity:0;
+    padding-left:3rem;
+}
 
-        transform:translateY(20px);
-    }
+.story-timeline__list::before{
 
-    to{
+    left:22px;
+}
 
-        opacity:1;
+.story-timeline__icon{
 
-        transform:translateY(0);
-    }
+    left:-36px;
+
+    width:50px;
+    height:50px;
+
+    font-size:1.2rem;
+}
+
+.story-timeline__item{
+
+    padding:1rem 1.2rem;
+}
+
+.story-timeline__header h2{
+
+    font-size:1.7rem;
+}
 
 }

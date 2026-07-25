@@ -4,36 +4,35 @@ import { useCollection } from "../../../../context/CollectionContext";
 
 const progressLabels = {
   Book: "Pages",
-  Novel: "Pages",
-  Manga: "Chapters",
   Comic: "Issues",
+  Fanfiction: "Chapters",
   Movie: "Minutes",
-  TV: "Episodes",
+  "TV Series": "Episodes",
   Anime: "Episodes",
   Game: "Hours",
-  Audiobook: "Hours",
-  Podcast: "Episodes",
   Music: "Tracks",
+  Podcast: "Episodes",
 };
 
-export default function StoryInfoGrid({
-  story,
-}) {
-  const { getCollectionById } =
-    useCollection();
+const journeyLabels = {
+  planning: "🌱 Planning",
+  growing: "🌿 Growing",
+  completed: "🌸 Bloomed",
+  paused: "🍂 Resting",
+  abandoned: "🪵 Abandoned",
+};
 
-  const collection =
-    story.collectionId
-      ? getCollectionById(
-          story.collectionId
-        )
-      : null;
+export default function StoryInfoGrid({ story }) {
+  const { getCollectionById } = useCollection();
+
+  const collection = story.collectionId
+    ? getCollectionById(story.collectionId)
+    : null;
 
   const progressLabel =
-    progressLabels[story.mediaType] ||
-    "Progress";
+    progressLabels[story.mediaType] || "Progress";
 
-  const progress =
+  const completion =
     story.totalProgress > 0
       ? Math.round(
           (story.currentProgress /
@@ -42,28 +41,37 @@ export default function StoryInfoGrid({
         )
       : 0;
 
+  const planted = story.plantedAt
+    ? new Date(story.plantedAt).toLocaleDateString(undefined, {
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+      })
+    : "—";
+
+  const updated =
+    story.updatedAt &&
+    story.updatedAt !== story.plantedAt
+      ? new Date(story.updatedAt).toLocaleDateString(
+          undefined,
+          {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          }
+        )
+      : null;
+
   return (
     <section className="story-info-grid">
 
       <div className="story-info-card">
-        <span>Media</span>
-
-        <strong>
-          {story.mediaType}
-        </strong>
+        <span>🎭 Genre</span>
+        <strong>{story.genre || "—"}</strong>
       </div>
 
       <div className="story-info-card">
-        <span>Genre</span>
-
-        <strong>
-          {story.genre || "—"}
-        </strong>
-      </div>
-
-      <div className="story-info-card">
-        <span>Grove</span>
-
+        <span>🌳 Grove</span>
         <strong>
           {collection
             ? `${collection.icon} ${collection.name}`
@@ -72,16 +80,14 @@ export default function StoryInfoGrid({
       </div>
 
       <div className="story-info-card">
-        <span>Journey</span>
-
+        <span>🌿 Journey</span>
         <strong>
-          {story.journey}
+          {journeyLabels[story.journey] || "—"}
         </strong>
       </div>
 
       <div className="story-info-card">
         <span>{progressLabel}</span>
-
         <strong>
           {story.totalProgress
             ? `${story.currentProgress} / ${story.totalProgress}`
@@ -90,28 +96,31 @@ export default function StoryInfoGrid({
       </div>
 
       <div className="story-info-card">
-        <span>Completed</span>
-
-        <strong>
-          {progress}%
-        </strong>
+        <span>📈 Completion</span>
+        <strong>{completion}%</strong>
       </div>
 
       <div className="story-info-card">
-        <span>Bloom</span>
-
-        <strong>
-          {story.bloom}/10
-        </strong>
+        <span>⭐ Bloom</span>
+        <strong>{story.bloom}/10</strong>
       </div>
 
       <div className="story-info-card">
-        <span>Origin</span>
-
-        <strong>
-          {story.origin || "—"}
-        </strong>
+        <span>🧭 Origin</span>
+        <strong>{story.origin || "—"}</strong>
       </div>
+
+      <div className="story-info-card">
+        <span>🌱 Planted</span>
+        <strong>{planted}</strong>
+      </div>
+
+      {updated && (
+        <div className="story-info-card">
+          <span>🪴 Last Updated</span>
+          <strong>{updated}</strong>
+        </div>
+      )}
 
     </section>
   );

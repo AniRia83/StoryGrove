@@ -7,3 +7,4 @@ export { default as BloomEditor } from "./BloomEditor/BloomEditor";
 export { default as StoryField } from "./StoryField/StoryField";
 export { default as EditStoryModal } from "./EditStoryModal/EditStoryModal";
 export { default as ProgressFields} from "./ProgressFields/ProgressFields";
+export { default as RelatedStories } from "./RelatedStories/RelatedStories";

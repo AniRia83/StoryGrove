@@ -1,11 +1,12 @@
 import "./StoryHero.css";
 
 import BloomEditor from "../BloomEditor/BloomEditor";
+import StoryHeroActions from "../StoryHeroActions/StoryHeroActions";
 
 const mediaIcons = {
   Book: "📚",
   Comic: "💥",
- Fanfic: "🪶",
+  Fanfiction: "🪶",
   Movie: "🎬",
   "TV Series": "📺",
   Anime: "🌸",
@@ -25,7 +26,14 @@ const journeyLabels = {
 export default function StoryHero({
   story,
   collection,
+  onJourneyChange,
+  onEdit,
+  onProgress,
+  onFavourite,
 }) {
+  const icon =
+    mediaIcons[story.mediaType] || "📚";
+
   const progress =
     story.totalProgress > 0
       ? Math.round(
@@ -34,6 +42,28 @@ export default function StoryHero({
             100
         )
       : 0;
+
+  const remaining =
+    story.totalProgress > 0
+      ? story.totalProgress -
+        story.currentProgress
+      : null;
+
+  const plantedDate = new Date(
+    story.plantedAt
+  ).toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
+
+  const updatedDate = new Date(
+    story.updatedAt || story.plantedAt
+  ).toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 
   return (
     <section className="story-hero">
@@ -47,7 +77,7 @@ export default function StoryHero({
           />
         ) : (
           <div className="story-hero__placeholder">
-            📚
+            {icon}
           </div>
         )}
 
@@ -55,14 +85,20 @@ export default function StoryHero({
 
       <div className="story-hero__content">
 
-        <div className="story-hero__badges">
+        <div className="story-hero__chips">
 
-          <span className="story-badge">
-            {mediaIcons[story.mediaType]} {story.mediaType}
+          <span className="chip">
+            {icon} {story.mediaType}
           </span>
 
+          {story.genre && (
+            <span className="chip">
+              🏷 {story.genre}
+            </span>
+          )}
+
           {collection && (
-            <span className="story-badge story-badge--grove">
+            <span className="chip chip--grove">
               {collection.icon} {collection.name}
             </span>
           )}
@@ -72,33 +108,32 @@ export default function StoryHero({
         <h1>{story.title}</h1>
 
         <p className="story-hero__creator">
-          {story.creator || "Unknown Creator"}
+          {story.creator ||
+            "Unknown Creator"}
         </p>
-
-        {story.genre && (
-          <p className="story-hero__genre">
-            {story.genre}
-          </p>
-        )}
 
         {story.totalProgress > 0 && (
 
-          <>
+          <div className="story-progress">
 
-            <div className="story-progress-header">
+            <div className="story-progress__top">
 
-              <span>Progress</span>
+              <span>
+                {story.currentProgress} /
+                {" "}
+                {story.totalProgress}
+              </span>
 
-              <strong>
-                {story.currentProgress} / {story.totalProgress}
-              </strong>
+              <span>
+                {progress}%
+              </span>
 
             </div>
 
-            <div className="story-progress">
+            <div className="story-progress__bar">
 
               <div
-                className="story-progress-fill"
+                className="story-progress__fill"
                 style={{
                   width: `${progress}%`,
                 }}
@@ -106,35 +141,73 @@ export default function StoryHero({
 
             </div>
 
-            <div className="story-progress-percent">
-              {progress}% completed
-            </div>
+            {remaining > 0 && (
+              <p className="story-progress__remaining">
+                🌱 {remaining} remaining
+              </p>
+            )}
 
-          </>
+          </div>
 
         )}
 
-        <div className="story-meta">
+        <div className="story-hero__stats">
 
-          <div>
+          <div className="story-stat">
 
-            <span>Journey</span>
+            <span className="story-stat__label">
+              Journey
+            </span>
 
             <strong>
-              {journeyLabels[story.journey]}
+              {journeyLabels[
+                story.journey
+              ] || "—"}
             </strong>
 
           </div>
 
-          <div>
+          <div className="story-stat">
 
-            <span>Bloom</span>
+            <span className="story-stat__label">
+              Bloom
+            </span>
 
             <BloomEditor story={story} />
 
           </div>
 
+          <div className="story-stat">
+
+            <span className="story-stat__label">
+              🌱 Planted
+            </span>
+
+            <strong>
+              {plantedDate}
+            </strong>
+
+          </div>
+
+          <div className="story-stat">
+
+            <span className="story-stat__label">
+              🪴 Updated
+            </span>
+
+            <strong>
+              {updatedDate}
+            </strong>
+
+          </div>
+
         </div>
+
+        <StoryHeroActions
+    onEdit={onEdit}
+    onProgress={onProgress}
+    onFavourite={onFavourite}
+/>
 
       </div>
 

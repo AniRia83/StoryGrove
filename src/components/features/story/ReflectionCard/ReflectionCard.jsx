@@ -1,23 +1,19 @@
 import "./ReflectionCard.css";
 
 export default function ReflectionCard({ story }) {
+  if (!story.reflections?.trim()) return null;
+
   return (
-    <section className="reflection-card">
-
-      <div className="reflection-card__header">
-
-        <span className="reflection-card__icon">
-          🍂
-        </span>
-
-        <h2>Reflections</h2>
-
+    <section className="story-note-card">
+      <div className="story-note-card__icon">
+        🍂
       </div>
 
-      <p className="reflection-card__text">
-        {story.reflections || "No reflections planted yet."}
-      </p>
+      <div className="story-note-card__content">
+        <h2>Reflections</h2>
 
+        <p>{story.reflections}</p>
+      </div>
     </section>
   );
 }

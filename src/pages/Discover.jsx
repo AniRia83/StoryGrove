@@ -1,170 +1,175 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 
 import AppLayout from "../components/layout/AppLayout/AppLayout";
 
 import PageBanner from "../components/ui/PageBanner";
-import SearchBar from "../components/ui/SearchBar";
 import EmptyState from "../components/ui/EmptyState";
 
-import GenreChips from "../components/features/wander/GenreChips";
-import MediaCategories from "../components/features/wander/MediaCategories";
-import FeaturedStories from "../components/features/wander/FeaturedStories";
-import ReadingInspiration from "../components/features/wander/ReadingInspiration";
-import SurpriseMe from "../components/features/wander/SurpriseMe";
+import DiscoverSection from "../components/features/wander/DiscoverSection/DiscoverSection";
 
 import { useStory } from "../context/StoryContext";
 
 export default function Discover() {
   const { stories } = useStory();
 
-  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
 
-  const [selectedGenre, setSelectedGenre] =
-    useState("");
+  const continueGrowing = useMemo(
+    () =>
+      stories.filter(
+        (story) =>
+          story.journey === "growing"
+      ),
+    [stories]
+  );
 
-  const [
-    selectedMediaType,
-    setSelectedMediaType,
-  ] = useState("");
+  const highestBloom = useMemo(
+    () =>
+      [...stories]
+        .sort(
+          (a, b) =>
+            (b.bloom || 0) -
+            (a.bloom || 0)
+        )
+        .slice(0, 8),
+    [stories]
+  );
 
-  const filteredStories = useMemo(() => {
-    return stories.filter((story) => {
-      const query = search.toLowerCase();
+  const recentlyPlanted = useMemo(
+    () =>
+      [...stories]
+        .sort(
+          (a, b) =>
+            new Date(
+              b.plantedAt
+            ) -
+            new Date(a.plantedAt)
+        )
+        .slice(0, 8),
+    [stories]
+  );
 
-      const matchesSearch =
-        story.title
-          ?.toLowerCase()
-          .includes(query) ||
-        story.creator
-          ?.toLowerCase()
-          .includes(query) ||
-        story.genre
-          ?.toLowerCase()
-          .includes(query);
+  function media(mediaType) {
+    return stories.filter(
+      (story) =>
+        story.mediaType === mediaType
+    );
+  }
 
-      const matchesGenre =
-        !selectedGenre ||
-        story.genre === selectedGenre;
+  function genre(name) {
+    return stories.filter(
+      (story) =>
+        story.genre === name
+    );
+  }
 
-      const matchesMediaType =
-        !selectedMediaType ||
-        story.mediaType ===
-          selectedMediaType;
-
-      return (
-        matchesSearch &&
-        matchesGenre &&
-        matchesMediaType
-      );
-    });
-  }, [
-    stories,
-    search,
-    selectedGenre,
-    selectedMediaType,
-  ]);
-
-  const hasFilters =
-    search ||
-    selectedGenre ||
-    selectedMediaType;
-
-  function clearFilters() {
-    setSearch("");
-    setSelectedGenre("");
-    setSelectedMediaType("");
+  function openStory(story) {
+    navigate(`/story/${story.id}`);
   }
 
   return (
     <AppLayout>
+
       <PageBanner
         icon="🧭"
         title="Discover"
-        subtitle="Explore stories waiting to become part of your grove."
+        subtitle="Rediscover stories already growing inside your Grove."
       />
 
-      <SearchBar
-        value={search}
-        onChange={setSearch}
-        placeholder="Search stories, creators or genres..."
-      />
-
-      <GenreChips
-        stories={stories}
-        selectedGenre={selectedGenre}
-        onSelectGenre={setSelectedGenre}
-      />
-
-      <MediaCategories
-        selectedMediaType={
-          selectedMediaType
-        }
-        onSelectMediaType={
-          setSelectedMediaType
-        }
-      />
-
-      <div
-        style={{
-          display: "flex",
-          justifyContent:
-            "space-between",
-          alignItems: "center",
-          marginTop: "2rem",
-          marginBottom: "1rem",
-          flexWrap: "wrap",
-          gap: "1rem",
-        }}
-      >
-        <p>
-          <strong>
-            {filteredStories.length}
-          </strong>{" "}
-          {filteredStories.length === 1
-            ? "story"
-            : "stories"}{" "}
-          found
-        </p>
-
-        {hasFilters && (
-          <button
-            onClick={clearFilters}
-            style={{
-              border: "none",
-              background:
-                "var(--color-evergreen)",
-              color: "white",
-              padding:
-                ".65rem 1.2rem",
-              borderRadius: "999px",
-              cursor: "pointer",
-              fontWeight: 700,
-            }}
-          >
-            Clear Filters
-          </button>
-        )}
-      </div>
-
-      {filteredStories.length === 0 ? (
+      {stories.length === 0 ? (
         <EmptyState
-          icon="🌿"
-          title="Nothing grew here."
-          description="Try another search or clear your filters."
+          icon="🌱"
+          title="Your Grove is empty"
+          description="Plant a few stories and Discover will grow automatically."
         />
       ) : (
         <>
-          <FeaturedStories
-            stories={filteredStories}
+
+          <DiscoverSection
+            title="🌿 Continue Growing"
+            subtitle="Continue your current adventures."
+            stories={continueGrowing}
+            onStoryClick={openStory}
           />
 
-          <ReadingInspiration />
-
-          <SurpriseMe
-            stories={filteredStories}
+          <DiscoverSection
+            title="⭐ Highest Bloom"
+            subtitle="Your favourite stories."
+            stories={highestBloom}
+            onStoryClick={openStory}
           />
+
+          <DiscoverSection
+            title="🌱 Recently Planted"
+            subtitle="Fresh additions to your Grove."
+            stories={recentlyPlanted}
+            onStoryClick={openStory}
+          />
+
+          <DiscoverSection
+            title="📚 Books"
+            stories={media("Book")}
+            onStoryClick={openStory}
+          />
+
+          <DiscoverSection
+            title="💥 Comics"
+            stories={media("Comic")}
+            onStoryClick={openStory}
+          />
+
+          <DiscoverSection
+            title="📝 Fanfiction"
+            stories={media("Fanfiction")}
+            onStoryClick={openStory}
+          />
+
+          <DiscoverSection
+            title="🎬 Movies"
+            stories={media("Movie")}
+            onStoryClick={openStory}
+          />
+
+          <DiscoverSection
+            title="📺 TV Series"
+            stories={media("TV Series")}
+            onStoryClick={openStory}
+          />
+
+          <DiscoverSection
+            title="🌸 Anime"
+            stories={media("Anime")}
+            onStoryClick={openStory}
+          />
+
+          <DiscoverSection
+            title="🎮 Games"
+            stories={media("Game")}
+            onStoryClick={openStory}
+          />
+
+          <DiscoverSection
+            title="🎵 Music"
+            stories={media("Music")}
+            onStoryClick={openStory}
+          />
+
+          <DiscoverSection
+            title="🎙 Podcasts"
+            stories={media("Podcast")}
+            onStoryClick={openStory}
+          />
+
+          <DiscoverSection
+            title="✨ Fantasy"
+            stories={genre("Fantasy")}
+            onStoryClick={openStory}
+          />
+
         </>
       )}
+
     </AppLayout>
   );
 }

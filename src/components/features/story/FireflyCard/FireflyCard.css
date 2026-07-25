@@ -1,31 +1,86 @@
 .firefly-card{
-  background:var(--color-surface);
-  border:1px solid var(--color-border);
-  border-radius:var(--radius-lg);
-  padding:2rem;
-  box-shadow:var(--shadow-soft);
+
+    position:relative;
+
+    overflow:hidden;
+
+    margin-top:2rem;
+
+    padding:2.5rem;
+
+    border-radius:28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,196,102,.18),
+            rgba(238,98,157,.08)
+        );
+
+    border:1px solid rgba(255,196,102,.35);
+
+    box-shadow:var(--shadow-soft);
+
+    animation:fadeIn .35s ease;
 }
 
-.firefly-card__header{
-  display:flex;
-  align-items:center;
-  gap:.75rem;
-  margin-bottom:1.25rem;
+.firefly-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-120px;
+    right:-120px;
+
+    width:260px;
+    height:260px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            rgba(255,255,180,.45),
+            transparent 70%
+        );
+
+    animation:sparkle 6s ease infinite;
 }
 
-.firefly-card__icon{
-  font-size:1.5rem;
+.firefly-card__glow{
+
+    font-size:2.5rem;
+
+    margin-bottom:1rem;
+
+    animation:float 4s ease-in-out infinite;
 }
 
-.firefly-card__header h2{
-  font-family:var(--font-heading);
-  color:var(--color-heading);
-  font-size:1.7rem;
+.firefly-card h2{
+
+    margin:0;
+
+    font-size:2rem;
 }
 
-.firefly-card__text{
-  font-size:1.05rem;
-  line-height:2;
-  color:var(--color-text);
-  white-space:pre-wrap;
+.firefly-card__subtitle{
+
+    margin:.5rem 0 2rem;
+
+    color:var(--color-text-secondary);
+}
+
+.firefly-card__quote{
+
+    margin:0;
+
+    font-family:var(--font-heading);
+
+    font-size:2rem;
+
+    line-height:1.5;
+
+    color:var(--color-heading);
+
+    font-style:italic;
 }

@@ -12,6 +12,7 @@ import {
   ReflectionCard,
   FireflyCard,
   StoryTimeline,
+  RelatedStories,
 } from "../components/features/story";
 
 import Button from "../components/ui/Button";
@@ -51,9 +52,7 @@ export default function StoryDetails() {
 
   const collection =
     story.collectionId
-      ? getCollectionById(
-          story.collectionId
-        )
+      ? getCollectionById(story.collectionId)
       : null;
 
   function handleJourneyChange(
@@ -76,35 +75,37 @@ export default function StoryDetails() {
     navigate("/library");
   }
 
+  function handleEdit() {
+    setShowEditModal(true);
+  }
+
+  function handleProgress() {
+    setShowEditModal(true);
+  }
+
+  function handleFavourite() {
+    alert("❤️ Favourite system coming soon!");
+  }
+
   return (
     <AppLayout>
 
       <StoryHero
         story={story}
         collection={collection}
-        onJourneyChange={
-          handleJourneyChange
-        }
+        onJourneyChange={handleJourneyChange}
+        onEdit={handleEdit}
+        onProgress={handleProgress}
+        onFavourite={handleFavourite}
       />
 
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
-          gap: "1rem",
-          flexWrap: "wrap",
+          justifyContent: "flex-end",
           marginBottom: "2rem",
         }}
       >
-        <Button
-          variant="secondary"
-          onClick={() =>
-            setShowEditModal(true)
-          }
-        >
-          ✏️ Edit Story
-        </Button>
-
         <Button
           variant="outline"
           onClick={handleDelete}
@@ -120,6 +121,8 @@ export default function StoryDetails() {
       <FireflyCard story={story} />
 
       <StoryTimeline story={story} />
+
+      <RelatedStories story={story} />
 
       <EditStoryModal
         isOpen={showEditModal}
