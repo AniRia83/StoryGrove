@@ -3,23 +3,28 @@ import "./StoryHero.css";
 import BloomEditor from "../BloomEditor/BloomEditor";
 
 const mediaIcons = {
-  Book: "📖",
-  Novel: "📘",
-  Manga: "📚",
+  Book: "📚",
   Comic: "💥",
+ Fanfic: "🪶",
   Movie: "🎬",
-  TV: "📺",
+  "TV Series": "📺",
   Anime: "🌸",
   Game: "🎮",
-  Audiobook: "🎧",
-  Podcast: "🎙️",
   Music: "🎵",
+  Podcast: "🎙️",
+};
+
+const journeyLabels = {
+  planning: "🌱 Planning",
+  growing: "🌿 Growing",
+  completed: "🌸 Bloomed",
+  paused: "🍂 Resting",
+  abandoned: "🪵 Abandoned",
 };
 
 export default function StoryHero({
   story,
   collection,
-  onJourneyChange,
 }) {
   const progress =
     story.totalProgress > 0
@@ -33,22 +38,18 @@ export default function StoryHero({
   return (
     <section className="story-hero">
 
-      <div className="story-hero__cover-container">
+      <div className="story-hero__cover">
 
-        <div className="story-hero__cover">
-
-          {story.cover ? (
-            <img
-              src={story.cover}
-              alt={story.title}
-            />
-          ) : (
-            <div className="story-hero__placeholder">
-              📚
-            </div>
-          )}
-
-        </div>
+        {story.cover ? (
+          <img
+            src={story.cover}
+            alt={story.title}
+          />
+        ) : (
+          <div className="story-hero__placeholder">
+            📚
+          </div>
+        )}
 
       </div>
 
@@ -56,48 +57,48 @@ export default function StoryHero({
 
         <div className="story-hero__badges">
 
-          <span className="story-hero__type">
-            {mediaIcons[story.mediaType] || "📚"}{" "}
-            {story.mediaType}
+          <span className="story-badge">
+            {mediaIcons[story.mediaType]} {story.mediaType}
           </span>
 
           {collection && (
-            <span className="story-hero__collection">
-  {collection.icon} {collection.name}
-</span>
+            <span className="story-badge story-badge--grove">
+              {collection.icon} {collection.name}
+            </span>
           )}
 
         </div>
 
-        <h1 className="story-hero__title">
-          {story.title}
-        </h1>
+        <h1>{story.title}</h1>
 
         <p className="story-hero__creator">
           {story.creator || "Unknown Creator"}
         </p>
 
+        {story.genre && (
+          <p className="story-hero__genre">
+            {story.genre}
+          </p>
+        )}
+
         {story.totalProgress > 0 && (
 
-          <div className="story-hero__progress">
+          <>
 
-            <div className="story-hero__progress-top">
+            <div className="story-progress-header">
 
-              <span>
-                Progress
-              </span>
+              <span>Progress</span>
 
-              <span>
-                {story.currentProgress} /{" "}
-                {story.totalProgress}
-              </span>
+              <strong>
+                {story.currentProgress} / {story.totalProgress}
+              </strong>
 
             </div>
 
-            <div className="story-hero__progress-bar">
+            <div className="story-progress">
 
               <div
-                className="story-hero__progress-fill"
+                className="story-progress-fill"
                 style={{
                   width: `${progress}%`,
                 }}
@@ -105,37 +106,33 @@ export default function StoryHero({
 
             </div>
 
-            <p className="story-hero__progress-text">
-              {progress}% Complete
-            </p>
+            <div className="story-progress-percent">
+              {progress}% completed
+            </div>
 
-          </div>
+          </>
 
         )}
 
-        <div className="story-hero__divider"></div>
+        <div className="story-meta">
 
-        <div className="story-hero__section">
+          <div>
 
-  <h3>Journey</h3>
+            <span>Journey</span>
 
-  <div className="story-hero__journey">
+            <strong>
+              {journeyLabels[story.journey]}
+            </strong>
 
-    {story.journey === "planning" && "🌱 Planning"}
+          </div>
 
-    {story.journey === "growing" && "🌿 Growing"}
+          <div>
 
-    {story.journey === "bloomed" && "🌸 Bloomed"}
+            <span>Bloom</span>
 
-  </div>
+            <BloomEditor story={story} />
 
-</div>
-
-        <div className="story-hero__section">
-
-          <h3>Bloom</h3>
-
-          <BloomEditor story={story} />
+          </div>
 
         </div>
 

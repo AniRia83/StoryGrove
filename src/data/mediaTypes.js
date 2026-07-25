@@ -5,24 +5,34 @@ const mediaTypes = [
     icon: "📚",
   },
   {
+    id: "comic",
+    name: "Comic",
+    icon: "📖",
+  },
+  {
+    id: "manga",
+    name: "Manga",
+    icon: "📘",
+  },
+  {
+    id: "fanfiction",
+    name: "Fanfiction",
+    icon: "✍️",
+  },
+  {
     id: "movie",
     name: "Movie",
     icon: "🎬",
   },
   {
-    id: "tv",
+    id: "tv-series",
     name: "TV Series",
     icon: "📺",
   },
   {
     id: "anime",
     name: "Anime",
-    icon: "🎌",
-  },
-  {
-    id: "manga",
-    name: "Manga",
-    icon: "📖",
+    icon: "🌸",
   },
   {
     id: "game",

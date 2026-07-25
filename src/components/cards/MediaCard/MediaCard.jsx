@@ -3,17 +3,16 @@ import "./MediaCard.css";
 import { getProgressPercentage } from "../../../utils/storyUtils";
 
 const mediaIcons = {
-  Book: "📖",
-  Novel: "📘",
-  Manga: "📚",
-  Comic: "💥",
+  Book: "📚",
+  Comic: "📖",
+  Manga: "📘",
+  Fanfiction: "✍️",
   Movie: "🎬",
-  TV: "📺",
+  "TV Series": "📺",
   Anime: "🌸",
   Game: "🎮",
-  Audiobook: "🎧",
-  Podcast: "🎙️",
   Music: "🎵",
+  Podcast: "🎙️",
 };
 
 export default function MediaCard({

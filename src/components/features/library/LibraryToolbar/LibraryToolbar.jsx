@@ -9,6 +9,8 @@ export default function LibraryToolbar({
   setGrove,
   journey,
   setJourney,
+  mediaType,
+  setMediaType,
   bloom,
   setBloom,
   sort,
@@ -80,6 +82,57 @@ export default function LibraryToolbar({
               🪵 Abandoned
             </option>
           </select>
+
+          <select
+  value={mediaType}
+  onChange={(e) =>
+    setMediaType(e.target.value)
+  }
+>
+  <option value="">
+    🎬 All Media
+  </option>
+
+  <option value="Book">
+    📚 Book
+  </option>
+
+  <option value="Comic">
+    📖 Comic
+  </option>
+
+  <option value="Manga">
+    📘 Manga
+  </option>
+
+  <option value="Fanfiction">
+    ✍️ Fanfiction
+  </option>
+
+  <option value="Movie">
+    🎬 Movie
+  </option>
+
+  <option value="TV Series">
+    📺 TV Series
+  </option>
+
+  <option value="Anime">
+    🌸 Anime
+  </option>
+
+  <option value="Game">
+    🎮 Game
+  </option>
+
+  <option value="Music">
+    🎵 Music
+  </option>
+
+  <option value="Podcast">
+    🎙️ Podcast
+  </option>
+</select>
 
           <select
             value={bloom}

@@ -1,47 +1,5 @@
 import "./MediaCategories.css";
-
-const categories = [
-  {
-    icon: "📚",
-    title: "Book",
-    description: "Novels & literature",
-  },
-  {
-    icon: "📖",
-    title: "Manga",
-    description: "Graphic stories",
-  },
-  {
-    icon: "📺",
-    title: "Anime",
-    description: "Animated series",
-  },
-  {
-    icon: "🎬",
-    title: "Movie",
-    description: "Films",
-  },
-  {
-    icon: "📺",
-    title: "TV Series",
-    description: "Shows & series",
-  },
-  {
-    icon: "🎮",
-    title: "Game",
-    description: "Interactive adventures",
-  },
-  {
-    icon: "🎵",
-    title: "Music",
-    description: "Albums & soundtracks",
-  },
-  {
-    icon: "🎙️",
-    title: "Podcast",
-    description: "Episodes & audio",
-  },
-];
+import mediaTypes from "../../../../data/mediaTypes";
 
 export default function MediaCategories({
   selectedMediaType,
@@ -59,9 +17,7 @@ export default function MediaCategories({
         {selectedMediaType && (
           <button
             className="media-categories__clear"
-            onClick={() =>
-              onSelectMediaType("")
-            }
+            onClick={() => onSelectMediaType("")}
           >
             Clear
           </button>
@@ -77,9 +33,7 @@ export default function MediaCategories({
               ? "media-category-card active"
               : "media-category-card"
           }
-          onClick={() =>
-            onSelectMediaType("")
-          }
+          onClick={() => onSelectMediaType("")}
         >
           <span className="media-category-card__icon">
             🌿
@@ -90,30 +44,25 @@ export default function MediaCategories({
           <p>Everything in your grove</p>
         </button>
 
-        {categories.map((category) => (
+        {mediaTypes.map((media) => (
 
           <button
-            key={category.title}
+            key={media.id}
             className={
-              selectedMediaType ===
-              category.title
+              selectedMediaType === media.name
                 ? "media-category-card active"
                 : "media-category-card"
             }
             onClick={() =>
-              onSelectMediaType(
-                category.title
-              )
+              onSelectMediaType(media.name)
             }
           >
 
             <span className="media-category-card__icon">
-              {category.icon}
+              {media.icon}
             </span>
 
-            <h3>{category.title}</h3>
-
-            <p>{category.description}</p>
+            <h3>{media.name}</h3>
 
           </button>
 

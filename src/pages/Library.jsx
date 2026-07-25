@@ -28,6 +28,7 @@ export default function Library() {
   const [search, setSearch] = useState("");
   const [grove, setGrove] = useState("");
   const [journey, setJourney] = useState("");
+  const [mediaType, setMediaType] = useState("");
   const [bloom, setBloom] = useState("");
   const [sort, setSort] = useState("newest");
 
@@ -45,6 +46,7 @@ export default function Library() {
         story.title?.toLowerCase().includes(query) ||
         story.creator?.toLowerCase().includes(query) ||
         story.genre?.toLowerCase().includes(query) ||
+        story.mediaType?.toLowerCase().includes(query) ||
         collection?.name?.toLowerCase().includes(query);
 
       const matchesGrove =
@@ -55,6 +57,10 @@ export default function Library() {
         !journey ||
         story.journey === journey;
 
+      const matchesMediaType =
+        !mediaType ||
+        story.mediaType === mediaType;
+
       const matchesBloom =
         !bloom ||
         Number(story.bloom) >= Number(bloom);
@@ -63,6 +69,7 @@ export default function Library() {
         matchesSearch &&
         matchesGrove &&
         matchesJourney &&
+        matchesMediaType &&
         matchesBloom
       );
     })
@@ -106,6 +113,8 @@ export default function Library() {
         setGrove={setGrove}
         journey={journey}
         setJourney={setJourney}
+        mediaType={mediaType}
+        setMediaType={setMediaType}
         bloom={bloom}
         setBloom={setBloom}
         sort={sort}
