@@ -196,3 +196,30 @@
 
     font-weight:700;
 }
+
+.media-card.compact{
+
+    transform:scale(.88);
+
+    transform-origin:top center;
+}
+
+.media-card.compact .media-card__cover{
+
+    height:190px;
+}
+
+.media-card.compact .media-card__title{
+
+    font-size:.95rem;
+}
+
+.media-card.compact .media-card__collection{
+
+    font-size:.8rem;
+}
+
+.media-card.compact .media-card__content{
+
+    padding:.8rem;
+}

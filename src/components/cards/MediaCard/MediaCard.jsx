@@ -19,15 +19,21 @@ export default function MediaCard({
   story,
   collection,
   onClick,
+  compact = false,
 }) {
   const icon =
     mediaIcons[story.mediaType] || "📚";
 
-  const progress = getProgressPercentage(story);
+  const progress =
+    getProgressPercentage(story);
 
   return (
     <article
-      className="media-card"
+      className={
+        compact
+          ? "media-card compact"
+          : "media-card"
+      }
       onClick={onClick}
     >
       <div className="media-card__cover">

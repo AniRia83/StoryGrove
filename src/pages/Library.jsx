@@ -14,6 +14,7 @@ import EmptyState from "../components/ui/EmptyState";
 
 import { useStory } from "../context/StoryContext";
 import { useCollection } from "../context/CollectionContext";
+import { useSettings } from "../context/SettingsContext";
 
 export default function Library() {
   const navigate = useNavigate();
@@ -24,6 +25,11 @@ export default function Library() {
     collections,
     getCollectionById,
   } = useCollection();
+
+  const { settings } = useSettings();
+
+  const compactLibrary =
+    settings.preferences.compactLibrary;
 
   const [search, setSearch] = useState("");
   const [grove, setGrove] = useState("");
@@ -103,7 +109,6 @@ export default function Library() {
 
   return (
     <AppLayout>
-
       <LibraryHeader />
 
       <LibraryToolbar
@@ -130,24 +135,19 @@ export default function Library() {
       </div>
 
       {totalStories === 0 ? (
-
         <EmptyState
           icon="🌳"
           title="Your grove is waiting."
           description="Every story you plant becomes another tree in your forest."
         />
-
       ) : (
-
-        <MediaGrid>
-
+        <MediaGrid compact={compactLibrary}>
           {filteredStories.length > 0 ? (
-
             filteredStories.map((story) => (
-
               <MediaCard
                 key={story.id}
                 story={story}
+                compact={compactLibrary}
                 collection={
                   story.collectionId
                     ? getCollectionById(
@@ -159,23 +159,16 @@ export default function Library() {
                   navigate(`/story/${story.id}`)
                 }
               />
-
             ))
-
           ) : (
-
             <EmptyState
               icon="🍃"
               title="Nothing grows here yet."
               description="Try another search or adjust your Grove filters."
             />
-
           )}
-
         </MediaGrid>
-
       )}
-
     </AppLayout>
   );
 }

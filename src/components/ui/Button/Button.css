@@ -1,71 +1,100 @@
-.sg-button {
-  border: none;
-  border-radius: var(--radius-pill);
+.sg-button{
 
-  padding: 0.85rem 1.6rem;
+  border:none;
 
-  font-family: var(--font-body);
-  font-size: var(--text-md);
-  font-weight: 500;
+  border-radius:999px;
 
-  transition: all var(--transition-normal);
+  padding:.9rem 1.8rem;
 
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: .5rem;
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:.6rem;
+
+  cursor:pointer;
+
+  font-family:var(--font-body);
+
+  font-size:var(--text-md);
+
+  font-weight:700;
+
+  transition:all .25s ease;
+
+  box-shadow:0 8px 18px rgba(0,0,0,.08);
 }
 
-/* =========================
-   PRIMARY
-========================= */
+/* ==========================
+   Primary
+========================== */
 
-.sg-button.primary {
-  background: var(--color-sage);   /* or your existing green token */
-  color: var(--color-heading);     /* or #1F3D2B */
+.sg-button.primary{
+
+  background:var(--color-evergreen);
+
+  color:white;
 }
 
-.sg-button.primary:hover {
-  filter: brightness(1.05);
+.sg-button.primary:hover{
+
+  transform:translateY(-2px);
+
+  box-shadow:0 12px 22px rgba(0,0,0,.12);
+
+  filter:brightness(1.05);
 }
 
-/* =========================
-   SECONDARY
-========================= */
+/* ==========================
+   Secondary
+========================== */
 
-.sg-button.secondary {
-  background: var(--color-card);
-  color: var(--color-heading);
+.sg-button.secondary{
 
-  border: 1px solid var(--color-border);
+  background:white;
+
+  color:var(--color-evergreen);
+
+  border:1px solid var(--color-border);
 }
 
-/* =========================
-   OUTLINE
-========================= */
+.sg-button.secondary:hover{
 
-.sg-button.outline {
-  background: transparent;
-
-  border: 1px solid var(--color-primary);
-
-  color: var(--color-primary);
+  background:var(--color-background-secondary);
 }
 
-/* =========================
-   SIZES
-========================= */
+/* ==========================
+   Outline
+========================== */
 
-.sg-button.sm {
-  padding: .6rem 1rem;
-  font-size: var(--text-sm);
+.sg-button.outline{
+
+  background:transparent;
+
+  color:var(--color-evergreen);
+
+  border:1px solid var(--color-evergreen);
 }
 
-.sg-button.md {
-  padding: .85rem 1.6rem;
+/* ==========================
+   Sizes
+========================== */
+
+.sg-button.sm{
+
+  padding:.65rem 1.2rem;
 }
 
-.sg-button.lg {
-  padding: 1rem 2rem;
-  font-size: var(--text-lg);
+.sg-button.md{
+
+  padding:.9rem 1.8rem;
+}
+
+.sg-button.lg{
+
+  padding:1rem 2.5rem;
+
+  font-size:1.05rem;
 }

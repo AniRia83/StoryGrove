@@ -7,19 +7,24 @@ import App from "./App.jsx";
 
 import { StoryProvider } from "./context/StoryContext";
 import { CollectionProvider } from "./context/CollectionContext";
+import { SettingsProvider } from "./context/SettingsContext";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
 
-    <CollectionProvider>
+    <SettingsProvider>
 
-      <StoryProvider>
+      <CollectionProvider>
 
-        <App />
+        <StoryProvider>
 
-      </StoryProvider>
+          <App />
 
-    </CollectionProvider>
+        </StoryProvider>
+
+      </CollectionProvider>
+
+    </SettingsProvider>
 
   </StrictMode>
 );

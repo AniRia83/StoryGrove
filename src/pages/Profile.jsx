@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 import AppLayout from "../components/layout/AppLayout/AppLayout";
+
+import Button from "../components/ui/Button";
 
 import ProfileHeader from "../components/features/profile/ProfileHeader";
 import ReadingSummary from "../components/features/profile/ReadingSummary";
@@ -14,8 +18,27 @@ export default function Profile() {
 
   const { stories } = useStory();
 
+  const navigate = useNavigate();
+
   return (
     <AppLayout>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginBottom: "1rem",
+        }}
+      >
+        <Button
+          variant="secondary"
+          onClick={() =>
+            navigate("/settings")
+          }
+        >
+          ⚙️ Settings
+        </Button>
+      </div>
 
       <ProfileHeader
         name="Ani"
@@ -25,15 +48,25 @@ export default function Profile() {
         stories={stories}
       />
 
-      <AchievementGarden stories={stories} />
+      <AchievementGarden
+        stories={stories}
+      />
 
-      <FavoriteGenres stories={stories} />
+      <FavoriteGenres
+        stories={stories}
+      />
 
-      <ReadingHabits stories={stories} />
+      <ReadingHabits
+        stories={stories}
+      />
 
-      <FavoriteCreators stories={stories} />
+      <FavoriteCreators
+        stories={stories}
+      />
 
-      <GardenQuote stories={stories} />
+      <GardenQuote
+        stories={stories}
+      />
 
     </AppLayout>
   );

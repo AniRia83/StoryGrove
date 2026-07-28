@@ -1,0 +1,84 @@
+.settings-item{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:var(--color-surface);
+
+    border:1px solid var(--color-border);
+
+    border-radius:18px;
+
+    padding:1rem 1.25rem;
+
+    cursor:pointer;
+
+    transition:var(--transition-normal);
+
+    box-shadow:var(--shadow-soft);
+}
+
+.settings-item:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:var(--shadow-card);
+}
+
+.settings-item__left{
+
+    display:flex;
+
+    gap:1rem;
+
+    align-items:center;
+
+    text-align:left;
+}
+
+.settings-item__icon{
+
+    width:48px;
+
+    height:48px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:14px;
+
+    background:var(--color-cream);
+
+    font-size:1.4rem;
+}
+
+.settings-item h3{
+
+    margin:0;
+
+    font-size:1rem;
+}
+
+.settings-item p{
+
+    margin:.25rem 0 0;
+
+    color:var(--color-moss);
+
+    font-size:.85rem;
+}
+
+.settings-item__right{
+
+    font-size:1.3rem;
+
+    color:var(--color-moss);
+}

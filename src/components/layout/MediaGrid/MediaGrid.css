@@ -10,3 +10,8 @@
 
   margin-top: 2rem;
 }
+
+.media-grid.compact{
+
+    gap:1rem;
+}
