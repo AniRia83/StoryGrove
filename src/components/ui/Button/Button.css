@@ -53,7 +53,7 @@
 
 .sg-button.secondary{
 
-  background:white;
+  background:var(--color-surface);
 
   color:var(--color-evergreen);
 

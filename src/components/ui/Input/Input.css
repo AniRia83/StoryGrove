@@ -1,43 +1,63 @@
 .sg-input{
-  display:flex;
-  flex-direction:column;
-  gap:.8rem;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:.8rem;
+
+    width:100%;
 }
 
 .sg-input__label{
-  font-weight:600;
-  color:var(--text);
+
+    font-weight:600;
+
+    color:var(--color-text);
 }
 
 .sg-input__required{
-  color:#c26b6b;
-  margin-left:.2rem;
+
+    color:#c26b6b;
+
+    margin-left:.2rem;
 }
 
 .sg-input input{
-  width:100%;
 
-  padding:.9rem 1rem;
+    width:100%;
 
-  border:1px solid var(--border);
-  border-radius:18px;
+    padding:.95rem 1rem;
 
-  background:#fffdf9;
+    border:1px solid var(--color-border);
 
-  font:inherit;
+    border-radius:18px;
 
-  transition:all .25s ease;
+    background:var(--color-input);
+
+    color:var(--color-heading);
+
+    font:inherit;
+
+    transition:all .25s ease;
 }
 
 .sg-input input::placeholder{
-  color:var(--text-muted);
+
+    color:var(--color-placeholder);
+}
+
+.sg-input input:hover{
+
+    border-color:var(--color-primary);
 }
 
 .sg-input input:focus{
-  outline:none;
 
-  border-color:var(--accent);
+    outline:none;
 
-  box-shadow:
-    0 0 0 4px rgba(111,150,126,.15);
+    border-color:var(--color-primary);
+
+    box-shadow:
+        0 0 0 4px var(--color-primary-soft);
 }

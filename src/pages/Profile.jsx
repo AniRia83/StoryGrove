@@ -11,12 +11,15 @@ import FavoriteGenres from "../components/features/profile/FavoriteGenres";
 import ReadingHabits from "../components/features/profile/ReadingHabits";
 import FavoriteCreators from "../components/features/profile/FavoriteCreators";
 import GardenQuote from "../components/features/profile/GardenQuote";
+import QuickActions from "../components/features/profile/QuickActions";
 
 import { useStory } from "../context/StoryContext";
+import { useSettings } from "../context/SettingsContext";
 
 export default function Profile() {
 
   const { stories } = useStory();
+  const { settings } = useSettings();
 
   const navigate = useNavigate();
 
@@ -41,8 +44,10 @@ export default function Profile() {
       </div>
 
       <ProfileHeader
-        name="Ani"
-      />
+  name={settings.profile.displayName}
+  avatar={settings.profile.avatar}
+  bio={settings.profile.bio}
+/>
 
       <ReadingSummary
         stories={stories}
@@ -67,6 +72,8 @@ export default function Profile() {
       <GardenQuote
         stories={stories}
       />
+
+      <QuickActions />
 
     </AppLayout>
   );

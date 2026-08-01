@@ -78,7 +78,7 @@
 
     border-radius:50%;
 
-    background:white;
+    background:var(--color-surface);
 
     transition:.25s;
 

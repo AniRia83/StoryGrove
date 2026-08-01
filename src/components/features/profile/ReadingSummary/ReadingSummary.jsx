@@ -33,28 +33,33 @@ export default function ReadingSummary({
   const stats = [
     {
       icon: "📚",
-      label: "Stories",
       value: totalStories,
+      label: "Stories",
+      accent: "stories",
     },
     {
       icon: "🌳",
-      label: "Groves",
       value: totalGroves,
+      label: "Groves",
+      accent: "groves",
     },
     {
       icon: "🌱",
-      label: "Growing",
       value: growingStories,
+      label: "Growing",
+      accent: "growing",
     },
     {
       icon: "🌸",
-      label: "Bloomed",
       value: bloomedStories,
+      label: "Bloomed",
+      accent: "bloomed",
     },
     {
       icon: "✨",
-      label: "Avg. Bloom",
       value: averageBloom,
+      label: "Average Bloom",
+      accent: "bloom",
     },
   ];
 
@@ -65,12 +70,12 @@ export default function ReadingSummary({
 
         <article
           key={stat.label}
-          className="reading-summary__card"
+          className={`reading-summary__card ${stat.accent}`}
         >
 
-          <span className="reading-summary__icon">
+          <div className="reading-summary__icon">
             {stat.icon}
-          </span>
+          </div>
 
           <h2>{stat.value}</h2>
 

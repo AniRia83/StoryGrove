@@ -1,25 +1,36 @@
 import "./FavoriteCreators.css";
+
 import Section from "../../../ui/Section";
+
+const creatorColors = [
+  "pink",
+  "purple",
+  "orange",
+  "green",
+  "yellow",
+];
 
 export default function FavoriteCreators({
   stories,
 }) {
+
   const creatorMap = {};
 
   stories.forEach((story) => {
+
     if (!story.creator) return;
 
     creatorMap[story.creator] =
       (creatorMap[story.creator] || 0) + 1;
+
   });
 
-  const creators = Object.entries(
-    creatorMap
-  )
+  const creators = Object.entries(creatorMap)
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5);
 
   return (
+
     <Section
       title="Favorite Creators"
       icon="✍️"
@@ -28,30 +39,59 @@ export default function FavoriteCreators({
       {creators.length === 0 ? (
 
         <div className="favorite-creators__empty">
+
           Plant more stories to discover your favourite creators.
+
         </div>
 
       ) : (
 
-        <div className="favorite-creators__list">
+        <div className="favorite-creators__grid">
 
           {creators.map(
-            ([creator, count]) => (
+            ([creator, count], index) => {
 
-              <div
-                key={creator}
-                className="creator-chip"
-              >
+              const percentage = Math.round(
+                (count / stories.length) * 100
+              );
 
-                <span>{creator}</span>
+              return (
 
-                <span className="creator-chip__count">
-                  {count}
-                </span>
+                <article
+                  key={creator}
+                  className={`creator-card ${creatorColors[index % creatorColors.length]}`}
+                >
 
-              </div>
+                  <div className="creator-card__avatar">
 
-            )
+                    ✍️
+
+                  </div>
+
+                  <h3>{creator}</h3>
+
+                  <div className="creator-card__progress">
+
+                    <div
+                      className="creator-card__fill"
+                      style={{
+                        width: `${percentage}%`,
+                      }}
+                    />
+
+                  </div>
+
+                  <p>
+
+                    {count} stories • {percentage}% of library
+
+                  </p>
+
+                </article>
+
+              );
+
+            }
           )}
 
         </div>
@@ -59,5 +99,7 @@ export default function FavoriteCreators({
       )}
 
     </Section>
+
   );
+
 }

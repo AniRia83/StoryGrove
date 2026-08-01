@@ -33,6 +33,20 @@
   --color-warning: #FFC466;
   --color-danger: #EE629D;
 
+  --color-primary-soft: rgba(238,98,157,.12);
+
+  --color-text-secondary: #8B7566;
+
+--color-input: #FFFDF9;
+
+--color-hover: #F8F3EC;
+
+--color-progress-bg: #ECE7DF;
+
+--color-chip: #FFF8F0;
+
+--color-placeholder: #A18F82;
+
   /*=====================================================
     TYPOGRAPHY
   =====================================================*/
@@ -132,6 +146,26 @@
   --color-text:#F3EFEA;
 
   --color-heading:#FFFFFF;
+
+   --color-cream:#332F3B;
+  --color-mist:#2D2A34;
+
+  --color-primary-soft:rgba(238,98,157,.20);
+
+
+  --color-primary-soft: rgba(238,98,157,.20);
+
+  --color-text-secondary: #C7C1D1;
+
+--color-input: #2F2B38;
+
+--color-hover: #3A3644;
+
+--color-progress-bg: #494454;
+
+--color-chip: #3B3745;
+
+--color-placeholder: #9A95A6;
 
   --shadow-soft:
       0 4px 12px rgba(0,0,0,.30);

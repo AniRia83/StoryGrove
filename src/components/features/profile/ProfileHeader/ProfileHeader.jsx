@@ -2,12 +2,14 @@ import "./ProfileHeader.css";
 
 export default function ProfileHeader({
   name = "Reader",
+  avatar = "🌿",
+  bio = "",
 }) {
   return (
     <section className="profile-header">
 
       <div className="profile-header__avatar">
-        🌿
+        {avatar}
       </div>
 
       <div className="profile-header__content">
@@ -21,7 +23,9 @@ export default function ProfileHeader({
         </h1>
 
         <p className="profile-header__subtitle">
-          Every story leaves another leaf on your tree.
+          {bio?.trim()
+            ? bio
+            : "Every story leaves another leaf on your tree."}
         </p>
 
       </div>

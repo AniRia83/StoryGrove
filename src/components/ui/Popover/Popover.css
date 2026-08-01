@@ -7,13 +7,21 @@
 
 .sg-popover__trigger{
 
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:0;
+
+    margin:0;
+
     border:none;
 
     background:none;
 
     cursor:pointer;
-
-    padding:0;
 }
 
 .sg-popover__content{
@@ -24,25 +32,25 @@
 
     right:0;
 
-    z-index:100;
+    z-index:1000;
 
     animation:popoverFade .18s ease;
 }
 
 @keyframes popoverFade{
 
-from{
+    from{
 
-opacity:0;
+        opacity:0;
 
-transform:translateY(-6px);
-}
+        transform:translateY(-6px);
+    }
 
-to{
+    to{
 
-opacity:1;
+        opacity:1;
 
-transform:translateY(0);
-}
+        transform:translateY(0);
+    }
 
 }

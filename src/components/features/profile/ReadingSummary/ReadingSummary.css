@@ -12,35 +12,75 @@
 
 .reading-summary__card{
 
+    position:relative;
+
+    overflow:hidden;
+
     padding:2rem;
 
     background:var(--color-surface);
 
     border:1px solid var(--color-border);
 
-    border-radius:var(--radius-lg);
+    border-radius:28px;
 
     text-align:center;
 
-    transition:var(--transition-normal);
-
     box-shadow:var(--shadow-soft);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
 }
 
 .reading-summary__card:hover{
 
-    transform:translateY(-5px);
+    transform:
+        translateY(-8px);
 
     box-shadow:var(--shadow-card);
 }
 
+.reading-summary__card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:.08;
+
+    pointer-events:none;
+
+    background:
+        radial-gradient(circle at top right,
+        currentColor,
+        transparent 65%);
+}
+
 .reading-summary__icon{
 
-    display:block;
+    width:72px;
+
+    height:72px;
+
+    margin:0 auto 1.2rem;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
 
     font-size:2rem;
 
-    margin-bottom:1rem;
+    border-radius:50%;
+
+    background:rgba(255,255,255,.45);
+
+    backdrop-filter:blur(8px);
 }
 
 .reading-summary__card h2{
@@ -49,14 +89,74 @@
 
     font-family:var(--font-heading);
 
-    font-size:2.6rem;
+    font-size:2.8rem;
 
-    color:var(--color-evergreen);
+    line-height:1;
+
+    color:var(--color-heading);
 }
 
 .reading-summary__card p{
 
-    margin-top:.6rem;
+    margin-top:.8rem;
 
     color:var(--color-text);
+
+    font-size:.95rem;
+
+    letter-spacing:.4px;
+}
+
+/* Accent Colors */
+
+.reading-summary__card.stories{
+    color:var(--color-primary);
+}
+
+.reading-summary__card.groves{
+    color:var(--color-evergreen);
+}
+
+.reading-summary__card.growing{
+    color:var(--color-moss);
+}
+
+.reading-summary__card.bloomed{
+    color:var(--color-secondary);
+}
+
+.reading-summary__card.bloom{
+    color:var(--color-accent);
+}
+
+.reading-summary__card.stories,
+.reading-summary__card.groves,
+.reading-summary__card.growing,
+.reading-summary__card.bloomed,
+.reading-summary__card.bloom{
+
+    border-color:
+        color-mix(
+            in srgb,
+            currentColor 30%,
+            var(--color-border)
+        );
+}
+
+@media (max-width:768px){
+
+    .reading-summary{
+
+        grid-template-columns:1fr;
+    }
+
+    .reading-summary__card{
+
+        padding:1.6rem;
+    }
+
+    .reading-summary__card h2{
+
+        font-size:2.3rem;
+    }
 }

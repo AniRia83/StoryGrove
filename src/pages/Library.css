@@ -7,7 +7,7 @@
 .grove-stat{
   flex:1;
 
-  background:#fffdf9;
+  background:var(--color-surface)df9;
 
   border:1px solid #eadfcf;
 

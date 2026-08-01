@@ -57,7 +57,7 @@
 
     border-color:var(--color-primary);
 
-    background:#FFF5FB;
+    background:var(--color-surface)5FB;
 }
 
 .collection-theme__icon{

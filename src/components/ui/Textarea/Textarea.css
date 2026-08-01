@@ -1,47 +1,67 @@
 .sg-textarea{
-  display:flex;
-  flex-direction:column;
-  gap:.8rem;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:.8rem;
+
+    width:100%;
 }
 
 .sg-textarea__label{
-  font-weight:600;
-  color:var(--text);
+
+    font-weight:600;
+
+    color:var(--color-text);
 }
 
 .sg-textarea__required{
-  color:#c26b6b;
-  margin-left:.2rem;
+
+    color:#c26b6b;
+
+    margin-left:.2rem;
 }
 
 .sg-textarea textarea{
-  width:100%;
 
-  min-height:140px;
+    width:100%;
 
-  padding:1rem;
+    min-height:140px;
 
-  border:1px solid var(--border);
-  border-radius:18px;
+    padding:1rem;
 
-  background:#fffdf9;
+    border:1px solid var(--color-border);
 
-  font:inherit;
+    border-radius:18px;
 
-  resize:vertical;
+    background:var(--color-input);
 
-  transition:all .25s ease;
+    color:var(--color-heading);
+
+    font:inherit;
+
+    resize:vertical;
+
+    transition:all .25s ease;
 }
 
 .sg-textarea textarea::placeholder{
-  color:var(--text-muted);
+
+    color:var(--color-placeholder);
+}
+
+.sg-textarea textarea:hover{
+
+    border-color:var(--color-primary);
 }
 
 .sg-textarea textarea:focus{
-  outline:none;
 
-  border-color:var(--accent);
+    outline:none;
 
-  box-shadow:
-    0 0 0 4px rgba(111,150,126,.15);
+    border-color:var(--color-primary);
+
+    box-shadow:
+        0 0 0 4px var(--color-primary-soft);
 }

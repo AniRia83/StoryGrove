@@ -121,7 +121,7 @@
 
     border-radius:50%;
 
-    background:white;
+    background:var(--color-surface);
 
     border:3px solid var(--color-evergreen);
 

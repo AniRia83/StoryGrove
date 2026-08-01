@@ -12,25 +12,25 @@ const bannerThemes = {
 
   blossom: {
     background:
-      "linear-gradient(135deg,#FFF5FB,#FFF8F0)",
+      "linear-gradient(135deg, var(--color-surface), color-mix(in srgb, var(--color-primary) 12%, var(--color-surface)))",
     accent: "var(--color-primary)",
   },
 
   moonlight: {
     background:
-      "linear-gradient(135deg,#F7F2FF,#FFFDF9)",
+      "linear-gradient(135deg, var(--color-surface), color-mix(in srgb, var(--color-secondary) 12%, var(--color-surface)))",
     accent: "var(--color-secondary)",
   },
 
   autumn: {
     background:
-      "linear-gradient(135deg,#FFF7EE,#FFFDF9)",
+      "linear-gradient(135deg, var(--color-surface), color-mix(in srgb, var(--color-accent) 12%, var(--color-surface)))",
     accent: "var(--color-accent)",
   },
 
   sunshine: {
     background:
-      "linear-gradient(135deg,#FFFDE8,#FFFDF9)",
+      "linear-gradient(135deg, var(--color-surface), color-mix(in srgb, var(--color-highlight) 10%, var(--color-surface)))",
     accent: "var(--color-highlight)",
   },
 };
@@ -58,7 +58,6 @@ export default function CollectionBanner({
         background: theme.background,
       }}
     >
-
       <div
         className="collection-banner__accent"
         style={{
@@ -68,9 +67,7 @@ export default function CollectionBanner({
 
       <Popover
         trigger={
-          <span
-            className="collection-banner__menu"
-          >
+          <span className="collection-banner__menu">
             &#8942;
           </span>
         }
@@ -79,9 +76,7 @@ export default function CollectionBanner({
           onEdit={onEdit}
           onFavourite={onFavourite}
           onDelete={onDelete}
-          isFavourite={
-            collection.isFavorite
-          }
+          isFavourite={collection.isFavorite}
         />
       </Popover>
 
@@ -113,9 +108,7 @@ export default function CollectionBanner({
       </p>
 
       <div className="collection-banner__stats">
-
         <div>
-
           <strong
             style={{
               color: theme.accent,
@@ -125,11 +118,9 @@ export default function CollectionBanner({
           </strong>
 
           <span>Stories</span>
-
         </div>
 
         <div>
-
           <strong
             style={{
               color: theme.accent,
@@ -139,11 +130,8 @@ export default function CollectionBanner({
           </strong>
 
           <span>Average Bloom</span>
-
         </div>
-
       </div>
-
     </section>
   );
 }

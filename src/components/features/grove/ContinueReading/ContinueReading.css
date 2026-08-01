@@ -1,6 +1,21 @@
-.continue-reading__card {
-  padding: var(--space-lg);
-  border-radius: var(--radius-lg);
-  background: white;
-  border: 1px solid var(--color-border);
+.continue-reading__card{
+
+    padding:var(--space-lg);
+
+    border-radius:var(--radius-lg);
+
+    background:var(--color-card);
+
+    border:1px solid var(--color-border);
+
+    box-shadow:var(--shadow-soft);
+
+    transition:var(--transition-normal);
+
+}
+
+.continue-reading__card:hover{
+
+    box-shadow:var(--shadow-card);
+
 }

@@ -56,11 +56,11 @@
 
     font-size:5rem;
 
-    background:linear-gradient(
-        135deg,
-        var(--color-cream),
-        white
-    );
+    background: linear-gradient(
+135deg,
+var(--color-surface),
+var(--color-card)
+);
 }
 
 .story-hero__content{
@@ -93,7 +93,10 @@
 
     border-radius:999px;
 
-    background:var(--color-cream);
+    
+background:var(--color-chip);
+color:var(--color-heading);
+
 
     font-size:.9rem;
 
@@ -129,7 +132,7 @@
 
 .story-progress{
 
-    background:var(--color-cream);
+    background:var(--color-card);
 
     padding:1.4rem;
 
@@ -157,7 +160,7 @@
 
     overflow:hidden;
 
-    background:white;
+    background:var(--color-progress-bg);
 }
 
 .story-progress__fill{
@@ -197,7 +200,7 @@
 
 .story-stat{
 
-    background:var(--color-background);
+    background:var(--color-card);
 
     padding:1.25rem;
 

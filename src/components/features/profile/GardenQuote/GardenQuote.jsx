@@ -1,74 +1,110 @@
 import "./GardenQuote.css";
 
-export default function GardenQuote({
-  stories,
-}) {
-  let quote = "";
+import { useMemo, useState } from "react";
 
-  if (stories.length === 0) {
-    quote =
-      "Every great forest begins with a single seed.";
-  } else {
-    const bloomed = stories.filter(
-      (story) => story.journey === "bloomed"
-    ).length;
+const quotes = [
+  {
+    text: "Every page turned grows another branch in your grove.",
+    author: "StoryGrove",
+  },
+  {
+    text: "Some stories stay with us long after the final chapter.",
+    author: "StoryGrove",
+  },
+  {
+    text: "A quiet evening, a warm drink, and a good story can change everything.",
+    author: "StoryGrove",
+  },
+  {
+    text: "Every story you finish becomes another flower in your forest.",
+    author: "StoryGrove",
+  },
+  {
+    text: "The most beautiful gardens are grown one seed at a time.",
+    author: "StoryGrove",
+  },
+  {
+    text: "Books remember the versions of ourselves that read them.",
+    author: "StoryGrove",
+  },
+  {
+    text: "Stories bloom where curiosity is planted.",
+    author: "StoryGrove",
+  },
+  {
+    text: "Some journeys begin with a single sentence.",
+    author: "StoryGrove",
+  },
+];
 
-    const growing = stories.filter(
-      (story) => story.journey === "growing"
-    ).length;
+export default function GardenQuote() {
 
-    const averageBloom =
-      stories.reduce(
-        (sum, story) =>
-          sum + Number(story.bloom || 0),
-        0
-      ) / stories.length;
+  const randomQuote = useMemo(() => {
 
-    if (stories.length >= 50) {
-      quote =
-        "Your grove has become a forest of unforgettable stories.";
+    return quotes[
+      Math.floor(Math.random() * quotes.length)
+    ];
+
+  }, []);
+
+  const [quote, setQuote] = useState(randomQuote);
+
+  function generateQuote() {
+
+    let next = quote;
+
+    while (next === quote) {
+
+      next =
+        quotes[
+          Math.floor(
+            Math.random() * quotes.length
+          )
+        ];
+
     }
 
-    else if (bloomed >= 10) {
-      quote =
-        "Your grove is blooming beautifully. Every finished story has become another flower.";
-    }
+    setQuote(next);
 
-    else if (averageBloom >= 8) {
-      quote =
-        "You don't just finish stories—you cherish them.";
-    }
-
-    else if (growing >= 5) {
-      quote =
-        "Some stories are still reaching toward the sunlight.";
-    }
-
-    else {
-      quote =
-        "Every page turned grows another branch in your grove.";
-    }
   }
 
   return (
+
     <section className="garden-quote">
 
       <div className="garden-quote__card">
 
-        <span className="garden-quote__icon">
-          🌿
-        </span>
+        <div className="garden-quote__leaf">
 
-        <p className="garden-quote__text">
-          "{quote}"
+          🌿
+
+        </div>
+
+        <blockquote className="garden-quote__text">
+
+          “{quote.text}”
+
+        </blockquote>
+
+        <p className="garden-quote__author">
+
+          — {quote.author}
+
         </p>
 
-        <span className="garden-quote__brand">
-          — StoryGrove
-        </span>
+        <button
+          className="garden-quote__button"
+          onClick={generateQuote}
+        >
+
+          🍃 Whisper Again
+
+        </button>
 
       </div>
 
     </section>
+
   );
+
 }

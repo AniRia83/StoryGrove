@@ -147,7 +147,7 @@
 
 .genre-chip.active .genre-chip__count{
 
-    background:white;
+    background:var(--color-surface);
 
     color:var(--color-evergreen);
 }

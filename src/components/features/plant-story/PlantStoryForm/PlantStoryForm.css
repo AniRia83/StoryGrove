@@ -2,58 +2,92 @@
    Plant Story Form
 ======================================================= */
 
-.plant-story-form {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+.plant-story-form{
+  display:flex;
+  flex-direction:column;
+  gap:2rem;
 }
 
 /* =======================================================
    Header
 ======================================================= */
 
-.plant-story-form__header {
-  margin-bottom: 0.5rem;
+.plant-story-form__header{
+  margin-bottom:.5rem;
 }
 
-.plant-story-form__header h2 {
-  margin-bottom: 0.5rem;
-  font-size: 2rem;
+.plant-story-form__header h2{
+  margin-bottom:.5rem;
+  font-size:2rem;
 }
 
-.plant-story-form__header p {
-  color: var(--text-muted);
+.plant-story-form__header p{
+  color:var(--color-text);
 }
 
 /* =======================================================
    Grid Layout
 ======================================================= */
 
-.plant-story-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+.plant-story-grid{
 
-  column-gap: 3rem;
-  row-gap: 2.25rem;
+  display:grid;
+
+  grid-template-columns:repeat(2,minmax(0,1fr));
+
+  column-gap:3rem;
+
+  row-gap:2.25rem;
+
+  align-items:start;
+
 }
 
-.form-group--full {
-  grid-column: 1 / -1;
+/* IMPORTANT */
+.plant-story-grid > *{
+  min-width:0;
+}
+
+.form-group--full{
+  grid-column:1 / -1;
 }
 
 /* =======================================================
    Form Groups
 ======================================================= */
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
+.form-group{
+
+  display:flex;
+
+  flex-direction:column;
+
+  gap:.8rem;
+
+  min-width:0;
+
 }
 
-.form-group label {
-  font-weight: 600;
-  color: var(--text);
+.form-group label{
+
+  font-weight:600;
+
+  color:var(--color-heading);
+
+}
+
+/* =======================================================
+   Shared Width Fixes
+======================================================= */
+
+.sg-input,
+.sg-textarea,
+.form-group{
+
+  width:100%;
+
+  min-width:0;
+
 }
 
 /* =======================================================
@@ -61,89 +95,180 @@
 ======================================================= */
 
 .plant-story-form input,
-.plant-story-form textarea {
-  width: 100%;
+.plant-story-form textarea{
 
-  padding: 0.9rem 1rem;
+  width:100%;
 
-  border: 1px solid var(--border);
-  border-radius: 18px;
+  max-width:100%;
 
-  background: #fffdf9;
+  padding:.9rem 1rem;
 
-  font: inherit;
+  border:1px solid var(--color-border);
 
-  transition: all 0.25s ease;
+  border-radius:18px;
+
+  background:var(--color-surface);
+
+  color:var(--color-text);
+
+  font:inherit;
+
+  transition:all .25s ease;
+
+  box-sizing:border-box;
+
 }
 
 .plant-story-form input::placeholder,
-.plant-story-form textarea::placeholder {
-  color: var(--text-muted);
+.plant-story-form textarea::placeholder{
+
+  color:var(--color-text);
+
 }
 
 .plant-story-form input:focus,
-.plant-story-form textarea:focus {
-  outline: none;
+.plant-story-form textarea:focus{
 
-  border-color: var(--accent);
+  outline:none;
 
-  box-shadow: 0 0 0 4px rgba(111, 150, 126, 0.15);
+  border-color:var(--color-primary);
+
+  box-shadow:0 0 0 4px color-mix(
+    in srgb,
+    var(--color-evergreen) 20%,
+    transparent
+  );
+
 }
 
-.plant-story-form textarea {
-  resize: vertical;
-  min-height: 120px;
+.plant-story-form textarea{
+
+  resize:vertical;
+
+  min-height:120px;
+
+}
+
+/* =======================================================
+   Select
+======================================================= */
+
+.plant-story-form select{
+
+  width:100%;
+
+  max-width:100%;
+
+  padding:.9rem 1rem;
+
+  border:1px solid var(--color-border);
+
+  border-radius:18px;
+
+  background:var(--color-surface);
+
+  color:var(--color-text);
+
+  font:inherit;
+
+  transition:all .25s ease;
+
+  appearance:none;
+
+  -webkit-appearance:none;
+
+  -moz-appearance:none;
+
+  cursor:pointer;
+
+  box-sizing:border-box;
+
+}
+
+.plant-story-form select:focus{
+
+  outline:none;
+
+  border-color:var(--color-primary);
+
+  box-shadow:0 0 0 4px color-mix(
+    in srgb,
+    var(--color-evergreen) 20%,
+    transparent
+  );
+
 }
 
 /* =======================================================
    Range Slider
 ======================================================= */
 
-.form-group input[type="range"] {
-  padding: 0;
-  cursor: pointer;
+.form-group input[type="range"]{
+
+  padding:0;
+
+  cursor:pointer;
+
 }
 
-.bloom-value {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--accent);
+.bloom-value{
+
+  font-size:.95rem;
+
+  font-weight:600;
+
+  color:var(--color-primary);
+
 }
 
 /* =======================================================
    File Upload
 ======================================================= */
 
-.form-group input[type="file"] {
-  padding: 0;
-  border: none;
-  background: transparent;
+.form-group input[type="file"]{
+
+  padding:0;
+
+  border:none;
+
+  background:transparent;
+
 }
 
 /* =======================================================
    Submit Button
 ======================================================= */
 
-.plant-story-form .sg-button {
-  width: 100%;
-  margin-top: 1rem;
+.plant-story-form .sg-button{
+
+  width:100%;
+
+  margin-top:1rem;
+
 }
 
 /* =======================================================
    Responsive
 ======================================================= */
 
-@media (max-width: 768px) {
-  .plant-story-grid {
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
+@media (max-width:768px){
+
+  .plant-story-grid{
+
+    grid-template-columns:1fr;
+
   }
 
-  .form-group--full {
-    grid-column: auto;
+  .form-group--full{
+
+    grid-column:1 / -1;
+
   }
 
-  .plant-story-form__header h2 {
-    font-size: 1.75rem;
+  .plant-story-form__header h2{
+
+    font-size:1.75rem;
+
   }
+
 }
