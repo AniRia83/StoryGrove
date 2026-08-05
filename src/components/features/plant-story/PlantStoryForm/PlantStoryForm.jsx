@@ -42,6 +42,9 @@ export default function PlantStoryForm({
 
     currentProgress: 0,
     totalProgress: "",
+
+    // NEW
+    hoursPlayed: 0,
   });
 
   const [showCreateGrove, setShowCreateGrove] =
@@ -60,24 +63,28 @@ export default function PlantStoryForm({
     e.preventDefault();
 
     const story = {
-  mediaType,
+      mediaType,
 
-  ...formData,
+      ...formData,
 
-  currentProgress: Number(
-    formData.currentProgress
-  ),
+      currentProgress: Number(
+        formData.currentProgress
+      ),
 
-  totalProgress: Number(
-    formData.totalProgress
-  ),
+      totalProgress: Number(
+        formData.totalProgress
+      ),
 
-  plantedAt: new Date().toISOString(),
-};
+      hoursPlayed: Number(
+        formData.hoursPlayed || 0
+      ),
 
-story.journey = getJourney(story);
+      plantedAt: new Date().toISOString(),
+    };
 
-onPlant(story);
+    story.journey = getJourney(story);
+
+    onPlant(story);
   }
 
   return (

@@ -5,29 +5,6 @@ export default function ProgressFields({
   formData,
   handleChange,
 }) {
-  if (mediaType === "Movie") {
-    return (
-      <div className="form-group form-group--full">
-        <label>Watching Status</label>
-
-        <select
-          value={formData.journey}
-          onChange={(e) =>
-            handleChange("journey", e.target.value)
-          }
-        >
-          <option value="planning">
-            Planning
-          </option>
-
-          <option value="completed">
-            Watched
-          </option>
-        </select>
-      </div>
-    );
-  }
-
   let currentLabel = "Current";
   let totalLabel = "Total";
 
@@ -42,19 +19,44 @@ export default function ProgressFields({
       totalLabel = "Total Chapters";
       break;
 
+    case "Comic":
+      currentLabel = "Current Issue";
+      totalLabel = "Total Issues";
+      break;
+
+    case "Fanfiction":
+      currentLabel = "Current Chapter";
+      totalLabel = "Total Chapters";
+      break;
+
     case "Anime":
       currentLabel = "Current Episode";
       totalLabel = "Total Episodes";
       break;
 
-    case "TV Show":
+    case "TV Series":
       currentLabel = "Current Episode";
       totalLabel = "Total Episodes";
       break;
 
+    case "Podcast":
+      currentLabel = "Current Episode";
+      totalLabel = "Total Episodes";
+      break;
+
+    case "Music":
+      currentLabel = "Current Track";
+      totalLabel = "Total Tracks";
+      break;
+
+    case "Movie":
+      currentLabel = "Minutes Watched";
+      totalLabel = "Total Minutes";
+      break;
+
     case "Game":
-      currentLabel = "Completion";
-      totalLabel = "Total";
+      currentLabel = "Current Level";
+      totalLabel = "Total Levels";
       break;
 
     default:
@@ -64,12 +66,31 @@ export default function ProgressFields({
   return (
     <div className="progress-fields">
 
-      <div className="form-group">
+      {/* Hours Played only for games */}
+      {mediaType === "Game" && (
+        <div className="form-group form-group--full">
+          <label>Hours Played</label>
 
+          <input
+            type="number"
+            min="0"
+            value={formData.hoursPlayed || ""}
+            onChange={(e) =>
+              handleChange(
+                "hoursPlayed",
+                e.target.value
+              )
+            }
+          />
+        </div>
+      )}
+
+      <div className="form-group">
         <label>{currentLabel}</label>
 
         <input
           type="number"
+          min="0"
           value={formData.currentProgress}
           onChange={(e) =>
             handleChange(
@@ -78,15 +99,14 @@ export default function ProgressFields({
             )
           }
         />
-
       </div>
 
       <div className="form-group">
-
         <label>{totalLabel}</label>
 
         <input
           type="number"
+          min="0"
           value={formData.totalProgress}
           onChange={(e) =>
             handleChange(
@@ -95,7 +115,6 @@ export default function ProgressFields({
             )
           }
         />
-
       </div>
 
     </div>

@@ -1,3 +1,5 @@
+import { getProgressPercentage } from "./storyUtils";
+
 export function getCollectionStats(
   collection,
   stories
@@ -7,13 +9,15 @@ export function getCollectionStats(
       story.collectionId === collection.id
   );
 
-  const totalStories =
-    groveStories.length;
+  const totalStories = groveStories.length;
 
-  const completedStories =
-    groveStories.filter(
-      (story) => story.journey === "completed"
-    ).length;
+  const growingStories = groveStories.filter(
+    (story) => story.journey === "growing"
+  ).length;
+
+  const completedStories = groveStories.filter(
+    (story) => story.journey === "bloomed"
+  ).length;
 
   const averageBloom =
     totalStories > 0
@@ -26,28 +30,14 @@ export function getCollectionStats(
         ).toFixed(1)
       : 0;
 
-  const currentProgress =
-    groveStories.reduce(
-      (sum, story) =>
-        sum +
-        Number(story.currentProgress || 0),
-      0
-    );
-
-  const totalProgress =
-    groveStories.reduce(
-      (sum, story) =>
-        sum +
-        Number(story.totalProgress || 0),
-      0
-    );
-
   const progressPercent =
-    totalProgress > 0
+    totalStories > 0
       ? Math.round(
-          (currentProgress /
-            totalProgress) *
-            100
+          groveStories.reduce(
+            (sum, story) =>
+              sum + getProgressPercentage(story),
+            0
+          ) / totalStories
         )
       : 0;
 
@@ -64,10 +54,9 @@ export function getCollectionStats(
 
   return {
     totalStories,
+    growingStories,
     completedStories,
     averageBloom,
-    currentProgress,
-    totalProgress,
     progressPercent,
     lastUpdated,
   };

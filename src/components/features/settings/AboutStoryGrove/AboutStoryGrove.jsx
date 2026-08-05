@@ -49,11 +49,7 @@ export default function AboutStoryGrove() {
           <h3>🍃 Cultivated by</h3>
 
           <p>
-            <strong>Your Studio Name</strong>
-          </p>
-
-          <p>
-            (Brand name coming soon)
+            <strong>BerryByte Studio</strong>
           </p>
 
         </div>
@@ -63,7 +59,7 @@ export default function AboutStoryGrove() {
         <div className="about-footer">
 
           <p>
-            © 2026 Your Studio Name.
+            © 2026 BerryByte Studio
             All rights reserved.
           </p>
 

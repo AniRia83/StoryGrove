@@ -6,8 +6,28 @@ export default function ContinueReadingCard({
 }) {
   if (!story) return null;
 
-  const progress = Math.round(
-    (Number(story.bloom || 0) / 10) * 100
+  let progress = 0;
+
+  if (story.mediaType === "Movie") {
+    progress =
+      story.journey === "completed"
+        ? 100
+        : story.journey === "planning"
+        ? 0
+        : 0;
+  } else if (
+    Number(story.totalProgress) > 0
+  ) {
+    progress = Math.round(
+      (Number(story.currentProgress) /
+        Number(story.totalProgress)) *
+        100
+    );
+  }
+
+  progress = Math.max(
+    0,
+    Math.min(progress, 100)
   );
 
   return (
@@ -16,7 +36,6 @@ export default function ContinueReadingCard({
       onClick={onClick}
     >
       <div className="continue-card__cover">
-
         {story.cover ? (
           <img
             src={story.cover}
@@ -27,11 +46,9 @@ export default function ContinueReadingCard({
             📚
           </div>
         )}
-
       </div>
 
       <div className="continue-card__content">
-
         <span className="continue-card__badge">
           {story.mediaType}
         </span>
@@ -43,30 +60,26 @@ export default function ContinueReadingCard({
         </p>
 
         <div className="continue-card__progress">
-
           <div
             className="continue-card__progress-fill"
             style={{
               width: `${progress}%`,
             }}
           />
-
         </div>
 
         <div className="continue-card__footer">
-
           <span>
-            {progress}% Bloomed
+            {progress}% Complete
           </span>
 
           <button
             className="continue-card__button"
+            type="button"
           >
             Continue Reading →
           </button>
-
         </div>
-
       </div>
     </article>
   );

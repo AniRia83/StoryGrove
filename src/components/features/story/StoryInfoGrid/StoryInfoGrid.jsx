@@ -9,17 +9,16 @@ const progressLabels = {
   Movie: "Minutes",
   "TV Series": "Episodes",
   Anime: "Episodes",
-  Game: "Hours",
   Music: "Tracks",
   Podcast: "Episodes",
 };
 
 const journeyLabels = {
-  planning: "🌱 Planning",
+  planning: "🌰 Planning",
+  started: "🌱 Started",
   growing: "🌿 Growing",
-  completed: "🌸 Bloomed",
-  paused: "🍂 Resting",
-  abandoned: "🪵 Abandoned",
+  bloomed: "🌸 Bloomed",
+  archived: "🍂 Archived",
 };
 
 export default function StoryInfoGrid({ story }) {
@@ -32,21 +31,34 @@ export default function StoryInfoGrid({ story }) {
   const progressLabel =
     progressLabels[story.mediaType] || "Progress";
 
-  const completion =
-    story.totalProgress > 0
-      ? Math.round(
-          (story.currentProgress /
-            story.totalProgress) *
-            100
-        )
-      : 0;
+  const current = Number(story.currentProgress || 0);
+  const total = Number(story.totalProgress || 0);
+
+  let completion = 0;
+
+  if (story.mediaType === "Movie") {
+    completion =
+      total > 0
+        ? Math.round((current / total) * 100)
+        : story.journey === "bloomed"
+        ? 100
+        : 0;
+  } else if (story.mediaType !== "Game") {
+    completion =
+      total > 0
+        ? Math.round((current / total) * 100)
+        : 0;
+  }
 
   const planted = story.plantedAt
-    ? new Date(story.plantedAt).toLocaleDateString(undefined, {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
-      })
+    ? new Date(story.plantedAt).toLocaleDateString(
+        undefined,
+        {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+        }
+      )
     : "—";
 
   const updated =
@@ -64,7 +76,6 @@ export default function StoryInfoGrid({ story }) {
 
   return (
     <section className="story-info-grid">
-
       <div className="story-info-card">
         <span>🎭 Genre</span>
         <strong>{story.genre || "—"}</strong>
@@ -86,42 +97,57 @@ export default function StoryInfoGrid({ story }) {
         </strong>
       </div>
 
-      <div className="story-info-card">
-        <span>{progressLabel}</span>
-        <strong>
-          {story.totalProgress
-            ? `${story.currentProgress} / ${story.totalProgress}`
-            : "—"}
-        </strong>
-      </div>
+      {story.mediaType === "Game" && (
+  <div className="story-info-card">
+    <span>🎮 Hours Played</span>
 
-      <div className="story-info-card">
-        <span>📈 Completion</span>
-        <strong>{completion}%</strong>
-      </div>
+    <strong>
+      {story.hoursPlayed || 0} hrs
+    </strong>
+  </div>
+)}
+
+<div className="story-info-card">
+  <span>{progressLabel}</span>
+
+  <strong>
+    {story.totalProgress
+      ? `${story.currentProgress} / ${story.totalProgress}`
+      : "—"}
+  </strong>
+</div>
+
+<div className="story-info-card">
+  <span>📈 Completion</span>
+
+  <strong>{completion}%</strong>
+</div>
 
       <div className="story-info-card">
         <span>⭐ Bloom</span>
+
         <strong>{story.bloom}/10</strong>
       </div>
 
       <div className="story-info-card">
         <span>🧭 Origin</span>
+
         <strong>{story.origin || "—"}</strong>
       </div>
 
       <div className="story-info-card">
         <span>🌱 Planted</span>
+
         <strong>{planted}</strong>
       </div>
 
       {updated && (
         <div className="story-info-card">
           <span>🪴 Last Updated</span>
+
           <strong>{updated}</strong>
         </div>
       )}
-
     </section>
   );
 }

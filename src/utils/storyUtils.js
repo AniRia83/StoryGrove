@@ -20,17 +20,32 @@ export function getProgressPercentage(story) {
 }
 
 export function getJourney(story) {
-  const progress = getProgressPercentage(story);
+  const current = Number(story.currentProgress || 0);
+  const total = Number(story.totalProgress || 0);
 
-  if (progress === 0) {
-    return "planning";
+  switch (story.mediaType) {
+    case "Movie":
+      if (total <= 0) return "planning";
+      return current >= total
+        ? "bloomed"
+        : current > 0
+        ? "growing"
+        : "planning";
+
+    case "Game":
+      if (current <= 0) return "planning";
+      if (current >= 100) return "bloomed";
+      return "growing";
+
+    default:
+      if (total <= 0) return "planning";
+
+      if (current <= 0) return "planning";
+
+      if (current >= total) return "bloomed";
+
+      return "growing";
   }
-
-  if (progress >= 100) {
-    return "bloomed";
-  }
-
-  return "growing";
 }
 
 export function isCompleted(story) {

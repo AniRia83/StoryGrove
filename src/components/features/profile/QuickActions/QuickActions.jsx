@@ -5,7 +5,9 @@ import Button from "../../../ui/Button";
 
 import { useNavigate } from "react-router-dom";
 
-export default function QuickActions() {
+export default function QuickActions({
+  onPlantStory,
+}) {
   const navigate = useNavigate();
 
   return (
@@ -14,9 +16,8 @@ export default function QuickActions() {
       icon="🌿"
     >
       <div className="quick-actions">
-
         <Button
-          onClick={() => navigate("/plant-story")}
+          onClick={onPlantStory}
         >
           🌱 Plant a Story
         </Button>
@@ -34,7 +35,6 @@ export default function QuickActions() {
         >
           ✨ Wander
         </Button>
-
       </div>
     </Section>
   );

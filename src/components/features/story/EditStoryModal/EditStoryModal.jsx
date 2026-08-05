@@ -20,7 +20,6 @@ export default function EditStoryModal({
   story,
 }) {
   const { collections } = useCollection();
-
   const { updateStory } = useStory();
 
   const [formData, setFormData] = useState({
@@ -37,6 +36,7 @@ export default function EditStoryModal({
 
     currentProgress: 0,
     totalProgress: "",
+    hoursPlayed: 0,
   });
 
   useEffect(() => {
@@ -54,11 +54,9 @@ export default function EditStoryModal({
       firefly: story.firefly || "",
       cover: story.cover || null,
 
-      currentProgress:
-        story.currentProgress || 0,
-
-      totalProgress:
-        story.totalProgress || "",
+      currentProgress: story.currentProgress ?? 0,
+      totalProgress: story.totalProgress ?? "",
+      hoursPlayed: story.hoursPlayed ?? 0,
     });
   }, [story]);
 
@@ -73,13 +71,9 @@ export default function EditStoryModal({
     const updatedStory = {
       ...formData,
 
-      currentProgress: Number(
-        formData.currentProgress
-      ),
-
-      totalProgress: Number(
-        formData.totalProgress
-      ),
+      currentProgress: Number(formData.currentProgress),
+      totalProgress: Number(formData.totalProgress),
+      hoursPlayed: Number(formData.hoursPlayed),
     };
 
     updatedStory.journey = getJourney({
@@ -87,10 +81,7 @@ export default function EditStoryModal({
       ...updatedStory,
     });
 
-    updateStory(
-      story.id,
-      updatedStory
-    );
+    updateStory(story.id, updatedStory);
 
     onClose();
   }
@@ -114,10 +105,7 @@ export default function EditStoryModal({
         label="Title"
         value={formData.title}
         onChange={(e) =>
-          handleChange(
-            "title",
-            e.target.value
-          )
+          handleChange("title", e.target.value)
         }
       />
 
@@ -125,10 +113,7 @@ export default function EditStoryModal({
         label="Creator"
         value={formData.creator}
         onChange={(e) =>
-          handleChange(
-            "creator",
-            e.target.value
-          )
+          handleChange("creator", e.target.value)
         }
       />
 
@@ -138,15 +123,10 @@ export default function EditStoryModal({
         <select
           value={formData.collectionId}
           onChange={(e) =>
-            handleChange(
-              "collectionId",
-              e.target.value
-            )
+            handleChange("collectionId", e.target.value)
           }
         >
-          <option value="">
-            No Grove
-          </option>
+          <option value="">No Grove</option>
 
           {collections.map((collection) => (
             <option
@@ -163,10 +143,7 @@ export default function EditStoryModal({
         label="Genre"
         value={formData.genre}
         onChange={(e) =>
-          handleChange(
-            "genre",
-            e.target.value
-          )
+          handleChange("genre", e.target.value)
         }
       />
 
@@ -174,10 +151,7 @@ export default function EditStoryModal({
         label="Origin"
         value={formData.origin}
         onChange={(e) =>
-          handleChange(
-            "origin",
-            e.target.value
-          )
+          handleChange("origin", e.target.value)
         }
       />
 
@@ -197,10 +171,7 @@ export default function EditStoryModal({
           step="0.1"
           value={formData.bloom}
           onChange={(e) =>
-            handleChange(
-              "bloom",
-              e.target.value
-            )
+            handleChange("bloom", e.target.value)
           }
         />
 
@@ -212,10 +183,7 @@ export default function EditStoryModal({
         rows={5}
         value={formData.reflections}
         onChange={(e) =>
-          handleChange(
-            "reflections",
-            e.target.value
-          )
+          handleChange("reflections", e.target.value)
         }
       />
 
@@ -224,10 +192,7 @@ export default function EditStoryModal({
         rows={3}
         value={formData.firefly}
         onChange={(e) =>
-          handleChange(
-            "firefly",
-            e.target.value
-          )
+          handleChange("firefly", e.target.value)
         }
       />
 

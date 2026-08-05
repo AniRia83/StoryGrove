@@ -6,6 +6,7 @@ export default function StoryHeroActions({
   onEdit,
   onProgress,
   onFavourite,
+  isFavourite,
 }) {
   return (
     <div className="story-hero-actions">
@@ -17,9 +18,7 @@ export default function StoryHeroActions({
         ✏️ Edit Story
       </Button>
 
-      <Button
-        onClick={onProgress}
-      >
+      <Button onClick={onProgress}>
         📖 Update Progress
       </Button>
 
@@ -27,7 +26,9 @@ export default function StoryHeroActions({
         variant="outline"
         onClick={onFavourite}
       >
-        ❤️ Favourite
+        {isFavourite
+          ? "💛 Favourited"
+          : "🤍 Favourite"}
       </Button>
 
     </div>

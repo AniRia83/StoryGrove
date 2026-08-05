@@ -16,11 +16,11 @@ const mediaIcons = {
 };
 
 const journeyLabels = {
-  planning: "🌱 Planning",
+  planning: "🌰 Planning",
+  started: "🌱 Started",
   growing: "🌿 Growing",
-  completed: "🌸 Bloomed",
-  paused: "🍂 Resting",
-  abandoned: "🪵 Abandoned",
+  bloomed: "🌸 Bloomed",
+  archived: "🍂 Archived",
 };
 
 export default function StoryHero({
@@ -204,9 +204,10 @@ export default function StoryHero({
         </div>
 
         <StoryHeroActions
-    onEdit={onEdit}
-    onProgress={onProgress}
-    onFavourite={onFavourite}
+  onEdit={onEdit}
+  onProgress={onProgress}
+  onFavourite={onFavourite}
+  isFavourite={story.isFavorite}
 />
 
       </div>

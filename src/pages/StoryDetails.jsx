@@ -31,6 +31,7 @@ export default function StoryDetails() {
     getStoryById,
     deleteStory,
     updateStory,
+    toggleFavourite,
   } = useStory();
 
   const { getCollectionById } =
@@ -84,7 +85,7 @@ export default function StoryDetails() {
   }
 
   function handleFavourite() {
-    alert("❤️ Favourite system coming soon!");
+    toggleFavourite(story.id);
   }
 
   return (

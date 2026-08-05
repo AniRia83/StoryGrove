@@ -37,6 +37,10 @@ export function StoryProvider({ children }) {
       story.totalProgress || 0
     );
 
+    const hoursPlayed = Number(
+      story.hoursPlayed || 0
+    );
+
     const now = new Date().toISOString();
 
     const newStory = {
@@ -48,6 +52,8 @@ export function StoryProvider({ children }) {
 
       updatedAt: now,
 
+      isFavorite: false,
+
       collectionId:
         story.collectionId || null,
 
@@ -55,14 +61,13 @@ export function StoryProvider({ children }) {
 
       totalProgress,
 
+      hoursPlayed,
+
       timeline: [
         {
           id: crypto.randomUUID(),
-
           type: "plant",
-
           message: "Story planted 🌱",
-
           createdAt: now,
         },
       ],
@@ -80,7 +85,6 @@ export function StoryProvider({ children }) {
   function updateStory(id, updates) {
     setStories((prevStories) =>
       prevStories.map((story) => {
-
         if (story.id !== id)
           return story;
 
@@ -97,6 +101,12 @@ export function StoryProvider({ children }) {
           totalProgress: Number(
             updates.totalProgress ??
               story.totalProgress ??
+              0
+          ),
+
+          hoursPlayed: Number(
+            updates.hoursPlayed ??
+              story.hoursPlayed ??
               0
           ),
 
@@ -120,6 +130,20 @@ export function StoryProvider({ children }) {
 
         return updatedStory;
       })
+    );
+  }
+
+  function toggleFavourite(id) {
+    setStories((prevStories) =>
+      prevStories.map((story) =>
+        story.id === id
+          ? {
+              ...story,
+              isFavorite:
+                !story.isFavorite,
+            }
+          : story
+      )
     );
   }
 
@@ -167,6 +191,7 @@ export function StoryProvider({ children }) {
         stories,
         plantStory,
         updateStory,
+        toggleFavourite,
         deleteStory,
         removeCollectionFromStories,
         getStoryById,

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import AppLayout from "../components/layout/AppLayout/AppLayout";
@@ -13,19 +14,23 @@ import FavoriteCreators from "../components/features/profile/FavoriteCreators";
 import GardenQuote from "../components/features/profile/GardenQuote";
 import QuickActions from "../components/features/profile/QuickActions";
 
+import PlantStoryModal from "../components/features/plant-story/PlantStoryModal";
+
 import { useStory } from "../context/StoryContext";
 import { useSettings } from "../context/SettingsContext";
 
 export default function Profile() {
+  const { stories, plantStory } = useStory();
 
-  const { stories } = useStory();
   const { settings } = useSettings();
 
   const navigate = useNavigate();
 
+  const [showPlantModal, setShowPlantModal] =
+    useState(false);
+
   return (
     <AppLayout>
-
       <div
         style={{
           display: "flex",
@@ -35,46 +40,43 @@ export default function Profile() {
       >
         <Button
           variant="secondary"
-          onClick={() =>
-            navigate("/settings")
-          }
+          onClick={() => navigate("/settings")}
         >
           ⚙️ Settings
         </Button>
       </div>
 
       <ProfileHeader
-  name={settings.profile.displayName}
-  avatar={settings.profile.avatar}
-  bio={settings.profile.bio}
-/>
-
-      <ReadingSummary
-        stories={stories}
+        name={settings.profile.displayName}
+        avatar={settings.profile.avatar}
+        bio={settings.profile.bio}
       />
 
-      <AchievementGarden
-        stories={stories}
+      <ReadingSummary stories={stories} />
+
+      <AchievementGarden stories={stories} />
+
+      <FavoriteGenres stories={stories} />
+
+      <ReadingHabits stories={stories} />
+
+      <FavoriteCreators stories={stories} />
+
+      <GardenQuote stories={stories} />
+
+      <QuickActions
+        onPlantStory={() =>
+          setShowPlantModal(true)
+        }
       />
 
-      <FavoriteGenres
-        stories={stories}
+      <PlantStoryModal
+        isOpen={showPlantModal}
+        onClose={() =>
+          setShowPlantModal(false)
+        }
+        onPlant={plantStory}
       />
-
-      <ReadingHabits
-        stories={stories}
-      />
-
-      <FavoriteCreators
-        stories={stories}
-      />
-
-      <GardenQuote
-        stories={stories}
-      />
-
-      <QuickActions />
-
     </AppLayout>
   );
 }
